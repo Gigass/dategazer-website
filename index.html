@@ -3,164 +3,1291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DateGazer - 纪念日管理应用</title>
+    <title>DateGazer - 心念记纪念日管理专家</title>
+    <meta name="description" content="DateGazer心念记 - 精美卡片创作，Live Photo分享美好回忆，应用图标实时倒计时，智能提醒不错过，桌面小组件DIY，心情日记记录瞬间">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --cool-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --dark-overlay: rgba(0, 0, 0, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--primary-gradient);
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: floatBg 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        /* Header Section */
+        .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-        }
-        .container {
-            text-align: center;
             padding: 2rem;
-            max-width: 600px;
+            text-align: center;
+            position: relative;
         }
-        .logo {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        p {
-            font-size: 1.2rem;
+
+        .logo-container {
             margin-bottom: 2rem;
-            opacity: 0.9;
+            position: relative;
         }
+
+        .logo {
+            font-size: 5rem;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: white;
+            text-shadow: var(--text-shadow);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: var(--text-shadow);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: var(--text-shadow);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
         .download-btn {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 1rem 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
             color: white;
             font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: var(--text-shadow);
+            position: relative;
+            overflow: hidden;
         }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
         .download-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
         }
-        .features {
-            margin-top: 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+
+        .download-btn.primary {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
-        .feature {
-            background: rgba(255,255,255,0.1);
+
+        .beta-notice {
+            background: rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
             padding: 1.5rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            text-align: center;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .footer-links {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+
+        .beta-badge {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        .footer-links h4 {
+
+        @keyframes glow {
+            from { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
+            to { box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5); }
+        }
+
+        .beta-notice p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: white;
+            text-shadow: var(--text-shadow);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Core Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: white;
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            text-shadow: var(--text-shadow);
         }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Screenshots Section */
+        .screenshots-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+
+        .screenshots-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .screenshots-row {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .screenshots-row-1 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .screenshots-row-2 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        @media (max-width: 1200px) {
+            .screenshots-row-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .screenshots-row-1,
+            .screenshots-row-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .screenshots-grid {
+                gap: 1rem;
+            }
+        }
+
+        .screenshot-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: var(--card-shadow);
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .screenshot-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .screenshot-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            margin: 1rem 0 0.5rem 0;
+            text-shadow: var(--text-shadow);
+        }
+
+        .screenshot-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Detailed Features */
+        .detailed-features {
+            padding: 5rem 2rem;
+        }
+
+        .features-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-column {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .feature-column h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: var(--text-shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .feature-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .feature-list li strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+        }
+
+        .cta-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--card-shadow);
+        }
+
+        .cta-card h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: var(--text-shadow);
+        }
+
+        .cta-card p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
         .footer-links a {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            margin: 0 1rem 0 0;
+            font-weight: 500;
+            transition: all 0.3s ease;
             padding: 0.5rem 1rem;
             border-radius: 10px;
-            transition: all 0.3s ease;
-            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .features-columns {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .screenshot-card {
+                padding: 1rem;
+            }
+            
+            .screenshot-card img {
+                border-radius: 8px;
+            }
+            
+            .cta-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-btn {
+                width: 280px;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .screenshots-grid {
+                gap: 0.8rem;
+            }
+            
+            .screenshots-row {
+                gap: 0.8rem;
+            }
+            
+            .screenshot-card {
+                padding: 0.8rem;
+            }
+            
+            .screenshot-card h4 {
+                font-size: 1rem;
+            }
+            
+            .screenshot-card p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Custom Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: var(--text-shadow);
             margin-bottom: 0.5rem;
         }
-        .footer-links a:hover {
-            background: rgba(255,255,255,0.1);
+
+        .modal-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .modal-body {
+            margin-bottom: 2rem;
+        }
+
+        .modal-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .beta-link {
+            background: rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #ffd700;
+            word-break: break-all;
+            user-select: all;
+        }
+
+        .feature-list {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-btn.primary {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #2c3e50;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .modal-btn.primary:hover {
+            background: linear-gradient(45deg, #ffed4e, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .modal-btn.secondary {
+            background: var(--glass-bg);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--glass-border);
+        }
+
+        .modal-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
             color: white;
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .modal-icon {
+                font-size: 3rem;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .modal-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">❤️</div>
-        <h1>DateGazer</h1>
-        <p>用心记录每一个重要时刻，让爱在时光中永恒绽放</p>
-        
-        <a href="#" class="download-btn" onclick="handleDownload()">
-            📱 下载DateGazer应用
-        </a>
-        
-        <div class="features">
-            <div class="feature">
-                <h3>💕 纪念日管理</h3>
-                <p>记录重要的日期和回忆</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-container">
+                <div class="logo">❤️</div>
             </div>
-            <div class="feature">
-                <h3>🔔 智能提醒</h3>
-                <p>永远不会错过重要时刻</p>
+            <h1>DateGazer</h1>
+            <div class="tagline">心念记 - 纪念日管理专家</div>
+            <p class="subtitle">精美卡片创作，Live Photo分享美好回忆<br>应用图标实时倒计时，智能提醒不错过<br>桌面小组件DIY，心情日记记录瞬间<br>让每个重要时刻都闪闪发光！</p>
+            
+            <div class="beta-notice">
+                <div class="beta-badge">🚀 Beta测试版</div>
+                <p>通过TestFlight抢先体验DateGazer的所有功能</p>
             </div>
-            <div class="feature">
-                <h3>🎨 精美卡片</h3>
-                <p>为每个纪念日创建美丽卡片</p>
+            
+            <div class="cta-container">
+                <a href="#" class="download-btn primary" onclick="handleDownload()">
+                    🚀 下载Beta测试版
+                </a>
+                <a href="#features" class="download-btn">
+                    ✨ 了解更多功能
+                </a>
             </div>
         </div>
         
-        <div class="footer-links">
-            <h4>📋 相关链接</h4>
-            <div>
+        <div class="scroll-indicator" onclick="document.querySelector('#features').scrollIntoView()">
+            <div style="font-size: 1.5rem;">⬇</div>
+            <div style="font-size: 0.8rem; margin-top: 0.5rem;">滑动了解更多</div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>🌟 核心功能</h2>
+                <p>DateGazer为您提供全方位的纪念日管理体验，每个功能都经过精心设计</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎨</div>
+                    <h3>纪念日卡片创作与分享</h3>
+                    <p>创建精美的纪念日卡片，支持多种设计风格。生成Live Photo动态照片，导出纪念日视频，一键分享到各大社交平台。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">精美卡片</span>
+                        <span class="feature-tag">Live Photo</span>
+                        <span class="feature-tag">视频导出</span>
+                        <span class="feature-tag">社交分享</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⏰</div>
+                    <h3>纪念日倒计时系统</h3>
+                    <p>应用图标实时显示最近纪念日倒数天数，智能角标提醒，支持正数计时和倒数计时，永远不会错过重要时刻。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">图标倒计时</span>
+                        <span class="feature-tag">角标提醒</span>
+                        <span class="feature-tag">双向计时</span>
+                        <span class="feature-tag">智能算法</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3>桌面小组件</h3>
+                    <p>添加纪念日到iPhone主屏幕，三种预设风格：简约、优雅、浪漫。支持自定义背景图片，实时更新倒计时信息。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">主屏幕小组件</span>
+                        <span class="feature-tag">三种风格</span>
+                        <span class="feature-tag">自定义背景</span>
+                        <span class="feature-tag">实时更新</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔔</div>
+                    <h3>强大的提醒系统</h3>
+                    <p>系统级闹铃提醒，穿透静音模式和专注模式。法定工作日闹钟智能识别，支持多种日常提醒场景。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">系统闹铃</span>
+                        <span class="feature-tag">工作日识别</span>
+                        <span class="feature-tag">穿透静音</span>
+                        <span class="feature-tag">场景提醒</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📝</div>
+                    <h3>心情日记</h3>
+                    <p>每日心情记录与追踪，表情符号标记情绪状态，富文本编辑支持，时间轴查看历史心情变化。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">情绪追踪</span>
+                        <span class="feature-tag">富文本编辑</span>
+                        <span class="feature-tag">时间轴展示</span>
+                        <span class="feature-tag">关联记录</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>隐私保护与同步</h3>
+                    <p>本地数据存储优先，数据加密保护。支持iCloud自动同步，多设备数据一致，无需网络权限运行。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">本地存储</span>
+                        <span class="feature-tag">数据加密</span>
+                        <span class="feature-tag">iCloud同步</span>
+                        <span class="feature-tag">多设备支持</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>📸 应用预览</h2>
+                <p>直观体验DateGazer的精美界面和强大功能</p>
+            </div>
+            
+            <div class="screenshots-grid">
+                <!-- 第一排：3张图片 -->
+                <div class="screenshots-row screenshots-row-1">
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/纪念日卡片宣传图.jpg" alt="纪念日卡片创作">
+                        <h4>🎨 纪念日卡片创作</h4>
+                        <p>DIY名片设计工具，打造专属纪念日卡片</p>
+                    </div>
+                    
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/纪念日卡片livephoto和视频分享宣传图.jpg" alt="Live Photo分享">
+                        <h4>📹 Live Photo动态分享</h4>
+                        <p>创建动态Live Photo，让回忆更加生动</p>
+                    </div>
+                    
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/系统级闹钟宣传图.jpg" alt="系统级闹钟">
+                        <h4>⏰ 系统级闹钟提醒</h4>
+                        <p>穿透静音模式，确保重要提醒不错过</p>
+                    </div>
+                </div>
+                
+                <!-- 第二排：4张图片 -->
+                <div class="screenshots-row screenshots-row-2">
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/桌面DIY小组件宣传图.jpg" alt="桌面小组件">
+                        <h4>📱 桌面DIY小组件</h4>
+                        <p>个性化桌面小组件，实时显示重要纪念日</p>
+                    </div>
+                    
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/app通知提醒和日历提醒宣传图.jpg" alt="通知提醒系统">
+                        <h4>🔔 智能通知提醒</h4>
+                        <p>多重提醒保障，日历同步多设备数据共享</p>
+                    </div>
+                    
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/国内节假日日历和timeline宣传图.jpg" alt="日历和时间线">
+                        <h4>📅 节假日日历与时间线</h4>
+                        <p>国内节假日月历，时间轴展示纪念日卡片</p>
+                    </div>
+                    
+                    <div class="screenshot-card fade-in">
+                        <img src="pic/心情日记宣传图.jpg" alt="心情日记">
+                        <h4>📝 心情日记记录</h4>
+                        <p>记录每天心情瞬间，支持格式编辑和自动保存</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Features Section -->
+    <section class="detailed-features">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>🚀 功能详解</h2>
+                <p>深入了解DateGazer的每一个贴心设计</p>
+            </div>
+            
+            <div class="features-columns">
+                <div class="feature-column fade-in">
+                    <h3>🎯 提醒系统</h3>
+                    <ul class="feature-list">
+                        <li><strong>系统级闹铃提醒</strong> - 闹铃级别强提醒（需要iOS 16+）</li>
+                        <li><strong>法定工作日闹钟</strong> - 智能识别中国法定工作日</li>
+                        <li><strong>日常提醒场景</strong> - 喝水、运动、吃药等多场景支持</li>
+                        <li><strong>纪念日提醒</strong> - 本地通知和iOS日历提醒双重保险</li>
+                        <li><strong>跨设备同步</strong> - iPhone、iPad、Mac、Apple Watch全平台</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-column fade-in">
+                    <h3>🎨 个性化定制</h3>
+                    <ul class="feature-list">
+                        <li><strong>多种主题配色</strong> - 丰富的视觉主题选择</li>
+                        <li><strong>动态视频背景</strong> - 支持自定义动态背景</li>
+                        <li><strong>新拟态界面设计</strong> - 现代化UI设计语言</li>
+                        <li><strong>深色模式适配</strong> - 自动适应系统深色模式</li>
+                        <li><strong>标签分类系统</strong> - 自定义彩色标签管理</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-column fade-in">
+                    <h3>💫 智能辅助</h3>
+                    <ul class="feature-list">
+                        <li><strong>智能生成标题</strong> - 根据类型自动生成纪念日标题</li>
+                        <li><strong>智能推荐提醒</strong> - 根据重要程度推荐提醒时间</li>
+                        <li><strong>重要程度排序</strong> - 自动按重要程度排序显示</li>
+                        <li><strong>去重提醒</strong> - 相似纪念日智能去重</li>
+                        <li><strong>Spotlight集成</strong> - 支持iOS系统搜索</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-column fade-in">
+                    <h3>🤝 社交互动</h3>
+                    <ul class="feature-list">
+                        <li><strong>纪念日共享</strong> - 与亲友分享重要纪念日</li>
+                        <li><strong>导入分享</strong> - 导入他人分享的纪念日</li>
+                        <li><strong>群组管理</strong> - 群组纪念日协同管理</li>
+                        <li><strong>祝福模板</strong> - 丰富的纪念日祝福模板</li>
+                        <li><strong>快捷操作</strong> - 手势操作和快捷菜单支持</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card fade-in">
+                <h2>开始您的纪念日管理之旅</h2>
+                <p>DateGazer - 让每个重要时刻都闪闪发光！<br>现在就下载体验专业的纪念日管理服务</p>
+                
+                <div class="cta-container">
+                    <a href="#" class="download-btn primary" onclick="handleDownload()">
+                        🚀 加入Beta测试
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
                 <a href="privacy-policy.html">🛡️ 隐私政策</a>
                 <a href="terms-of-service.html">📄 服务条款</a>
                 <a href="support.html">🛠️ 技术支持</a>
                 <a href="mailto:1547654938@qq.com">📧 联系我们</a>
                 <a href="mailto:1547654938@qq.com">💬 用户反馈</a>
             </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 DateGazer. 保留所有权利.</p>
+                <p style="margin-top: 0.5rem;">用心记录每一个重要时刻 ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Modal -->
+    <div id="downloadModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">🚀</div>
+                <div class="modal-title">DateGazer Beta测试版</div>
+                <div class="modal-subtitle">通过TestFlight抢先体验所有功能</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text">
+                    请在iPhone或iPad上打开TestFlight链接加入Beta测试：
+                </div>
+                <div class="beta-link">
+                    https://testflight.apple.com/join/D1K1UVDu
+                </div>
+                <div class="modal-text">
+                    <strong>🎯 主要功能预览：</strong>
+                </div>
+                <ul class="feature-list">
+                    <li>纪念日卡片创作与Live Photo分享</li>
+                    <li>系统级闹钟提醒，穿透静音模式</li>
+                    <li>桌面小组件DIY，实时倒计时显示</li>
+                    <li>心情日记记录，隐私本地存储</li>
+                    <li>智能辅助功能，多设备云同步</li>
+                </ul>
+            </div>
+            <div class="modal-actions">
+                <a href="https://testflight.apple.com/join/D1K1UVDu" class="modal-btn primary" target="_blank">
+                    🚀 立即加入测试
+                </a>
+                <button class="modal-btn secondary" onclick="closeModal()">
+                    稍后再说
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Android Modal -->
+    <div id="androidModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">🍎</div>
+                <div class="modal-title">仅支持iOS平台</div>
+                <div class="modal-subtitle">DateGazer目前专为iPhone和iPad设计</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text">
+                    请使用iPhone或iPad访问TestFlight测试版：
+                </div>
+                <div class="beta-link">
+                    https://testflight.apple.com/join/D1K1UVDu
+                </div>
+                <div class="modal-text">
+                    <strong>Android版本敬请期待！</strong><br>
+                    我们正在努力开发Android版本，请关注后续更新。
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn primary" onclick="copyLink()">
+                    📋 复制TestFlight链接
+                </button>
+                <button class="modal-btn secondary" onclick="closeModal()">
+                    我知道了
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        function handleDownload() {
-            // 尝试打开应用，如果失败则引导下载
-            const userAgent = navigator.userAgent;
-            if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                // iOS用户 - 尝试打开应用
-                window.location.href = 'dategazer://open';
-                
-                // 如果应用没有安装，2秒后跳转到App Store
-                setTimeout(() => {
-                    window.location.href = 'https://apps.apple.com/app/dategazer';
-                }, 2000);
-            } else if (/Android/i.test(userAgent)) {
-                // Android用户
-                window.location.href = 'https://play.google.com/store/apps/details?id=com.gigass.dategazer';
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal-overlay');
+            modals.forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.body.style.overflow = 'auto';
+        }
+
+        function copyLink() {
+            const link = 'https://testflight.apple.com/join/D1K1UVDu';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link).then(() => {
+                    // 临时更改按钮文本以提供反馈
+                    const btn = event.target;
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '✅ 已复制';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                    }, 2000);
+                });
             } else {
-                // 其他设备
-                alert('DateGazer应用即将上线，敬请期待！');
+                // 降级方案
+                const textarea = document.createElement('textarea');
+                textarea.value = link;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✅ 已复制';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
             }
         }
 
-        // 处理Universal Links
+        // Download handler
+        function handleDownload() {
+            const userAgent = navigator.userAgent;
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                // iOS用户 - 直接跳转到TestFlight beta测试版
+                window.location.href = 'https://testflight.apple.com/join/D1K1UVDu';
+            } else if (/Android/i.test(userAgent)) {
+                // Android用户 - 显示Android专用弹窗
+                openModal('androidModal');
+            } else {
+                // 其他设备 - 显示通用下载弹窗
+                openModal('downloadModal');
+            }
+        }
+
+        // 点击弹窗外部区域关闭弹窗
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Handle Universal Links
         const path = window.location.pathname;
         if (path.startsWith('/wechat/')) {
-            // 微信登录回调
             console.log('WeChat login callback:', path);
-            // 尝试打开应用
             window.location.href = `dategazer://wechat${path.replace('/wechat', '')}`;
         } else if (path.startsWith('/auth/') || path.startsWith('/share/') || path.startsWith('/deeplink/')) {
-            // 其他深度链接
             console.log('Deep link:', path);
             window.location.href = `dategazer://${path.substring(1)}`;
         }
+
+        // Fade in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.background = 'rgba(255, 255, 255, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'rgba(255, 255, 255, 0.1)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - scrolled / window.innerHeight;
+            }
+        });
     </script>
 </body>
 </html>
