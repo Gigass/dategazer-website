@@ -1,0 +1,30 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [ "D656GS6DUT.com.gigass.dategazer" ],
+        "components": [
+          {
+            "/": "/wechat/*",
+            "comment": "微信登录回调路径"
+          },
+          {
+            "/": "/auth/*",
+            "comment": "通用认证路径"
+          },
+          {
+            "/": "/share/*",
+            "comment": "分享功能路径"
+          },
+          {
+            "/": "/deeplink/*",
+            "comment": "深度链接路径"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [ "D656GS6DUT.com.gigass.dategazer" ]
+  }
+}

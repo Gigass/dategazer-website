@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DateGazer - 纪念日管理应用</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .download-btn {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        .features {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">❤️</div>
+        <h1>DateGazer</h1>
+        <p>用心记录每一个重要时刻，让爱在时光中永恒绽放</p>
+        
+        <a href="#" class="download-btn" onclick="handleDownload()">
+            📱 下载DateGazer应用
+        </a>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>💕 纪念日管理</h3>
+                <p>记录重要的日期和回忆</p>
+            </div>
+            <div class="feature">
+                <h3>🔔 智能提醒</h3>
+                <p>永远不会错过重要时刻</p>
+            </div>
+            <div class="feature">
+                <h3>🎨 精美卡片</h3>
+                <p>为每个纪念日创建美丽卡片</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleDownload() {
+            // 尝试打开应用，如果失败则引导下载
+            const userAgent = navigator.userAgent;
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                // iOS用户 - 尝试打开应用
+                window.location.href = 'dategazer://open';
+                
+                // 如果应用没有安装，2秒后跳转到App Store
+                setTimeout(() => {
+                    window.location.href = 'https://apps.apple.com/app/dategazer';
+                }, 2000);
+            } else if (/Android/i.test(userAgent)) {
+                // Android用户
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.gigass.dategazer';
+            } else {
+                // 其他设备
+                alert('DateGazer应用即将上线，敬请期待！');
+            }
+        }
+
+        // 处理Universal Links
+        const path = window.location.pathname;
+        if (path.startsWith('/wechat/')) {
+            // 微信登录回调
+            console.log('WeChat login callback:', path);
+            // 尝试打开应用
+            window.location.href = `dategazer://wechat${path.replace('/wechat', '')}`;
+        } else if (path.startsWith('/auth/') || path.startsWith('/share/') || path.startsWith('/deeplink/')) {
+            // 其他深度链接
+            console.log('Deep link:', path);
+            window.location.href = `dategazer://${path.substring(1)}`;
+        }
+    </script>
+</body>
+</html>
