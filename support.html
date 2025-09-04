@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术支持 - DateGazer 纪念日管理应用</title>
+    <meta name="description" content="DateGazer应用技术支持，常见问题解答，故障排除和联系客服。">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-links {
+            text-align: center;
+            padding: 1rem 0;
+            background: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .nav-links a:hover {
+            background-color: #f8f9fa;
+        }
+        .nav-links a.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .contact-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        .contact-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .contact-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        .contact-card a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .faq-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            background: #e9ecef;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .faq-question:hover {
+            background: #dee2e6;
+        }
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+            border-top: 1px solid #dee2e6;
+        }
+        .faq-answer.active {
+            display: block;
+        }
+        .faq-arrow {
+            transition: transform 0.3s;
+        }
+        .faq-arrow.active {
+            transform: rotate(180deg);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateX(5px);
+        }
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        .status-online {
+            background-color: #28a745;
+            box-shadow: 0 0 10px #28a745;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                margin: 0;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>❤️ DateGazer</h1>
+        <p>技术支持中心</p>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">🏠 首页</a>
+        <a href="support.html" class="active">🛠️ 技术支持</a>
+        <a href="privacy-policy.html">🛡️ 隐私政策</a>
+        <a href="terms-of-service.html">📄 服务条款</a>
+    </div>
+
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon">📧</div>
+                <h3>邮件支持</h3>
+                <p>遇到技术问题？发送邮件给我们，我们会在24小时内回复</p>
+                <a href="mailto:1547654938@qq.com">1547654938@qq.com</a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="icon">⚡</div>
+                <h3>服务状态</h3>
+                <p><span class="status-indicator status-online"></span>所有服务正常运行</p>
+                <p>99.9% 可用性保证</p>
+                <a href="#status">查看详情</a>
+            </div>
+        </div>
+
+        <h2>📋 常见问题</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>如何创建我的第一个纪念日？</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>1. 打开DateGazer应用</p>
+                <p>2. 点击"+"按钮或"添加纪念日"</p>
+                <p>3. 输入纪念日标题（如"我们的相遇"）</p>
+                <p>4. 选择日期</p>
+                <p>5. 添加照片和描述（可选）</p>
+                <p>6. 设置提醒（可选）</p>
+                <p>7. 点击"保存"完成创建</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>数据如何同步到其他设备？</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>DateGazer支持通过iCloud自动同步您的数据：</p>
+                <p>1. 确保在所有设备上使用相同的Apple ID登录</p>
+                <p>2. 在iOS设置中开启iCloud</p>
+                <p>3. 在DateGazer设置中启用"iCloud同步"</p>
+                <p>4. 数据将自动在所有设备间同步</p>
+                <p><strong>注意：</strong>首次同步可能需要几分钟时间</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>如何设置提醒通知？</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>DateGazer提供多种提醒方式：</p>
+                <p><strong>应用通知：</strong></p>
+                <p>1. 编辑纪念日</p>
+                <p>2. 开启"提醒通知"</p>
+                <p>3. 选择提醒时间（当天、前一天、一周前等）</p>
+                <p><strong>日历提醒：</strong></p>
+                <p>1. 在纪念日详情页点击"添加到日历"</p>
+                <p>2. 系统日历将创建对应事件</p>
+                <p><strong>系统级闹钟：</strong></p>
+                <p>1. 支持iOS 18+的AlarmKit功能</p>
+                <p>2. 创建系统级闹钟提醒</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>微信登录失败怎么办？</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>如果微信登录遇到问题，请尝试：</p>
+                <p>1. 确保已安装最新版本的微信</p>
+                <p>2. 检查网络连接</p>
+                <p>3. 在微信中确认授权</p>
+                <p>4. 如果仍有问题，可以使用Apple ID登录</p>
+                <p>5. 或者联系我们的技术支持</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Live Photo创建失败如何解决？</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Live Photo创建问题的解决步骤：</p>
+                <p>1. 确保允许DateGazer访问相册权限</p>
+                <p>2. 检查设备存储空间是否充足</p>
+                <p>3. 尝试使用较小的背景视频</p>
+                <p>4. 重启应用后再次尝试</p>
+                <p>5. 如果问题持续，请发送错误日志给我们</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>如何备份我的数据？</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>DateGazer提供多种数据备份方式：</p>
+                <p><strong>自动备份：</strong></p>
+                <p>- iCloud自动备份（推荐）</p>
+                <p>- iTunes备份包含应用数据</p>
+                <p><strong>手动备份：</strong></p>
+                <p>1. 进入设置 > 数据管理</p>
+                <p>2. 选择"导出数据"</p>
+                <p>3. 选择导出格式（JSON、CSV等）</p>
+                <p>4. 保存到文件或发送到邮箱</p>
+            </div>
+        </div>
+
+        <h2 id="features">🚀 主要功能支持</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>📅 纪念日管理</h4>
+                <p>创建、编辑、删除纪念日，支持分类和标签管理</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🔔 智能提醒</h4>
+                <p>多种提醒方式：通知、日历、系统闹钟</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🎨 精美卡片</h4>
+                <p>自动生成纪念日卡片，支持自定义背景和样式</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>📱 Live Photo</h4>
+                <p>创建动态纪念日Live Photo，让回忆更生动</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>☁️ 云端同步</h4>
+                <p>iCloud自动同步，多设备数据一致</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🔐 隐私保护</h4>
+                <p>本地存储优先，数据加密保护</p>
+            </div>
+        </div>
+
+        <h2 id="status">📊 系统状态</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4><span class="status-indicator status-online"></span>应用服务</h4>
+                <p>正常运行 | 99.9% 可用性</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><span class="status-indicator status-online"></span>数据同步</h4>
+                <p>正常运行 | iCloud同步正常</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><span class="status-indicator status-online"></span>通知服务</h4>
+                <p>正常运行 | 推送服务正常</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><span class="status-indicator status-online"></span>第三方登录</h4>
+                <p>正常运行 | Apple ID & 微信登录</p>
+            </div>
+        </div>
+
+        <h2>🔧 故障排除指南</h2>
+        
+        <h3>应用崩溃或卡顿</h3>
+        <ol>
+            <li>重启应用</li>
+            <li>重启设备</li>
+            <li>检查iOS系统更新</li>
+            <li>确保有足够的存储空间</li>
+            <li>如果问题持续，请联系技术支持</li>
+        </ol>
+
+        <h3>数据同步问题</h3>
+        <ol>
+            <li>检查网络连接</li>
+            <li>确保iCloud正常工作</li>
+            <li>在设置中手动触发同步</li>
+            <li>等待几分钟让同步完成</li>
+            <li>重新登录Apple ID</li>
+        </ol>
+
+        <h3>权限相关问题</h3>
+        <ol>
+            <li>进入iOS设置 > DateGazer</li>
+            <li>检查并开启所需权限：
+                <ul>
+                    <li>📷 相机（拍摄照片）</li>
+                    <li>📱 相册（保存Live Photo）</li>
+                    <li>📅 日历（添加提醒）</li>
+                    <li>🔔 通知（提醒功能）</li>
+                </ul>
+            </li>
+            <li>重启应用使权限生效</li>
+        </ol>
+
+        <h2>📞 联系我们</h2>
+        
+        <div class="feature-card" style="max-width: 500px; margin: 1rem auto;">
+            <h4>技术支持团队</h4>
+            <p><strong>📧 邮箱：</strong><a href="mailto:1547654938@qq.com" style="color: #007bff;">1547654938@qq.com</a></p>
+            <p><strong>⏰ 响应时间：</strong>24小时内回复</p>
+            <p><strong>🕐 服务时间：</strong>全天候支持</p>
+            <p><strong>🌐 语言：</strong>中文、English</p>
+        </div>
+
+        <div style="background: #e8f4fd; padding: 1.5rem; border-radius: 10px; margin: 2rem 0;">
+            <h4 style="margin-top: 0;">💡 联系我们时请提供：</h4>
+            <ul>
+                <li>设备型号和iOS版本</li>
+                <li>DateGazer应用版本</li>
+                <li>详细的问题描述</li>
+                <li>问题发生的步骤</li>
+                <li>截图或错误信息（如有）</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 DateGazer. 保留所有权利.</p>
+        <p>用心记录每一个重要时刻 ❤️</p>
+    </div>
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('.faq-arrow');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                arrow.classList.remove('active');
+            } else {
+                // 关闭所有其他FAQ
+                document.querySelectorAll('.faq-answer.active').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-arrow.active').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // 打开当前FAQ
+                answer.classList.add('active');
+                arrow.classList.add('active');
+            }
+        }
+
+        // 页面加载时的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加加载动画
+            const cards = document.querySelectorAll('.contact-card, .feature-card, .faq-item');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
