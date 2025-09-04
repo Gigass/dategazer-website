@@ -8,17 +8,138 @@
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --warm-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --cool-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            --dark-overlay: rgba(0, 0, 0, 0.1);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            /* 动态配色系统 */
+            --theme-primary: 102, 126, 234;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 6, 182, 212;
+            --theme-warm: 245, 158, 11;
+            --theme-cool: 139, 92, 246;
+            
+            /* 动态渐变系统 */
+            --primary-gradient: linear-gradient(135deg, 
+                rgba(var(--theme-primary), 1) 0%, 
+                rgba(var(--theme-secondary), 0.8) 50%, 
+                rgba(var(--theme-accent), 1) 100%);
+            --secondary-gradient: linear-gradient(135deg, 
+                rgba(var(--theme-secondary), 1) 0%, 
+                rgba(var(--theme-warm), 0.8) 50%, 
+                rgba(var(--theme-cool), 1) 100%);
+            --accent-gradient: linear-gradient(135deg, 
+                rgba(var(--theme-accent), 1) 0%, 
+                rgba(var(--theme-primary), 0.8) 50%, 
+                rgba(var(--theme-secondary), 1) 100%);
+            --warm-gradient: linear-gradient(135deg, 
+                rgba(var(--theme-warm), 1) 0%, 
+                rgba(var(--theme-secondary), 0.8) 50%, 
+                rgba(var(--theme-primary), 1) 100%);
+            --cool-gradient: linear-gradient(135deg, 
+                rgba(var(--theme-cool), 1) 0%, 
+                rgba(var(--theme-accent), 0.8) 50%, 
+                rgba(var(--theme-primary), 1) 100%);
+            --luxury-gradient: linear-gradient(135deg, 
+                rgba(var(--theme-warm), 1) 0%, 
+                rgba(var(--theme-warm), 0.8) 25%, 
+                rgba(var(--theme-primary), 0.9) 50%, 
+                rgba(var(--theme-secondary), 0.7) 75%, 
+                rgba(var(--theme-cool), 1) 100%);
+            
+            /* 玻璃拟态系统 */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-hover: rgba(255, 255, 255, 0.12);
+            --glass-bg-active: rgba(255, 255, 255, 0.16);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border-hover: rgba(255, 255, 255, 0.25);
+            --glass-border-strong: rgba(255, 255, 255, 0.3);
+            
+            /* 阴影系统 */
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                            0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                           0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.4);
+            --shadow-glow-hover: 0 0 30px rgba(102, 126, 234, 0.6);
+            
+            /* 文字阴影 */
             --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            --hover-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            --text-shadow-strong: 0 3px 6px rgba(0, 0, 0, 0.2);
+            --text-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.5);
+            
+            /* 色彩系统 */
+            --white-pure: rgba(255, 255, 255, 1);
+            --white-90: rgba(255, 255, 255, 0.9);
+            --white-80: rgba(255, 255, 255, 0.8);
+            --white-70: rgba(255, 255, 255, 0.7);
+            --white-60: rgba(255, 255, 255, 0.6);
+            --white-50: rgba(255, 255, 255, 0.5);
+            
+            /* 动画时序 */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 尺寸系统 */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 20px;
+            --border-radius-2xl: 24px;
+            --border-radius-3xl: 32px;
+            
+            /* 主题切换动画 */
+            transition: all 0.8s var(--ease-smooth);
+        }
+
+        /* 预设主题配色 */
+        [data-theme="aurora"] {
+            --theme-primary: 102, 126, 234;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 6, 182, 212;
+            --theme-warm: 245, 158, 11;
+            --theme-cool: 139, 92, 246;
+        }
+
+        [data-theme="sunset"] {
+            --theme-primary: 251, 113, 133;
+            --theme-secondary: 249, 115, 22;
+            --theme-accent: 234, 88, 12;
+            --theme-warm: 239, 68, 68;
+            --theme-cool: 168, 85, 247;
+        }
+
+        [data-theme="ocean"] {
+            --theme-primary: 14, 165, 233;
+            --theme-secondary: 6, 182, 212;
+            --theme-accent: 34, 197, 94;
+            --theme-warm: 16, 185, 129;
+            --theme-cool: 99, 102, 241;
+        }
+
+        [data-theme="forest"] {
+            --theme-primary: 34, 197, 94;
+            --theme-secondary: 16, 185, 129;
+            --theme-accent: 132, 204, 22;
+            --theme-warm: 234, 179, 8;
+            --theme-cool: 99, 102, 241;
+        }
+
+        [data-theme="midnight"] {
+            --theme-primary: 99, 102, 241;
+            --theme-secondary: 139, 92, 246;
+            --theme-accent: 168, 85, 247;
+            --theme-warm: 217, 70, 239;
+            --theme-cool: 236, 72, 153;
+        }
+
+        [data-theme="rose"] {
+            --theme-primary: 244, 63, 94;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 219, 39, 119;
+            --theme-warm: 251, 113, 133;
+            --theme-cool: 168, 85, 247;
         }
 
         * {
@@ -27,16 +148,80 @@
             box-sizing: border-box;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
             background: var(--primary-gradient);
             position: relative;
+            min-height: 100vh;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            font-variant-numeric: oldstyle-nums;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
-        /* Animated background */
+        /* 高级字体系统 */
+        .text-display {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            font-feature-settings: 'ss01', 'ss02';
+        }
+
+        .text-heading {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .text-subheading {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.005em;
+        }
+
+        .text-body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0;
+        }
+
+        .text-caption {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        /* 高级动画背景系统 */
         body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 25% 75%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 25%, rgba(236, 72, 153, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 45%),
+                radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.09) 0%, transparent 55%);
+            animation: luxuryFloat 25s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        body::after {
             content: '';
             position: fixed;
             top: 0;
@@ -44,16 +229,68 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            animation: floatBg 20s ease-in-out infinite;
+                conic-gradient(from 0deg at 30% 70%, 
+                    rgba(102, 126, 234, 0.05) 0deg, 
+                    transparent 120deg, 
+                    rgba(236, 72, 153, 0.03) 240deg, 
+                    transparent 360deg);
+            animation: conicRotate 40s linear infinite;
             z-index: -1;
         }
 
-        @keyframes floatBg {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
+        @keyframes luxuryFloat {
+            0%, 100% { 
+                transform: translateX(0px) translateY(0px) rotate(0deg) scale(1);
+                filter: blur(0px);
+            }
+            25% { 
+                transform: translateX(20px) translateY(-15px) rotate(1deg) scale(1.02);
+                filter: blur(0.5px);
+            }
+            50% { 
+                transform: translateX(-10px) translateY(-25px) rotate(-0.5deg) scale(1.01);
+                filter: blur(1px);
+            }
+            75% { 
+                transform: translateX(-20px) translateY(10px) rotate(0.8deg) scale(1.03);
+                filter: blur(0.3px);
+            }
+        }
+
+        @keyframes conicRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 微光粒子系统 */
+        .sparkle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--white-90);
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
         }
 
         /* Header Section */
@@ -79,13 +316,59 @@
 
         .logo {
             font-size: 5rem;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
-            animation: pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
+            animation: luxuryPulse 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            animation: logoHover 0.6s var(--ease-bounce);
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4)) 
+                    drop-shadow(0 0 30px rgba(102, 126, 234, 0.6));
+        }
+
+        @keyframes luxuryPulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
+            }
+            50% { 
+                transform: scale(1.08) rotate(2deg);
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+            }
+        }
+
+        @keyframes logoGlow {
+            from { 
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes logoHover {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.15) rotate(-5deg); }
+            50% { transform: scale(1.2) rotate(0deg); }
+            75% { transform: scale(1.1) rotate(3deg); }
+            100% { transform: scale(1.12) rotate(0deg); }
         }
 
         .hero h1 {
@@ -131,20 +414,21 @@
         .download-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
+            backdrop-filter: blur(25px);
+            padding: 1.4rem 2.8rem;
+            border-radius: var(--border-radius-3xl);
             text-decoration: none;
-            color: white;
-            font-weight: 600;
+            color: var(--white-pure);
+            font-weight: 700;
             font-size: 1.1rem;
-            border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-shadow: var(--text-shadow);
+            border: 1.5px solid var(--glass-border);
+            transition: all 0.5s var(--ease-smooth);
+            text-shadow: var(--text-shadow-strong);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-large);
         }
 
         .download-btn::before {
@@ -154,23 +438,80 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.25), 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.6s var(--ease-smooth);
+        }
+
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s var(--ease-smooth);
         }
 
         .download-btn:hover::before {
             left: 100%;
         }
 
+        .download-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
         .download-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: var(--hover-shadow);
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+            text-shadow: var(--text-shadow-glow);
+        }
+
+        .download-btn:active {
+            transform: translateY(-2px) scale(0.98);
+            transition: all 0.1s var(--ease-smooth);
         }
 
         .download-btn.primary {
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.15) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(102, 126, 234, 0.15) 100%);
+            border: 2px solid var(--glass-border-strong);
+            box-shadow: var(--shadow-xl), 0 0 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .download-btn.primary:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.25) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(102, 126, 234, 0.25) 100%);
+            box-shadow: var(--shadow-xl), 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        /* 按钮微光效果 */
+        @keyframes btnShimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(300%) rotate(45deg); }
+        }
+
+        .download-btn.primary::before {
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 215, 0, 0.3),
+                rgba(255, 255, 255, 0.4),
+                transparent);
+            animation: btnShimmer 3s ease-in-out infinite;
         }
 
         .beta-notice {
@@ -267,15 +608,15 @@
 
         .feature-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem;
+            backdrop-filter: blur(30px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: var(--border-radius-2xl);
+            padding: 3rem 2.5rem;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s var(--ease-smooth);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-large);
         }
 
         .feature-card::before {
@@ -285,26 +626,102 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.12) 0%, 
+                rgba(255, 255, 255, 0.06) 50%,
+                rgba(102, 126, 234, 0.08) 100%);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: all 0.6s var(--ease-smooth);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.3),
+                rgba(102, 126, 234, 0.3),
+                rgba(236, 72, 153, 0.3));
+            border-radius: var(--border-radius-2xl);
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.6s var(--ease-smooth);
         }
 
         .feature-card:hover::before {
             opacity: 1;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.18) 0%, 
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(102, 126, 234, 0.15) 100%);
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--hover-shadow);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+            border-color: var(--glass-border-strong);
+            background: var(--glass-bg-hover);
+        }
+
+        .feature-card:active {
+            transform: translateY(-8px) scale(0.98);
+            transition: all 0.2s var(--ease-smooth);
         }
 
         .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            font-size: 3.8rem;
+            margin-bottom: 1.8rem;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
             display: block;
+            transition: all 0.5s var(--ease-elastic);
+            position: relative;
+        }
+
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 0.4s var(--ease-smooth);
+            z-index: -1;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(5deg);
+            filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4)) 
+                    drop-shadow(0 0 20px rgba(102, 126, 234, 0.3));
+        }
+
+        .feature-card:hover .feature-icon::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* 图标呼吸效果 */
+        @keyframes iconBreathe {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+            }
+        }
+
+        .feature-icon {
+            animation: iconBreathe 4s ease-in-out infinite;
         }
 
         .feature-card h3 {
@@ -809,6 +1226,142 @@
             }
         }
 
+        /* 主题切换器样式 */
+        .theme-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .theme-switcher-trigger {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-smooth);
+            color: var(--white-90);
+            box-shadow: var(--shadow-large);
+        }
+
+        .theme-switcher-trigger:hover {
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            transform: scale(1.1) rotate(45deg);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+        }
+
+        .theme-options {
+            position: absolute;
+            top: 80px;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: var(--border-radius-2xl);
+            padding: 1.5rem;
+            min-width: 280px;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px) scale(0.9);
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .theme-switcher.active .theme-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .theme-option:hover {
+            background: var(--glass-bg-hover);
+            transform: translateX(5px);
+        }
+
+        .theme-option.active {
+            background: var(--glass-bg-active);
+            border: 1px solid var(--glass-border-strong);
+        }
+
+        .theme-preview {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--glass-border);
+            flex-shrink: 0;
+        }
+
+        .theme-preview.aurora {
+            background: linear-gradient(135deg, rgb(102, 126, 234), rgb(236, 72, 153), rgb(6, 182, 212));
+        }
+
+        .theme-preview.sunset {
+            background: linear-gradient(135deg, rgb(251, 113, 133), rgb(249, 115, 22), rgb(239, 68, 68));
+        }
+
+        .theme-preview.ocean {
+            background: linear-gradient(135deg, rgb(14, 165, 233), rgb(6, 182, 212), rgb(34, 197, 94));
+        }
+
+        .theme-preview.forest {
+            background: linear-gradient(135deg, rgb(34, 197, 94), rgb(16, 185, 129), rgb(132, 204, 22));
+        }
+
+        .theme-preview.midnight {
+            background: linear-gradient(135deg, rgb(99, 102, 241), rgb(139, 92, 246), rgb(236, 72, 153));
+        }
+
+        .theme-preview.rose {
+            background: linear-gradient(135deg, rgb(244, 63, 94), rgb(236, 72, 153), rgb(168, 85, 247));
+        }
+
+        .theme-option span {
+            color: var(--white-90);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+        }
+
+        /* 响应式主题切换器 */
+        @media (max-width: 768px) {
+            .theme-switcher {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .theme-switcher-trigger {
+                width: 50px;
+                height: 50px;
+            }
+
+            .theme-options {
+                right: -50px;
+                min-width: 250px;
+            }
+        }
+
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
@@ -832,10 +1385,22 @@
     <section class="hero">
         <div class="hero-content">
             <div class="logo-container">
-                <div class="logo">❤️</div>
+                <div class="logo">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <circle cx="40" cy="40" r="35" fill="url(#heartGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                        <path d="M40 58L32.5 50.5C25 43 25 30 32.5 30C36.25 30 40 33 40 33S43.75 30 47.5 30C55 30 55 43 47.5 50.5L40 58Z" fill="white"/>
+                        <defs>
+                            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(var(--theme-primary), 1)"/>
+                                <stop offset="50%" stop-color="rgba(var(--theme-secondary), 1)"/>
+                                <stop offset="100%" stop-color="rgba(var(--theme-accent), 1)"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
             </div>
-            <h1>DateGazer</h1>
-            <div class="tagline">心念记 - 纪念日管理专家</div>
+            <h1 class="text-display">DateGazer</h1>
+            <div class="tagline text-subheading">心念记 - 纪念日管理专家</div>
             <p class="subtitle">精美卡片创作，Live Photo分享美好回忆<br>应用图标实时倒计时，智能提醒不错过<br>桌面小组件DIY，心情日记记录瞬间<br>让每个重要时刻都闪闪发光！</p>
             
             <div class="beta-notice">
@@ -863,80 +1428,158 @@
     <section id="features" class="features-section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2>🌟 核心功能</h2>
-                <p>DateGazer为您提供全方位的纪念日管理体验，每个功能都经过精心设计</p>
+                <h2 class="text-display">核心功能</h2>
+                <p class="text-body">DateGazer为您提供全方位的纪念日管理体验，每个功能都经过精心设计</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">🎨</div>
-                    <h3>纪念日卡片创作与分享</h3>
-                    <p>创建精美的纪念日卡片，支持多种设计风格。生成Live Photo动态照片，导出纪念日视频，一键分享到各大社交平台。</p>
+                    <div class="feature-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <rect x="8" y="12" width="44" height="36" rx="6" fill="url(#cardGradient)" stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2"/>
+                            <path d="M16 20h28M16 26h20M16 32h24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="42" cy="38" r="6" fill="rgba(var(--theme-secondary), 0.8)"/>
+                            <defs>
+                                <linearGradient id="cardGradient">
+                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-accent), 0.6)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="text-heading">纪念日卡片创作与分享</h3>
+                    <p class="text-body">创建精美的纪念日卡片，支持多种设计风格。生成Live Photo动态照片，导出纪念日视频，一键分享到各大社交平台。</p>
                     <div class="feature-tags">
-                        <span class="feature-tag">精美卡片</span>
-                        <span class="feature-tag">Live Photo</span>
-                        <span class="feature-tag">视频导出</span>
-                        <span class="feature-tag">社交分享</span>
+                        <span class="feature-tag text-caption">精美卡片</span>
+                        <span class="feature-tag text-caption">Live Photo</span>
+                        <span class="feature-tag text-caption">视频导出</span>
+                        <span class="feature-tag text-caption">社交分享</span>
                     </div>
                 </div>
                 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">⏰</div>
-                    <h3>纪念日倒计时系统</h3>
-                    <p>应用图标实时显示最近纪念日倒数天数，智能角标提醒，支持正数计时和倒数计时，永远不会错过重要时刻。</p>
+                    <div class="feature-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <circle cx="30" cy="30" r="25" fill="url(#clockGradient)" stroke="rgba(var(--theme-secondary), 0.5)" stroke-width="2"/>
+                            <circle cx="30" cy="30" r="3" fill="white"/>
+                            <path d="M30 30L30 18" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M30 30L38 30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M30 10v4M30 46v4M10 30h4M46 30h4" stroke="rgba(var(--theme-primary), 0.6)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="clockGradient">
+                                    <stop offset="0%" stop-color="rgba(var(--theme-secondary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-warm), 0.6)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="text-heading">纪念日倒计时系统</h3>
+                    <p class="text-body">应用图标实时显示最近纪念日倒数天数，智能角标提醒，支持正数计时和倒数计时，永远不会错过重要时刻。</p>
                     <div class="feature-tags">
-                        <span class="feature-tag">图标倒计时</span>
-                        <span class="feature-tag">角标提醒</span>
-                        <span class="feature-tag">双向计时</span>
-                        <span class="feature-tag">智能算法</span>
+                        <span class="feature-tag text-caption">图标倒计时</span>
+                        <span class="feature-tag text-caption">角标提醒</span>
+                        <span class="feature-tag text-caption">双向计时</span>
+                        <span class="feature-tag text-caption">智能算法</span>
                     </div>
                 </div>
                 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">📱</div>
-                    <h3>桌面小组件</h3>
-                    <p>添加纪念日到iPhone主屏幕，三种预设风格：简约、优雅、浪漫。支持自定义背景图片，实时更新倒计时信息。</p>
+                    <div class="feature-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <rect x="10" y="8" width="40" height="44" rx="8" fill="url(#phoneGradient)" stroke="rgba(var(--theme-accent), 0.5)" stroke-width="2"/>
+                            <rect x="14" y="16" width="32" height="20" rx="4" fill="rgba(var(--theme-primary), 0.3)" stroke="rgba(var(--theme-primary), 0.8)" stroke-width="1"/>
+                            <rect x="16" y="18" width="12" height="8" rx="2" fill="rgba(var(--theme-secondary), 0.8)"/>
+                            <circle cx="44" cy="44" r="4" fill="white"/>
+                            <defs>
+                                <linearGradient id="phoneGradient">
+                                    <stop offset="0%" stop-color="rgba(var(--theme-accent), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-cool), 0.6)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="text-heading">桌面小组件</h3>
+                    <p class="text-body">添加纪念日到iPhone主屏幕，三种预设风格：简约、优雅、浪漫。支持自定义背景图片，实时更新倒计时信息。</p>
                     <div class="feature-tags">
-                        <span class="feature-tag">主屏幕小组件</span>
-                        <span class="feature-tag">三种风格</span>
-                        <span class="feature-tag">自定义背景</span>
-                        <span class="feature-tag">实时更新</span>
+                        <span class="feature-tag text-caption">主屏幕小组件</span>
+                        <span class="feature-tag text-caption">三种风格</span>
+                        <span class="feature-tag text-caption">自定义背景</span>
+                        <span class="feature-tag text-caption">实时更新</span>
                     </div>
                 </div>
                 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">🔔</div>
-                    <h3>强大的提醒系统</h3>
-                    <p>系统级闹铃提醒，穿透静音模式和专注模式。法定工作日闹钟智能识别，支持多种日常提醒场景。</p>
+                    <div class="feature-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <path d="M30 8v4M8 30h4M52 30h4M13.8 13.8l2.8 2.8M44.2 44.2l2.8 2.8" stroke="rgba(var(--theme-warm), 0.6)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="30" cy="30" r="18" fill="url(#bellGradient)" stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2"/>
+                            <path d="M22 25C22 21 25.5 18 30 18s8 3 8 7v8c0 4 2 6 2 6H20s2-2 2-6v-8z" fill="white"/>
+                            <path d="M26 42c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="bellGradient">
+                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-warm), 0.6)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="text-heading">强大的提醒系统</h3>
+                    <p class="text-body">系统级闹铃提醒，穿透静音模式和专注模式。法定工作日闹钟智能识别，支持多种日常提醒场景。</p>
                     <div class="feature-tags">
-                        <span class="feature-tag">系统闹铃</span>
-                        <span class="feature-tag">工作日识别</span>
-                        <span class="feature-tag">穿透静音</span>
-                        <span class="feature-tag">场景提醒</span>
+                        <span class="feature-tag text-caption">系统闹铃</span>
+                        <span class="feature-tag text-caption">工作日识别</span>
+                        <span class="feature-tag text-caption">穿透静音</span>
+                        <span class="feature-tag text-caption">场景提醒</span>
                     </div>
                 </div>
                 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">📝</div>
-                    <h3>心情日记</h3>
-                    <p>每日心情记录与追踪，表情符号标记情绪状态，富文本编辑支持，时间轴查看历史心情变化。</p>
+                    <div class="feature-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <rect x="12" y="8" width="36" height="44" rx="4" fill="url(#journalGradient)" stroke="rgba(var(--theme-cool), 0.5)" stroke-width="2"/>
+                            <path d="M18 18h24M18 24h20M18 30h22M18 36h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="42" cy="40" r="8" fill="rgba(var(--theme-secondary), 0.9)"/>
+                            <path d="M38 40a4 4 0 0 1 8 0M40 38v4M44 38v4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="journalGradient">
+                                    <stop offset="0%" stop-color="rgba(var(--theme-cool), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-accent), 0.6)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="text-heading">心情日记</h3>
+                    <p class="text-body">每日心情记录与追踪，表情符号标记情绪状态，富文本编辑支持，时间轴查看历史心情变化。</p>
                     <div class="feature-tags">
-                        <span class="feature-tag">情绪追踪</span>
-                        <span class="feature-tag">富文本编辑</span>
-                        <span class="feature-tag">时间轴展示</span>
-                        <span class="feature-tag">关联记录</span>
+                        <span class="feature-tag text-caption">情绪追踪</span>
+                        <span class="feature-tag text-caption">富文本编辑</span>
+                        <span class="feature-tag text-caption">时间轴展示</span>
+                        <span class="feature-tag text-caption">关联记录</span>
                     </div>
                 </div>
                 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>隐私保护与同步</h3>
-                    <p>本地数据存储优先，数据加密保护。支持iCloud自动同步，多设备数据一致，无需网络权限运行。</p>
+                    <div class="feature-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <path d="M30 8L46 18v16c0 12-16 18-16 18S14 46 14 34V18L30 8z" fill="url(#shieldGradient)" stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2"/>
+                            <path d="M24 28l6 6 12-12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="44" cy="16" r="8" fill="rgba(var(--theme-accent), 0.9)"/>
+                            <path d="M40 16h8M44 12v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="shieldGradient">
+                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-secondary), 0.6)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="text-heading">隐私保护与同步</h3>
+                    <p class="text-body">本地数据存储优先，数据加密保护。支持iCloud自动同步，多设备数据一致，无需网络权限运行。</p>
                     <div class="feature-tags">
-                        <span class="feature-tag">本地存储</span>
-                        <span class="feature-tag">数据加密</span>
-                        <span class="feature-tag">iCloud同步</span>
-                        <span class="feature-tag">多设备支持</span>
+                        <span class="feature-tag text-caption">本地存储</span>
+                        <span class="feature-tag text-caption">数据加密</span>
+                        <span class="feature-tag text-caption">iCloud同步</span>
+                        <span class="feature-tag text-caption">多设备支持</span>
                     </div>
                 </div>
             </div>
@@ -1093,6 +1736,45 @@
         </div>
     </footer>
 
+    <!-- 微光粒子系统 -->
+    <div class="sparkle-container" id="sparkleContainer"></div>
+
+    <!-- 主题切换控制器 -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <div class="theme-switcher-trigger" onclick="toggleThemeSwitcher()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
+            </svg>
+        </div>
+        <div class="theme-options">
+            <div class="theme-option" data-theme="aurora" onclick="setTheme('aurora')">
+                <div class="theme-preview aurora"></div>
+                <span>Aurora</span>
+            </div>
+            <div class="theme-option" data-theme="sunset" onclick="setTheme('sunset')">
+                <div class="theme-preview sunset"></div>
+                <span>Sunset</span>
+            </div>
+            <div class="theme-option" data-theme="ocean" onclick="setTheme('ocean')">
+                <div class="theme-preview ocean"></div>
+                <span>Ocean</span>
+            </div>
+            <div class="theme-option" data-theme="forest" onclick="setTheme('forest')">
+                <div class="theme-preview forest"></div>
+                <span>Forest</span>
+            </div>
+            <div class="theme-option" data-theme="midnight" onclick="setTheme('midnight')">
+                <div class="theme-preview midnight"></div>
+                <span>Midnight</span>
+            </div>
+            <div class="theme-option" data-theme="rose" onclick="setTheme('rose')">
+                <div class="theme-preview rose"></div>
+                <span>Rose</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Modal -->
     <div id="downloadModal" class="modal-overlay">
         <div class="modal-content">
@@ -1237,6 +1919,198 @@
                 closeModal();
             }
         });
+
+        // 微光粒子系统
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const delay = Math.random() * 3;
+            const duration = 2 + Math.random() * 4;
+            
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.animationDelay = delay + 's';
+            sparkle.style.animationDuration = duration + 's';
+            
+            document.getElementById('sparkleContainer').appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // 初始化微光粒子
+        function initSparkles() {
+            // 创建初始粒子
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createSparkle, Math.random() * 3000);
+            }
+            
+            // 持续创建粒子
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% 概率创建新粒子
+                    createSparkle();
+                }
+            }, 500);
+        }
+
+        // 主题切换功能
+        function toggleThemeSwitcher() {
+            const switcher = document.getElementById('themeSwitcher');
+            switcher.classList.toggle('active');
+        }
+
+        function setTheme(themeName) {
+            // 添加切换动画类
+            document.body.classList.add('theme-switching');
+            
+            // 设置主题
+            document.documentElement.setAttribute('data-theme', themeName);
+            
+            // 更新激活状态
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`[data-theme="${themeName}"]`).classList.add('active');
+            
+            // 保存到localStorage
+            localStorage.setItem('dategazer-theme', themeName);
+            
+            // 关闭主题选择器
+            document.getElementById('themeSwitcher').classList.remove('active');
+            
+            // 移除切换动画类
+            setTimeout(() => {
+                document.body.classList.remove('theme-switching');
+            }, 800);
+            
+            // 触发主题切换动画
+            createThemeTransition();
+        }
+
+        function createThemeTransition() {
+            // 创建主题切换的视觉效果
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle, rgba(var(--theme-primary), 0.1) 0%, transparent 70%);
+                pointer-events: none;
+                z-index: 9999;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            requestAnimationFrame(() => {
+                overlay.style.opacity = '1';
+                setTimeout(() => {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.remove(), 500);
+                }, 300);
+            });
+        }
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('dategazer-theme') || 'aurora';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.querySelector(`[data-theme="${savedTheme}"]`)?.classList.add('active');
+        }
+
+        // 点击外部关闭主题切换器
+        document.addEventListener('click', (e) => {
+            const switcher = document.getElementById('themeSwitcher');
+            if (!switcher.contains(e.target)) {
+                switcher.classList.remove('active');
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initSparkles();
+            initTheme();
+        });
+
+        // 鼠标移动时创建粒子轨迹
+        let mouseTrail = [];
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.05) { // 5% 概率在鼠标位置创建粒子
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.animationDuration = '1s';
+                document.getElementById('sparkleContainer').appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+
+        // 增强的滚动视差效果
+        let ticking = false;
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            // 更新背景位置
+            document.body.style.backgroundPositionY = rate + 'px';
+            
+            // 更新各个区域的视差效果
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.opacity = Math.max(0, 1 - scrolled / (window.innerHeight * 0.8));
+            }
+            
+            // 卡片进入动画
+            const cards = document.querySelectorAll('.feature-card, .screenshot-card');
+            cards.forEach((card) => {
+                const rect = card.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.8;
+                
+                if (isVisible && !card.classList.contains('animated')) {
+                    card.classList.add('animated');
+                    card.style.animation = 'cardSlideIn 0.8s var(--ease-bounce) forwards';
+                }
+            });
+            
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+
+        // 卡片滑入动画
+        const cardSlideInKeyframes = `
+            @keyframes cardSlideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px) scale(0.8);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = cardSlideInKeyframes;
+        document.head.appendChild(styleSheet);
 
         // Handle Universal Links
         const path = window.location.pathname;
