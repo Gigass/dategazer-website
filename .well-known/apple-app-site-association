@@ -19,6 +19,14 @@
           {
             "/": "/deeplink/*",
             "comment": "深度链接路径"
+          },
+          {
+            "/": "/privacy-policy",
+            "comment": "隐私政策页面"
+          },
+          {
+            "/": "/terms-of-service", 
+            "comment": "服务条款页面"
           }
         ]
       }
