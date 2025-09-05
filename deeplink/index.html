@@ -68,17 +68,44 @@
             <strong>提示：</strong>如果应用未自动打开，请确认已安装DateGazer应用
         </div>
     </div>
+    <!-- 如果应用已发布到App Store，请添加: <meta name="apple-itunes-app" content="app-id=YOUR_APP_STORE_ID"> -->
     <script>
         function openApp() {
             const params = new URLSearchParams(window.location.search);
             const action = params.get('action') || 'home';
-            window.location.href = `dategazer://deeplink?action=${action}`;
+            
+            // 尝试多种方式打开应用
+            
+            // 1. 尝试自定义URL Scheme
+            const customScheme = `dategazer://deeplink?action=${action}`;
+            window.location.href = customScheme;
+            
+            // 2. 如果支持，尝试使用Universal Links
+            setTimeout(() => {
+                if (document.hasFocus()) {
+                    // 应用可能没有打开，显示提示
+                    showInstallPrompt();
+                }
+            }, 2000);
         }
         
-        // 自动尝试打开应用
-        setTimeout(() => {
-            openApp();
-        }, 3000);
+        function showInstallPrompt() {
+            const notice = document.querySelector('.install-notice');
+            notice.innerHTML = `
+                <strong>应用未打开？</strong><br>
+                • 请确认已安装DateGazer应用<br>
+                • 或前往App Store下载应用<br>
+                <a href="https://apps.apple.com/app/id/YOUR_APP_ID" target="_blank" 
+                   style="color: white; text-decoration: underline;">前往App Store</a>
+            `;
+        }
+        
+        // 检测iOS设备并自动尝试打开
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            setTimeout(() => {
+                openApp();
+            }, 2000);
+        }
     </script>
 </body>
 </html>
