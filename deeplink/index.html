@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深度链接 - DateGazer</title>
+    <meta name="description" content="DateGazer应用深度链接页面">
+    <link rel="apple-touch-icon" href="../pic/logo.png">
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        h1 { font-size: 2em; margin-bottom: 20px; }
+        p { font-size: 1.1em; line-height: 1.6; margin-bottom: 30px; }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .btn.primary { background: rgba(255,255,255,0.3); }
+        .install-notice {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 打开DateGazer</h1>
+        <p>点击下方按钮打开DateGazer应用<br>或者等待自动跳转</p>
+        <div class="btn-group">
+            <a href="#" class="btn primary" onclick="openApp()">立即打开应用</a>
+            <a href="../" class="btn">返回首页</a>
+        </div>
+        <div class="install-notice">
+            <strong>提示：</strong>如果应用未自动打开，请确认已安装DateGazer应用
+        </div>
+    </div>
+    <script>
+        function openApp() {
+            const params = new URLSearchParams(window.location.search);
+            const action = params.get('action') || 'home';
+            window.location.href = `dategazer://deeplink?action=${action}`;
+        }
+        
+        // 自动尝试打开应用
+        setTimeout(() => {
+            openApp();
+        }, 3000);
+    </script>
+</body>
+</html>

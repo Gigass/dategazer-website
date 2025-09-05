@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份验证 - DateGazer</title>
+    <meta name="description" content="DateGazer应用身份验证页面">
+    <link rel="apple-touch-icon" href="../pic/logo.png">
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        h1 { font-size: 2em; margin-bottom: 20px; }
+        p { font-size: 1.1em; line-height: 1.6; margin-bottom: 30px; }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 身份验证</h1>
+        <p>正在处理身份验证请求...<br>即将自动跳转到DateGazer应用</p>
+        <a href="../" class="btn">返回首页</a>
+    </div>
+    <script>
+        // 自动尝试打开应用
+        setTimeout(() => {
+            window.location.href = 'dategazer://auth/verify';
+        }, 2000);
+    </script>
+</body>
+</html>
