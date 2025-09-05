@@ -104,6 +104,12 @@
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --ease-dynamic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            /* 动态背景变量 */
+            --bg-intensity: 1;
+            --particle-density: 1;
+            --animation-speed: 1;
             
             /* 超现代化设计系统 */
             --card-gradient: var(--crystal-gradient);
@@ -130,8 +136,8 @@
             --border-radius-2xl: 24px;
             --border-radius-3xl: 32px;
             
-            /* 主题切换动画 */
-            transition: all 0.8s var(--ease-smooth);
+            /* 动态主题切换动画 */
+            transition: all 1.2s var(--ease-smooth);
         }
 
         /* 预设主题配色 */
@@ -191,7 +197,7 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-        /* 全新高级背景系统 - 优美深色渐变，确保文字可读性 */
+        /* 动态背景系统 - 基于主题的多层渐变 */
         html {
             background: 
                 /* 主深色渐变基底 - 确保可读性 */
@@ -221,9 +227,30 @@
                     rgba(var(--theme-primary), 0.05) 240deg,
                     transparent 300deg,
                     rgba(var(--theme-cool), 0.06) 360deg);
-            background-attachment: local;
-            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
             min-height: 100vh;
+            /* 动态背景动画 */
+            animation: backgroundShift 20s ease-in-out infinite alternate;
+        }
+
+        /* 动态背景动画关键帧 */
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 0%, 20% 30%, 80% 70%, 60% 20%, 40% 60%;
+            }
+            25% {
+                background-position: 5% 10%, 25% 25%, 75% 75%, 55% 25%, 45% 55%;
+            }
+            50% {
+                background-position: 10% 5%, 30% 35%, 70% 65%, 65% 15%, 35% 65%;
+            }
+            75% {
+                background-position: 15% 15%, 15% 45%, 85% 55%, 45% 35%, 55% 45%;
+            }
+            100% {
+                background-position: 20% 20%, 10% 50%, 90% 50%, 50% 30%, 50% 50%;
+            }
         }
 
         body {
@@ -279,7 +306,7 @@
             font-size: 0.75rem;
         }
 
-        /* 高级装饰纹理层 - 提升质感 */
+        /* 高级装饰纹理层 - 动态效果 */
         body::before {
             content: '';
             position: fixed;
@@ -288,24 +315,41 @@
             width: 100vw;
             height: 100vh;
             background: 
-                /* 细腻的噪点纹理 */
-                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(var(--theme-accent), 0.015) 0%, transparent 70%),
-                /* 极细微的主题色装饰 */
+                /* 动态噪点纹理 */
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.015) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.015) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(var(--theme-accent), 0.02) 0%, transparent 70%),
+                /* 动态主题色装饰 */
                 linear-gradient(45deg, 
-                    rgba(var(--theme-primary), 0.008) 0%, 
+                    rgba(var(--theme-primary), 0.012) 0%, 
                     transparent 25%, 
-                    rgba(var(--theme-secondary), 0.006) 50%, 
+                    rgba(var(--theme-secondary), 0.01) 50%, 
                     transparent 75%, 
-                    rgba(var(--theme-cool), 0.01) 100%);
+                    rgba(var(--theme-cool), 0.015) 100%);
             z-index: -1;
             backface-visibility: hidden;
             pointer-events: none;
+            animation: textureFloat 15s ease-in-out infinite alternate;
+        }
+
+        /* 纹理浮动动画 */
+        @keyframes textureFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-10px, -5px) scale(1.02);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(5px, 10px) scale(0.98);
+                opacity: 0.9;
+            }
         }
 
 
-        /* 微光粒子系统 */
+        /* 增强微光粒子系统 */
         .sparkle-container {
             position: fixed;
             top: 0;
@@ -314,25 +358,49 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            overflow: hidden;
         }
 
         .sparkle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--white-90);
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(var(--theme-primary), 0.8) 0%, rgba(var(--theme-secondary), 0.6) 50%, transparent 100%);
             border-radius: 50%;
-            animation: sparkle 3s ease-in-out infinite;
+            animation: enhancedSparkle 4s ease-in-out infinite;
+            box-shadow: 0 0 6px rgba(var(--theme-accent), 0.4);
         }
 
-        @keyframes sparkle {
+        .sparkle:nth-child(2n) {
+            background: radial-gradient(circle, rgba(var(--theme-secondary), 0.8) 0%, rgba(var(--theme-accent), 0.6) 50%, transparent 100%);
+            animation-duration: 5s;
+        }
+
+        .sparkle:nth-child(3n) {
+            background: radial-gradient(circle, rgba(var(--theme-accent), 0.8) 0%, rgba(var(--theme-cool), 0.6) 50%, transparent 100%);
+            animation-duration: 6s;
+        }
+
+        @keyframes enhancedSparkle {
             0%, 100% { 
                 opacity: 0;
                 transform: scale(0) rotate(0deg);
+                filter: blur(1px);
+            }
+            25% {
+                opacity: 0.6;
+                transform: scale(0.5) rotate(90deg);
+                filter: blur(0.5px);
             }
             50% { 
                 opacity: 1;
-                transform: scale(1) rotate(180deg);
+                transform: scale(1.2) rotate(180deg);
+                filter: blur(0px);
+            }
+            75% {
+                opacity: 0.8;
+                transform: scale(0.8) rotate(270deg);
+                filter: blur(0.2px);
             }
         }
 
@@ -830,12 +898,7 @@
                     0 0 60px rgba(var(--theme-primary), 0.2);
             }
             
-            .screenshot-card:hover {
-                transform: translateY(-8px) scale(1.02);
-                box-shadow: 
-                    var(--shadow-xl),
-                    0 0 40px rgba(var(--theme-accent), 0.15);
-            }
+            /* 移除screenshot-card的PC端动画 */
         }
 
         .feature-card:active {
@@ -964,151 +1027,99 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Screenshots Section - 统一透明背景 */
-        .screenshots-section {
+        /* 应用预览区域 - 完全重构版本 */
+        .app-preview {
             padding: 5rem 2rem;
             background: transparent;
-            position: relative;
         }
 
         @media (min-width: 1024px) {
-            .screenshots-section {
+            .app-preview {
                 padding: 8rem 3rem;
             }
         }
 
         @media (min-width: 1400px) {
-            .screenshots-section {
+            .app-preview {
                 padding: 10rem 4rem;
             }
         }
 
-        .screenshots-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
+        .preview-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .preview-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: white;
+            text-shadow: var(--text-shadow);
+            margin-bottom: 1rem;
+        }
+
+        .preview-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .preview-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
-        
-        .screenshots-row {
-            display: grid;
-            gap: 2rem;
-        }
-        
-        /* PC端截图网格优化 */
-        .screenshots-row-1 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        
-        .screenshots-row-2 {
-            grid-template-columns: repeat(4, 1fr);
-        }
 
-        @media (min-width: 1400px) {
-            .screenshots-grid {
-                gap: 4rem;
-            }
-            
-            .screenshots-row {
-                gap: 2.5rem;
-            }
-            
-            .screenshots-row-1 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .screenshots-row-2 {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (min-width: 1600px) {
-            .screenshots-row {
-                gap: 3rem;
-            }
-        }
-        
-        @media (max-width: 1200px) {
-            .screenshots-row-2 {
+        @media (min-width: 768px) {
+            .preview-gallery {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        
-        @media (max-width: 768px) {
-            .screenshots-row-1,
-            .screenshots-row-2 {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .screenshots-grid {
-                gap: 1rem;
+
+        @media (min-width: 1200px) {
+            .preview-gallery {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        .screenshot-card {
-            background: 
-                linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+        .preview-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
             padding: 1.5rem;
             text-align: center;
-            transition: all 0.5s var(--ease-smooth);
-            box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.1), 
-                0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
-        .screenshot-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .preview-item img {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(var(--theme-primary), 0.1), 
-                transparent);
-            transition: left 0.8s ease;
-        }
-
-        .screenshot-card:hover::before {
-            left: 100%;
-        }
-
-        .screenshot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .screenshot-card img {
-            max-width: 100%;
             height: auto;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            display: block;
+            margin-bottom: 1rem;
         }
 
-        .screenshot-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .screenshot-card h4 {
-            font-size: 1.2rem;
+        .preview-info h4 {
+            font-size: 1.1rem;
             font-weight: 600;
             color: white;
-            margin: 1rem 0 0.5rem 0;
-            text-shadow: var(--text-shadow);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        .screenshot-card p {
+        .preview-info p {
             color: rgba(255, 255, 255, 0.8);
             font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
         }
 
         /* Detailed Features - 统一透明背景 */
@@ -1393,7 +1404,7 @@
             }
             
             .features-section, 
-            .screenshots-section, 
+            .app-preview, 
             .detailed-features {
                 padding: 4rem 1.5rem;
             }
@@ -1421,12 +1432,13 @@
                 gap: 1.5rem;
             }
             
-            .screenshot-card {
-                padding: 1rem;
+            .preview-gallery {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
-            .screenshot-card img {
-                border-radius: 8px;
+            .preview-item {
+                padding: 1rem;
             }
             
             .cta-container {
@@ -1462,7 +1474,7 @@
             }
             
             .features-section, 
-            .screenshots-section, 
+            .app-preview, 
             .detailed-features {
                 padding: 3rem 1rem;
             }
@@ -1481,25 +1493,21 @@
                 line-height: 1.5;
             }
             
-            .screenshots-grid {
-                gap: 0.8rem;
+            .preview-gallery {
+                gap: 1rem;
                 margin-top: 2rem;
             }
             
-            .screenshots-row {
-                gap: 0.8rem;
-            }
-            
-            .screenshot-card {
+            .preview-item {
                 padding: 0.8rem;
             }
             
-            .screenshot-card h4 {
+            .preview-info h4 {
                 font-size: 1rem;
-                margin: 0.8rem 0 0.3rem 0;
+                margin-bottom: 0.3rem;
             }
             
-            .screenshot-card p {
+            .preview-info p {
                 font-size: 0.85rem;
                 line-height: 1.4;
             }
@@ -1863,7 +1871,6 @@
         @media (min-width: 1024px) {
             /* 为PC端启用硬件加速 */
             .feature-card, 
-            .screenshot-card, 
             .feature-column {
                 will-change: transform;
                 backface-visibility: hidden;
@@ -2115,58 +2122,66 @@
         </div>
     </section>
 
-    <!-- Screenshots Section -->
-    <section class="screenshots-section">
-        <div class="container">
-            <div class="section-header fade-in">
+    <!-- Screenshots Section - 简化版本无动效 -->
+    <section class="app-preview">
+        <div class="preview-container">
+            <div class="preview-header">
                 <h2>📸 应用预览</h2>
                 <p>直观体验DateGazer的精美界面和强大功能</p>
             </div>
             
-            <div class="screenshots-grid">
-                <!-- 第一排：3张图片 -->
-                <div class="screenshots-row screenshots-row-1">
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/纪念日卡片宣传图.jpg" alt="纪念日卡片创作">
+            <div class="preview-gallery">
+                <div class="preview-item">
+                    <img src="pic/纪念日卡片宣传图.jpg" alt="纪念日卡片创作" loading="lazy">
+                    <div class="preview-info">
                         <h4>🎨 纪念日卡片创作</h4>
                         <p>DIY名片设计工具，打造专属纪念日卡片</p>
                     </div>
-                    
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/纪念日卡片livephoto和视频分享宣传图.jpg" alt="Live Photo分享">
+                </div>
+                
+                <div class="preview-item">
+                    <img src="pic/纪念日卡片livephoto和视频分享宣传图.jpg" alt="Live Photo分享" loading="lazy">
+                    <div class="preview-info">
                         <h4>📹 Live Photo动态分享</h4>
                         <p>创建动态Live Photo，让回忆更加生动</p>
                     </div>
-                    
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/系统级闹钟宣传图.jpg" alt="系统级闹钟">
+                </div>
+                
+                <div class="preview-item">
+                    <img src="pic/系统级闹钟宣传图.jpg" alt="系统级闹钟" loading="lazy">
+                    <div class="preview-info">
                         <h4>⏰ 系统级闹钟提醒</h4>
                         <p>穿透静音模式，确保重要提醒不错过</p>
                     </div>
                 </div>
                 
-                <!-- 第二排：4张图片 -->
-                <div class="screenshots-row screenshots-row-2">
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/桌面DIY小组件宣传图.jpg" alt="桌面小组件">
+                <div class="preview-item">
+                    <img src="pic/桌面DIY小组件宣传图.jpg" alt="桌面小组件" loading="lazy">
+                    <div class="preview-info">
                         <h4>📱 桌面DIY小组件</h4>
                         <p>个性化桌面小组件，实时显示重要纪念日</p>
                     </div>
-                    
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/app通知提醒和日历提醒宣传图.jpg" alt="通知提醒系统">
+                </div>
+                
+                <div class="preview-item">
+                    <img src="pic/app通知提醒和日历提醒宣传图.jpg" alt="通知提醒系统" loading="lazy">
+                    <div class="preview-info">
                         <h4>🔔 智能通知提醒</h4>
                         <p>多重提醒保障，日历同步多设备数据共享</p>
                     </div>
-                    
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/国内节假日日历和timeline宣传图.jpg" alt="日历和时间线">
+                </div>
+                
+                <div class="preview-item">
+                    <img src="pic/国内节假日日历和timeline宣传图.jpg" alt="日历和时间线" loading="lazy">
+                    <div class="preview-info">
                         <h4>📅 节假日日历与时间线</h4>
                         <p>国内节假日月历，时间轴展示纪念日卡片</p>
                     </div>
-                    
-                    <div class="screenshot-card fade-in">
-                        <img src="pic/心情日记宣传图.jpg" alt="心情日记">
+                </div>
+                
+                <div class="preview-item">
+                    <img src="pic/心情日记宣传图.jpg" alt="心情日记" loading="lazy">
+                    <div class="preview-info">
                         <h4>📝 心情日记记录</h4>
                         <p>记录每天心情瞬间，支持格式编辑和自动保存</p>
                     </div>
@@ -2449,41 +2464,117 @@
             }
         });
 
-        // 微光粒子系统
+        // 增强微光粒子系统
         function createSparkle() {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
             
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight;
-            const delay = Math.random() * 3;
-            const duration = 2 + Math.random() * 4;
+            const delay = Math.random() * 4;
+            const duration = 3 + Math.random() * 6;
+            
+            // 随机大小变化
+            const scale = 0.5 + Math.random() * 1.5;
+            const rotation = Math.random() * 360;
             
             sparkle.style.left = x + 'px';
             sparkle.style.top = y + 'px';
             sparkle.style.animationDelay = delay + 's';
             sparkle.style.animationDuration = duration + 's';
+            sparkle.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+            
+            // 随机颜色变化
+            const colorVariant = Math.floor(Math.random() * 3);
+            if (colorVariant === 1) {
+                sparkle.style.background = `radial-gradient(circle, rgba(var(--theme-warm), 0.8) 0%, rgba(var(--theme-primary), 0.6) 50%, transparent 100%)`;
+            } else if (colorVariant === 2) {
+                sparkle.style.background = `radial-gradient(circle, rgba(var(--theme-cool), 0.8) 0%, rgba(var(--theme-secondary), 0.6) 50%, transparent 100%)`;
+            }
             
             document.getElementById('sparkleContainer').appendChild(sparkle);
             
             setTimeout(() => {
-                sparkle.remove();
+                if (sparkle.parentNode) {
+                    sparkle.remove();
+                }
             }, (duration + delay) * 1000);
         }
 
-        // 初始化微光粒子
+        // 初始化增强微光粒子
         function initSparkles() {
-            // 创建初始粒子
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createSparkle, Math.random() * 3000);
+            // 创建初始粒子群
+            for (let i = 0; i < 25; i++) {
+                setTimeout(createSparkle, Math.random() * 5000);
             }
             
             // 持续创建粒子
             setInterval(() => {
-                if (Math.random() < 0.3) { // 30% 概率创建新粒子
+                if (Math.random() < 0.4) { // 40% 概率创建新粒子
                     createSparkle();
                 }
-            }, 500);
+            }, 400);
+        }
+
+        // 流星效果
+        function createMeteor() {
+            const meteor = document.createElement('div');
+            meteor.style.cssText = `
+                position: absolute;
+                width: 2px;
+                height: 80px;
+                background: linear-gradient(to bottom, 
+                    rgba(var(--theme-primary), 0.8) 0%, 
+                    rgba(var(--theme-secondary), 0.6) 50%, 
+                    transparent 100%);
+                border-radius: 50px;
+                top: -100px;
+                left: ${Math.random() * window.innerWidth}px;
+                animation: meteor 3s linear forwards;
+                pointer-events: none;
+                z-index: 1;
+            `;
+            
+            document.getElementById('sparkleContainer').appendChild(meteor);
+            
+            setTimeout(() => {
+                if (meteor.parentNode) {
+                    meteor.remove();
+                }
+            }, 3000);
+        }
+
+        // 流星动画
+        const meteorKeyframes = `
+            @keyframes meteor {
+                0% {
+                    transform: translateY(0) rotate(45deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(${window.innerHeight + 100}px) rotate(45deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        
+        const meteorStyleSheet = document.createElement('style');
+        meteorStyleSheet.textContent = meteorKeyframes;
+        document.head.appendChild(meteorStyleSheet);
+
+        // 初始化流星效果
+        function initMeteors() {
+            setInterval(() => {
+                if (Math.random() < 0.15) { // 15% 概率创建流星
+                    createMeteor();
+                }
+            }, 2000);
         }
 
         // 主题切换功能
@@ -2518,7 +2609,71 @@
             
             // 触发主题切换动画
             createThemeTransition();
+            
+            // 创建主题切换特效
+            createThemeChangeEffect();
         }
+        
+        // 主题切换特效
+        function createThemeChangeEffect() {
+            // 创建彩色爆发粒子
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const burst = document.createElement('div');
+                    burst.style.cssText = `
+                        position: fixed;
+                        width: 4px;
+                        height: 4px;
+                        background: radial-gradient(circle, 
+                            rgba(var(--theme-primary), 1) 0%, 
+                            rgba(var(--theme-secondary), 0.8) 50%, 
+                            transparent 100%);
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 50%;
+                        pointer-events: none;
+                        z-index: 1000;
+                        animation: themeChangeBurst 1.5s ease-out forwards;
+                    `;
+                    
+                    const angle = (i / 15) * Math.PI * 2;
+                    const distance = 200 + Math.random() * 100;
+                    
+                    burst.style.setProperty('--angle', angle + 'rad');
+                    burst.style.setProperty('--distance', distance + 'px');
+                    
+                    document.body.appendChild(burst);
+                    
+                    setTimeout(() => {
+                        if (burst.parentNode) {
+                            burst.remove();
+                        }
+                    }, 1500);
+                }, i * 50);
+            }
+        }
+        
+        // 主题切换爆发动画
+        const themeChangeKeyframes = `
+            @keyframes themeChangeBurst {
+                0% {
+                    transform: translate(-50%, -50%) scale(0);
+                    opacity: 1;
+                }
+                50% {
+                    transform: translate(calc(-50% + cos(var(--angle)) * var(--distance)), calc(-50% + sin(var(--angle)) * var(--distance))) scale(1.5);
+                    opacity: 0.8;
+                }
+                100% {
+                    transform: translate(calc(-50% + cos(var(--angle)) * var(--distance)), calc(-50% + sin(var(--angle)) * var(--distance))) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        
+        const themeChangeStyleSheet = document.createElement('style');
+        themeChangeStyleSheet.textContent = themeChangeKeyframes;
+        document.head.appendChild(themeChangeStyleSheet);
 
         function createThemeTransition() {
             // 创建主题切换的视觉效果
@@ -2565,43 +2720,65 @@
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
             initSparkles();
+            initMeteors();
             initTheme();
         });
 
-        // 鼠标移动时创建粒子轨迹
+        // 增强鼠标粒子轨迹效果
         let mouseTrail = [];
         document.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.05) { // 5% 概率在鼠标位置创建粒子
+            if (Math.random() < 0.08) { // 8% 概率在鼠标位置创建粒子
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
-                sparkle.style.animationDuration = '1s';
+                
+                // 添加随机偏移
+                const offsetX = (Math.random() - 0.5) * 30;
+                const offsetY = (Math.random() - 0.5) * 30;
+                
+                sparkle.style.left = (e.clientX + offsetX) + 'px';
+                sparkle.style.top = (e.clientY + offsetY) + 'px';
+                sparkle.style.animationDuration = '1.5s';
+                sparkle.style.transform = `scale(${0.3 + Math.random() * 0.7})`;
+                
+                // 鼠标轨迹粒子特殊颜色
+                sparkle.style.background = `radial-gradient(circle, 
+                    rgba(var(--theme-accent), 0.9) 0%, 
+                    rgba(var(--theme-primary), 0.7) 50%, 
+                    transparent 100%)`;
+                
                 document.getElementById('sparkleContainer').appendChild(sparkle);
                 
-                setTimeout(() => sparkle.remove(), 1000);
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.remove();
+                    }
+                }, 1500);
             }
         });
 
-        // 优化的滚动视差效果 - 防止闪烁
+        // 增强的动态背景滚动效果
         let ticking = false;
         
         function updateParallax() {
             const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
+            const rate = scrolled * -0.3;
             
-            // 更新背景位置
-            document.body.style.backgroundPositionY = rate + 'px';
+            // 动态背景位置更新
+            document.documentElement.style.setProperty('--scroll-y', scrolled + 'px');
             
-            // 更新各个区域的视差效果
+            // 更新hero区域的视差效果
             const hero = document.querySelector('.hero');
             if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.transform = `translateY(${scrolled * 0.2}px)`;
                 hero.style.opacity = Math.max(0, 1 - scrolled / (window.innerHeight * 0.8));
             }
             
-            // 移除screenshot-card的滚动动画处理，使用统一的IntersectionObserver
-            // 不在这里处理screenshot-card，避免与fade-in系统冲突
+            // 动态粒子密度调整
+            const sparkleContainer = document.getElementById('sparkleContainer');
+            if (sparkleContainer) {
+                const opacity = Math.max(0.3, 1 - scrolled / (window.innerHeight * 2));
+                sparkleContainer.style.opacity = opacity;
+            }
             
             ticking = false;
         }
@@ -2728,11 +2905,9 @@
 
         // 初始化渐入动画观察器
         document.addEventListener('DOMContentLoaded', () => {
-            // 延迟初始化，确保DOM完全渲染
             setTimeout(() => {
                 const fadeElements = document.querySelectorAll('.fade-in');
                 fadeElements.forEach(el => {
-                    // 确保初始状态正确
                     if (!el.classList.contains('visible')) {
                         fadeObserver.observe(el);
                     }
@@ -2740,9 +2915,8 @@
             }, 100);
         });
 
-        // 优化的交互效果 - 防止与滚动动画冲突
+        // 优化的交互效果
         document.addEventListener('DOMContentLoaded', () => {
-            // 等待DOM完全加载后再添加交互效果
             setTimeout(() => {
                 document.querySelectorAll('.feature-card').forEach(card => {
                     card.addEventListener('mouseenter', () => {
