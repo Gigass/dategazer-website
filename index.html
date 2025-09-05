@@ -1027,7 +1027,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* 应用预览区域 - 完全重构版本 */
+        /* 现代化应用预览区域 - 无毛玻璃效果 */
         .app-preview {
             padding: 5rem 2rem;
             background: transparent;
@@ -1072,54 +1072,130 @@
         }
 
         .preview-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
             margin-top: 3rem;
         }
 
-        @media (min-width: 768px) {
+        .preview-row {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .preview-row-1 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .preview-row-2 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (min-width: 1400px) {
             .preview-gallery {
+                gap: 4rem;
+            }
+            
+            .preview-row {
+                gap: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .preview-row {
+                gap: 3rem;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .preview-row-2 {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
-        @media (min-width: 1200px) {
+        
+        @media (max-width: 768px) {
+            .preview-row-1,
+            .preview-row-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
             .preview-gallery {
-                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
             }
         }
 
+        /* 现代化卡片设计 - 完全移除毛玻璃效果 */
         .preview-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
+            background: 
+                linear-gradient(145deg, 
+                    rgba(255, 255, 255, 0.12) 0%, 
+                    rgba(255, 255, 255, 0.06) 50%,
+                    rgba(255, 255, 255, 0.08) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
             text-align: center;
-            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.25),
+                0 4px 16px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 添加精致的内发光边框 */
+        .preview-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(var(--theme-primary), 0.1) 0%,
+                transparent 30%,
+                rgba(var(--theme-secondary), 0.08) 70%,
+                rgba(var(--theme-accent), 0.1) 100%);
+            border-radius: 18px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .preview-item > * {
+            position: relative;
+            z-index: 2;
         }
 
         .preview-item img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
+            border-radius: 16px;
             display: block;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 
+                0 12px 24px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .preview-info h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: white;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0.8rem;
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.5),
+                0 1px 2px rgba(0, 0, 0, 0.3);
+            line-height: 1.3;
         }
 
         .preview-info p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            line-height: 1.5;
             margin: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         /* Detailed Features - 统一透明背景 */
@@ -1432,13 +1508,32 @@
                 gap: 1.5rem;
             }
             
-            .preview-gallery {
+            .preview-row-1,
+            .preview-row-2 {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
             
+            .preview-gallery {
+                gap: 2rem;
+            }
+            
             .preview-item {
-                padding: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .preview-item img {
+                border-radius: 12px;
+                margin-bottom: 1rem;
+            }
+            
+            .preview-info h4 {
+                font-size: 1.1rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            .preview-info p {
+                font-size: 0.95rem;
             }
             
             .cta-container {
@@ -1498,17 +1593,30 @@
                 margin-top: 2rem;
             }
             
+            .preview-row {
+                gap: 1rem;
+            }
+            
+            .preview-gallery {
+                gap: 1.5rem;
+            }
+            
             .preview-item {
-                padding: 0.8rem;
+                padding: 1.2rem;
+            }
+            
+            .preview-item img {
+                border-radius: 10px;
+                margin-bottom: 0.8rem;
             }
             
             .preview-info h4 {
                 font-size: 1rem;
-                margin-bottom: 0.3rem;
+                margin-bottom: 0.4rem;
             }
             
             .preview-info p {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 line-height: 1.4;
             }
             
@@ -2131,59 +2239,65 @@
             </div>
             
             <div class="preview-gallery">
-                <div class="preview-item">
-                    <img src="pic/纪念日卡片宣传图.jpg" alt="纪念日卡片创作" loading="lazy">
-                    <div class="preview-info">
-                        <h4>🎨 纪念日卡片创作</h4>
-                        <p>DIY名片设计工具，打造专属纪念日卡片</p>
+                <!-- 第一排：3张图片 -->
+                <div class="preview-row preview-row-1">
+                    <div class="preview-item">
+                        <img src="pic/纪念日卡片宣传图.jpg" alt="纪念日卡片创作" loading="lazy">
+                        <div class="preview-info">
+                            <h4>🎨 纪念日卡片创作</h4>
+                            <p>DIY名片设计工具，打造专属纪念日卡片</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item">
+                        <img src="pic/纪念日卡片livephoto和视频分享宣传图.jpg" alt="Live Photo分享" loading="lazy">
+                        <div class="preview-info">
+                            <h4>📹 Live Photo动态分享</h4>
+                            <p>创建动态Live Photo，让回忆更加生动</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item">
+                        <img src="pic/系统级闹钟宣传图.jpg" alt="系统级闹钟" loading="lazy">
+                        <div class="preview-info">
+                            <h4>⏰ 系统级闹钟提醒</h4>
+                            <p>穿透静音模式，确保重要提醒不错过</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="preview-item">
-                    <img src="pic/纪念日卡片livephoto和视频分享宣传图.jpg" alt="Live Photo分享" loading="lazy">
-                    <div class="preview-info">
-                        <h4>📹 Live Photo动态分享</h4>
-                        <p>创建动态Live Photo，让回忆更加生动</p>
+                <!-- 第二排：4张图片 -->
+                <div class="preview-row preview-row-2">
+                    <div class="preview-item">
+                        <img src="pic/桌面DIY小组件宣传图.jpg" alt="桌面小组件" loading="lazy">
+                        <div class="preview-info">
+                            <h4>📱 桌面DIY小组件</h4>
+                            <p>个性化桌面小组件，实时显示重要纪念日</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="preview-item">
-                    <img src="pic/系统级闹钟宣传图.jpg" alt="系统级闹钟" loading="lazy">
-                    <div class="preview-info">
-                        <h4>⏰ 系统级闹钟提醒</h4>
-                        <p>穿透静音模式，确保重要提醒不错过</p>
+                    
+                    <div class="preview-item">
+                        <img src="pic/app通知提醒和日历提醒宣传图.jpg" alt="通知提醒系统" loading="lazy">
+                        <div class="preview-info">
+                            <h4>🔔 智能通知提醒</h4>
+                            <p>多重提醒保障，日历同步多设备数据共享</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="preview-item">
-                    <img src="pic/桌面DIY小组件宣传图.jpg" alt="桌面小组件" loading="lazy">
-                    <div class="preview-info">
-                        <h4>📱 桌面DIY小组件</h4>
-                        <p>个性化桌面小组件，实时显示重要纪念日</p>
+                    
+                    <div class="preview-item">
+                        <img src="pic/国内节假日日历和timeline宣传图.jpg" alt="日历和时间线" loading="lazy">
+                        <div class="preview-info">
+                            <h4>📅 节假日日历与时间线</h4>
+                            <p>国内节假日月历，时间轴展示纪念日卡片</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="preview-item">
-                    <img src="pic/app通知提醒和日历提醒宣传图.jpg" alt="通知提醒系统" loading="lazy">
-                    <div class="preview-info">
-                        <h4>🔔 智能通知提醒</h4>
-                        <p>多重提醒保障，日历同步多设备数据共享</p>
-                    </div>
-                </div>
-                
-                <div class="preview-item">
-                    <img src="pic/国内节假日日历和timeline宣传图.jpg" alt="日历和时间线" loading="lazy">
-                    <div class="preview-info">
-                        <h4>📅 节假日日历与时间线</h4>
-                        <p>国内节假日月历，时间轴展示纪念日卡片</p>
-                    </div>
-                </div>
-                
-                <div class="preview-item">
-                    <img src="pic/心情日记宣传图.jpg" alt="心情日记" loading="lazy">
-                    <div class="preview-info">
-                        <h4>📝 心情日记记录</h4>
-                        <p>记录每天心情瞬间，支持格式编辑和自动保存</p>
+                    
+                    <div class="preview-item">
+                        <img src="pic/心情日记宣传图.jpg" alt="心情日记" loading="lazy">
+                        <div class="preview-info">
+                            <h4>📝 心情日记记录</h4>
+                            <p>记录每天心情瞬间，支持格式编辑和自动保存</p>
+                        </div>
                     </div>
                 </div>
             </div>
