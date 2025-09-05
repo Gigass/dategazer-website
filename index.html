@@ -67,13 +67,13 @@
                 rgba(var(--theme-cool), 0.04) 100%
             );
             
-            /* 玻璃拟态系统 */
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-bg-hover: rgba(255, 255, 255, 0.12);
-            --glass-bg-active: rgba(255, 255, 255, 0.16);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-border-hover: rgba(255, 255, 255, 0.25);
-            --glass-border-strong: rgba(255, 255, 255, 0.3);
+            /* 玻璃拟态系统 - 进一步降低透明度提升可见性 */
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-bg-hover: rgba(255, 255, 255, 0.45);
+            --glass-bg-active: rgba(255, 255, 255, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-border-hover: rgba(255, 255, 255, 0.65);
+            --glass-border-strong: rgba(255, 255, 255, 0.75);
             
             /* 阴影系统 */
             --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
@@ -197,59 +197,118 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-        /* 动态背景系统 - 基于主题的多层渐变 */
+        /* 动态主题色彩背景系统 - 持续展示主题配色 */
         html {
             background: 
-                /* 主深色渐变基底 - 确保可读性 */
+                /* 主要主题色渐变基底 */
                 linear-gradient(135deg, 
-                    #0f0f23 0%,    /* 深紫蓝 */
-                    #1a1a2e 25%,   /* 深蓝灰 */
-                    #16213e 50%,   /* 暗蓝 */
-                    #0f3460 75%,   /* 深蓝 */
-                    #0d1b2a 100%   /* 极深蓝 */
+                    rgba(var(--theme-primary), 0.15) 0%,     /* 蓝紫色主调 */
+                    rgba(var(--theme-secondary), 0.12) 25%,  /* 粉红色点缀 */
+                    rgba(var(--theme-accent), 0.1) 50%,      /* 青色中调 */
+                    rgba(var(--theme-cool), 0.13) 75%,       /* 紫色深调 */
+                    rgba(var(--theme-primary), 0.08) 100%    /* 回到蓝紫色 */
                 ),
-                /* 动态主题色彩层 - 低透明度点缀 */
-                radial-gradient(ellipse 1200px 800px at 20% 30%, 
-                    rgba(var(--theme-primary), 0.12) 0%, 
+                /* 深色基底确保文字可读性 */
+                linear-gradient(135deg, 
+                    rgba(15, 15, 35, 0.9) 0%,    /* 深紫蓝基底 */
+                    rgba(26, 26, 46, 0.85) 25%,  /* 深蓝灰基底 */
+                    rgba(22, 33, 62, 0.9) 50%,   /* 暗蓝基底 */
+                    rgba(15, 52, 96, 0.85) 75%,  /* 深蓝基底 */
+                    rgba(13, 27, 42, 0.9) 100%   /* 极深蓝基底 */
+                ),
+                /* 动态主题色彩光晕 */
+                radial-gradient(ellipse 1000px 600px at 25% 25%, 
+                    rgba(var(--theme-primary), 0.2) 0%, 
                     transparent 60%),
-                radial-gradient(ellipse 800px 1000px at 80% 70%, 
-                    rgba(var(--theme-secondary), 0.1) 0%, 
+                radial-gradient(ellipse 800px 800px at 75% 75%, 
+                    rgba(var(--theme-secondary), 0.15) 0%, 
                     transparent 55%),
-                radial-gradient(ellipse 600px 600px at 60% 20%, 
-                    rgba(var(--theme-accent), 0.08) 0%, 
+                radial-gradient(ellipse 600px 1000px at 50% 10%, 
+                    rgba(var(--theme-accent), 0.12) 0%, 
                     transparent 50%),
-                /* 精致的环形渐变装饰 */
+                radial-gradient(ellipse 700px 500px at 80% 30%, 
+                    rgba(var(--theme-warm), 0.08) 0%, 
+                    transparent 45%),
+                /* 主题色环形渐变装饰 */
                 conic-gradient(from 180deg at 40% 60%, 
-                    rgba(var(--theme-cool), 0.06) 0deg, 
-                    transparent 60deg,
-                    rgba(var(--theme-warm), 0.04) 120deg,
-                    transparent 180deg,
-                    rgba(var(--theme-primary), 0.05) 240deg,
+                    rgba(var(--theme-primary), 0.1) 0deg, 
+                    rgba(var(--theme-secondary), 0.08) 60deg,
+                    rgba(var(--theme-accent), 0.06) 120deg,
+                    rgba(var(--theme-warm), 0.09) 180deg,
+                    rgba(var(--theme-cool), 0.11) 240deg,
                     transparent 300deg,
-                    rgba(var(--theme-cool), 0.06) 360deg);
+                    rgba(var(--theme-primary), 0.1) 360deg);
             background-attachment: fixed;
-            background-size: 100% 100%;
+            background-size: 100% 100%, 100% 100%, 1000px 600px, 800px 800px, 600px 1000px, 700px 500px, 100% 100%;
             min-height: 100vh;
-            /* 动态背景动画 */
-            animation: backgroundShift 20s ease-in-out infinite alternate;
+            /* 动态主题背景动画 */
+            animation: themeBackgroundFlow 25s ease-in-out infinite alternate;
         }
 
-        /* 动态背景动画关键帧 */
-        @keyframes backgroundShift {
+        /* 主题色彩流动动画 */
+        @keyframes themeBackgroundFlow {
             0% {
-                background-position: 0% 0%, 20% 30%, 80% 70%, 60% 20%, 40% 60%;
+                background-position: 0% 0%, 0% 0%, 25% 25%, 75% 75%, 50% 10%, 80% 30%, 40% 60%;
             }
-            25% {
-                background-position: 5% 10%, 25% 25%, 75% 75%, 55% 25%, 45% 55%;
+            20% {
+                background-position: 10% 10%, 10% 10%, 30% 20%, 80% 70%, 45% 15%, 75% 35%, 35% 65%;
             }
-            50% {
-                background-position: 10% 5%, 30% 35%, 70% 65%, 65% 15%, 35% 65%;
+            40% {
+                background-position: 20% 5%, 20% 5%, 20% 30%, 70% 80%, 55% 5%, 85% 25%, 45% 55%;
             }
-            75% {
-                background-position: 15% 15%, 15% 45%, 85% 55%, 45% 35%, 55% 45%;
+            60% {
+                background-position: 15% 20%, 15% 20%, 35% 35%, 65% 75%, 40% 20%, 70% 40%, 55% 45%;
+            }
+            80% {
+                background-position: 25% 15%, 25% 15%, 15% 25%, 85% 65%, 60% 8%, 90% 20%, 30% 70%;
             }
             100% {
-                background-position: 20% 20%, 10% 50%, 90% 50%, 50% 30%, 50% 50%;
+                background-position: 30% 30%, 30% 30%, 40% 40%, 60% 60%, 50% 25%, 80% 50%, 50% 50%;
+            }
+        }
+
+        /* 主题色动态装饰层 */
+        html::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(var(--theme-primary), 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(var(--theme-secondary), 0.12) 1px, transparent 1px),
+                radial-gradient(circle at 50% 10%, rgba(var(--theme-accent), 0.18) 1px, transparent 1px),
+                radial-gradient(circle at 90% 60%, rgba(var(--theme-warm), 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 10% 90%, rgba(var(--theme-cool), 0.14) 1px, transparent 1px);
+            background-size: 120px 120px, 100px 100px, 80px 80px, 140px 140px, 90px 90px;
+            opacity: 0.8;
+            animation: themeParticleFloat 30s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 主题色装饰动画 */
+        @keyframes themeParticleFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.8;
+            }
+            25% {
+                transform: translate(-15px, -15px) rotate(90deg);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(10px, -10px) rotate(180deg);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translate(20px, 15px) rotate(270deg);
+                opacity: 0.85;
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+                opacity: 0.8;
             }
         }
 
@@ -527,7 +586,7 @@
             align-items: center;
             gap: 0.6rem;
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(10px);
             padding: 1.4rem 2.8rem;
             border-radius: var(--border-radius-3xl);
             text-decoration: none;
@@ -593,20 +652,44 @@
         }
 
         .download-btn.primary {
-            background: linear-gradient(135deg, 
-                rgba(255, 215, 0, 0.15) 0%,
-                rgba(255, 255, 255, 0.1) 50%,
-                rgba(102, 126, 234, 0.15) 100%);
-            border: 2px solid var(--glass-border-strong);
-            box-shadow: var(--shadow-xl), 0 0 25px rgba(255, 215, 0, 0.2);
+            background: 
+                linear-gradient(135deg, 
+                    rgba(var(--theme-primary), 0.3) 0%,
+                    rgba(var(--theme-secondary), 0.25) 30%,
+                    rgba(var(--theme-accent), 0.3) 60%,
+                    rgba(var(--theme-warm), 0.2) 100%
+                ),
+                linear-gradient(45deg,
+                    rgba(var(--theme-cool), 0.1) 0%,
+                    transparent 50%,
+                    rgba(var(--theme-primary), 0.1) 100%
+                );
+            border: 2px solid rgba(var(--theme-primary), 0.4);
+            box-shadow: 
+                var(--shadow-xl), 
+                0 0 30px rgba(var(--theme-primary), 0.3),
+                0 0 60px rgba(var(--theme-secondary), 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .download-btn.primary:hover {
-            background: linear-gradient(135deg, 
-                rgba(255, 215, 0, 0.25) 0%,
-                rgba(255, 255, 255, 0.15) 50%,
-                rgba(102, 126, 234, 0.25) 100%);
-            box-shadow: var(--shadow-xl), 0 0 40px rgba(255, 215, 0, 0.4);
+            background: 
+                linear-gradient(135deg, 
+                    rgba(var(--theme-primary), 0.4) 0%,
+                    rgba(var(--theme-secondary), 0.35) 30%,
+                    rgba(var(--theme-accent), 0.4) 60%,
+                    rgba(var(--theme-warm), 0.3) 100%
+                ),
+                linear-gradient(45deg,
+                    rgba(var(--theme-cool), 0.15) 0%,
+                    transparent 50%,
+                    rgba(var(--theme-primary), 0.15) 100%
+                );
+            box-shadow: 
+                var(--shadow-xl), 
+                0 0 40px rgba(var(--theme-primary), 0.4),
+                0 0 80px rgba(var(--theme-secondary), 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
         }
 
         /* 按钮微光效果 */
@@ -626,8 +709,8 @@
         }
 
         .beta-notice {
-            background: rgba(255, 215, 0, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 20px;
             padding: 1.5rem;
@@ -801,7 +884,7 @@
 
         .feature-card {
             background: var(--card-gradient);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             border: 1px solid transparent;
             background-image: var(--border-gradient);
             background-origin: border-box;
@@ -817,18 +900,45 @@
 
         /* 现代化高级卡片变体 */
         .feature-card:nth-child(3n+1) {
-            background: var(--liquid-pattern);
-            box-shadow: var(--floating-shadow);
+            background: 
+                var(--liquid-pattern),
+                linear-gradient(135deg,
+                    rgba(var(--theme-primary), 0.15) 0%,
+                    rgba(var(--theme-accent), 0.1) 50%,
+                    rgba(var(--theme-cool), 0.12) 100%
+                );
+            box-shadow: 
+                var(--floating-shadow),
+                0 0 30px rgba(var(--theme-primary), 0.2);
+            border: 1px solid rgba(var(--theme-primary), 0.2);
         }
 
         .feature-card:nth-child(3n+2) {
-            background: var(--aurora-pattern);
-            box-shadow: var(--holographic-shadow);
+            background: 
+                var(--aurora-pattern),
+                linear-gradient(135deg,
+                    rgba(var(--theme-secondary), 0.15) 0%,
+                    rgba(var(--theme-warm), 0.1) 50%,
+                    rgba(var(--theme-primary), 0.12) 100%
+                );
+            box-shadow: 
+                var(--holographic-shadow),
+                0 0 30px rgba(var(--theme-secondary), 0.2);
+            border: 1px solid rgba(var(--theme-secondary), 0.2);
         }
 
         .feature-card:nth-child(3n+3) {
-            background: var(--prism-gradient);
-            box-shadow: var(--neumorphism-pro);
+            background: 
+                var(--prism-gradient),
+                linear-gradient(135deg,
+                    rgba(var(--theme-accent), 0.15) 0%,
+                    rgba(var(--theme-cool), 0.1) 50%,
+                    rgba(var(--theme-secondary), 0.12) 100%
+                );
+            box-shadow: 
+                var(--neumorphism-pro),
+                0 0 30px rgba(var(--theme-accent), 0.2);
+            border: 1px solid rgba(var(--theme-accent), 0.2);
         }
 
         .feature-card::before {
@@ -1125,13 +1235,13 @@
             }
         }
 
-        /* 现代化卡片设计 - 完全移除毛玻璃效果 */
+        /* 现代化卡片设计 - 进一步提升可见性 */
         .preview-item {
             background: 
                 linear-gradient(145deg, 
-                    rgba(255, 255, 255, 0.12) 0%, 
-                    rgba(255, 255, 255, 0.06) 50%,
-                    rgba(255, 255, 255, 0.08) 100%);
+                    rgba(255, 255, 255, 0.4) 0%, 
+                    rgba(255, 255, 255, 0.32) 50%,
+                    rgba(255, 255, 255, 0.36) 100%);
             border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 2rem;
@@ -1253,7 +1363,7 @@
 
         .feature-column {
             background: var(--crystal-gradient);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 20px;
             padding: 2.5rem;
@@ -1318,7 +1428,7 @@
 
         .cta-card {
             background: var(--mesh-gradient);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 30px;
             padding: 4rem 2rem;
@@ -1643,8 +1753,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1661,7 +1771,7 @@
 
         .modal-content {
             background: var(--glass-bg);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 3rem;
@@ -1713,8 +1823,8 @@
         }
 
         .beta-link {
-            background: rgba(255, 215, 0, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 12px;
             padding: 1rem;
@@ -1847,7 +1957,7 @@
             width: 60px;
             height: 60px;
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(10px);
             border: 1.5px solid var(--glass-border);
             border-radius: 50%;
             display: flex;
@@ -1871,7 +1981,7 @@
             top: 80px;
             right: 0;
             background: var(--glass-bg);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(12px);
             border: 1.5px solid var(--glass-border);
             border-radius: var(--border-radius-2xl);
             padding: 1.5rem;
