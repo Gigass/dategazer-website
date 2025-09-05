@@ -3,15 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服务条款 - DateGazer 纪念日管理应用</title>
-    <meta name="description" content="DateGazer应用的服务条款，详细说明使用规则、用户权利和义务。">
+    <title>服务条款 - DateGazer</title>
+    <meta name="description" content="DateGazer应用服务条款，详细说明使用规则、用户权利和义务。">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            /* 动态配色系统 */
+            --theme-primary: 102, 126, 234;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 6, 182, 212;
+            --theme-warm: 245, 158, 11;
+            --theme-cool: 139, 92, 246;
+            
+            /* 现代化高级渐变系统 */
+            --mesh-gradient: conic-gradient(from 180deg at 50% 50%, 
+                rgba(var(--theme-primary), 0.08) 0deg,
+                rgba(var(--theme-secondary), 0.06) 72deg,
+                rgba(var(--theme-accent), 0.07) 144deg,
+                rgba(var(--theme-warm), 0.05) 216deg,
+                rgba(var(--theme-cool), 0.09) 288deg,
+                rgba(var(--theme-primary), 0.08) 360deg);
+            --crystal-gradient: linear-gradient(
+                125deg,
+                rgba(var(--theme-primary), 0.05) 0%,
+                rgba(var(--theme-secondary), 0.03) 25%,
+                rgba(var(--theme-accent), 0.06) 50%,
+                rgba(var(--theme-warm), 0.025) 75%,
+                rgba(var(--theme-cool), 0.04) 100%
+            );
+            
+            /* 玻璃拟态系统 */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-hover: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            
+            /* 阴影系统 */
+            --floating-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                              0 4px 12px rgba(0, 0, 0, 0.1), 
+                              0 0 0 1px rgba(255, 255, 255, 0.08);
+            
+            /* 增强文字阴影确保可读性 */
+            --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.5);
+            --text-shadow-strong: 0 3px 12px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.6);
+            
+            /* 动画时序 */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* 尺寸系统 */
+            --border-radius-lg: 16px;
+            --border-radius-xl: 20px;
+            --border-radius-2xl: 24px;
+        }
+
+        /* 预设主题配色 */
+        [data-theme="aurora"] {
+            --theme-primary: 102, 126, 234;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 6, 182, 212;
+            --theme-warm: 245, 158, 11;
+            --theme-cool: 139, 92, 246;
+        }
+
+        [data-theme="sunset"] {
+            --theme-primary: 251, 113, 133;
+            --theme-secondary: 249, 115, 22;
+            --theme-accent: 234, 88, 12;
+            --theme-warm: 239, 68, 68;
+            --theme-cool: 168, 85, 247;
+        }
+
+        [data-theme="ocean"] {
+            --theme-primary: 14, 165, 233;
+            --theme-secondary: 6, 182, 212;
+            --theme-accent: 34, 197, 94;
+            --theme-warm: 16, 185, 129;
+            --theme-cool: 99, 102, 241;
+        }
+
+        [data-theme="forest"] {
+            --theme-primary: 34, 197, 94;
+            --theme-secondary: 16, 185, 129;
+            --theme-accent: 132, 204, 22;
+            --theme-warm: 234, 179, 8;
+            --theme-cool: 99, 102, 241;
+        }
+
+        [data-theme="midnight"] {
+            --theme-primary: 99, 102, 241;
+            --theme-secondary: 139, 92, 246;
+            --theme-accent: 168, 85, 247;
+            --theme-warm: 217, 70, 239;
+            --theme-cool: 236, 72, 153;
+        }
+
+        [data-theme="rose"] {
+            --theme-primary: 244, 63, 94;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 219, 39, 119;
+            --theme-warm: 251, 113, 133;
+            --theme-cool: 168, 85, 247;
         }
 
         * {
@@ -20,50 +110,93 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            background: var(--primary-gradient);
-            color: #333;
-            position: relative;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* 全新高级背景系统 - 优美深色渐变，确保文字可读性 */
+        html {
+            background: 
+                /* 主深色渐变基底 - 确保可读性 */
+                linear-gradient(135deg, 
+                    #0f0f23 0%,    /* 深紫蓝 */
+                    #1a1a2e 25%,   /* 深蓝灰 */
+                    #16213e 50%,   /* 暗蓝 */
+                    #0f3460 75%,   /* 深蓝 */
+                    #0d1b2a 100%   /* 极深蓝 */
+                ),
+                /* 动态主题色彩层 - 低透明度点缀 */
+                radial-gradient(ellipse 1200px 800px at 20% 30%, 
+                    rgba(var(--theme-primary), 0.12) 0%, 
+                    transparent 60%),
+                radial-gradient(ellipse 800px 1000px at 80% 70%, 
+                    rgba(var(--theme-secondary), 0.1) 0%, 
+                    transparent 55%),
+                radial-gradient(ellipse 600px 600px at 60% 20%, 
+                    rgba(var(--theme-accent), 0.08) 0%, 
+                    transparent 50%),
+                /* 精致的环形渐变装饰 */
+                conic-gradient(from 180deg at 40% 60%, 
+                    rgba(var(--theme-cool), 0.06) 0deg, 
+                    transparent 60deg,
+                    rgba(var(--theme-warm), 0.04) 120deg,
+                    transparent 180deg,
+                    rgba(var(--theme-primary), 0.05) 240deg,
+                    transparent 300deg,
+                    rgba(var(--theme-cool), 0.06) 360deg);
+            background-attachment: local;
+            background-repeat: no-repeat;
             min-height: 100vh;
         }
 
-        /* Animated background */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: transparent;
+            position: relative;
+            min-height: 100vh;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            font-variant-numeric: oldstyle-nums;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* 高级装饰纹理层 - 提升质感 */
         body::before {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            animation: floatBg 20s ease-in-out infinite;
+                /* 细腻的噪点纹理 */
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(var(--theme-accent), 0.015) 0%, transparent 70%),
+                /* 极细微的主题色装饰 */
+                linear-gradient(45deg, 
+                    rgba(var(--theme-primary), 0.008) 0%, 
+                    transparent 25%, 
+                    rgba(var(--theme-secondary), 0.006) 50%, 
+                    transparent 75%, 
+                    rgba(var(--theme-cool), 0.01) 100%);
             z-index: -1;
-        }
-
-        @keyframes floatBg {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
+            backface-visibility: hidden;
+            pointer-events: none;
         }
 
         .header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            color: white;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem 2rem;
             text-align: center;
             position: relative;
         }
 
         .header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            text-shadow: var(--text-shadow);
+            color: white;
+            text-shadow: var(--text-shadow-strong);
             margin-bottom: 1rem;
             background: linear-gradient(45deg, #ffffff, #f0f0f0);
             -webkit-background-clip: text;
@@ -73,189 +206,466 @@
 
         .header p {
             font-size: 1.2rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
             text-shadow: var(--text-shadow);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
             position: relative;
             z-index: 1;
         }
 
         .content-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            background: var(--crystal-gradient);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: var(--border-radius-2xl);
             padding: 3rem;
-            box-shadow: var(--card-shadow);
-        }
-        .update-date {
-            background: rgba(232, 244, 253, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-left: 4px solid #007bff;
+            box-shadow: var(--floating-shadow);
             margin-bottom: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 123, 255, 0.2);
         }
+
+        .nav-links {
+            text-align: center;
+            padding: 1rem 0 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s var(--ease-smooth);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
         h2 {
             color: white;
             margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             text-shadow: var(--text-shadow);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 0.8rem;
         }
+
         h2:first-of-type {
             margin-top: 1rem;
         }
+
         h3 {
             color: rgba(255, 255, 255, 0.95);
-            margin-top: 1.8rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
             font-weight: 600;
             text-shadow: var(--text-shadow);
         }
+
         p, li {
             margin-bottom: 1rem;
-            text-align: justify;
             color: rgba(255, 255, 255, 0.9);
             font-size: 1rem;
             line-height: 1.7;
         }
-        ul, ol {
+
+        ol, ul {
             padding-left: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
-        .highlight-box {
-            background: rgba(255, 243, 205, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 234, 167, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .contact-info {
-            background: rgba(212, 237, 218, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(195, 230, 203, 0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .contact-info h3 {
-            color: rgba(255, 255, 255, 0.95);
-            margin-top: 0;
-            font-weight: 700;
-        }
-        .warning-box {
-            background: rgba(255, 243, 205, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem 2rem;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 3rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
+
         strong {
             color: white;
             font-weight: 600;
         }
+
         a {
             color: rgba(255, 255, 255, 0.9);
             text-decoration: underline;
         }
+
         a:hover {
             color: white;
         }
-        .nav-links {
-            text-align: center;
-            padding: 1rem 0;
-            background: var(--glass-bg);
+
+        .highlight-box {
+            background: rgba(255, 243, 205, 0.1);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 234, 167, 0.2);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
         }
-        .nav-links a {
+
+        .highlight-box h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            background: rgba(212, 237, 218, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(195, 230, 203, 0.2);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-top: 0;
+            font-weight: 700;
+        }
+
+        .contact-info a {
             color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            margin: 0 1rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
+
+        .update-date {
+            background: rgba(var(--theme-warm), 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(var(--theme-warm), 0.3);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid rgba(var(--theme-warm), 0.8);
+        }
+
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid rgba(255, 193, 7, 0.8);
+        }
+
+        .warning-box strong {
+            color: #ffed4a;
+        }
+
+        /* Footer 统一样式 */
+        .footer {
+            padding: 4rem 2rem 3rem;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(var(--theme-primary), 0.03) 0%, 
+                    rgba(var(--theme-secondary), 0.05) 50%, 
+                    rgba(var(--theme-accent), 0.03) 100%);
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(var(--theme-primary), 0.3) 20%, 
+                rgba(var(--theme-secondary), 0.5) 50%, 
+                rgba(var(--theme-accent), 0.3) 80%, 
+                transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 0.9rem;
+            transition: all 0.4s var(--ease-smooth);
+            position: relative;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                rgba(var(--theme-primary), 0.8), 
+                rgba(var(--theme-secondary), 1));
+            transition: all 0.4s var(--ease-smooth);
+            transform: translateX(-50%);
+        }
+
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.95);
             transform: translateY(-2px);
         }
-        .nav-links a.active {
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.4);
+
+        .footer-links a:hover::after {
+            width: 100%;
         }
-        /* Responsive Design */
+
+        .footer-bottom {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            font-weight: 200;
+            letter-spacing: 1px;
+        }
+
+        /* 主题切换器 */
+        .theme-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .theme-switcher-trigger {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-smooth);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--floating-shadow);
+        }
+
+        .theme-switcher-trigger:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1) rotate(45deg);
+        }
+
+        .theme-options {
+            position: absolute;
+            top: 80px;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: var(--border-radius-xl);
+            padding: 1.5rem;
+            min-width: 280px;
+            box-shadow: var(--floating-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px) scale(0.9);
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .theme-switcher.active .theme-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .theme-option.active {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-preview {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--glass-border);
+            flex-shrink: 0;
+        }
+
+        .theme-preview.aurora {
+            background: linear-gradient(135deg, rgb(102, 126, 234), rgb(236, 72, 153), rgb(6, 182, 212));
+        }
+
+        .theme-preview.sunset {
+            background: linear-gradient(135deg, rgb(251, 113, 133), rgb(249, 115, 22), rgb(239, 68, 68));
+        }
+
+        .theme-preview.ocean {
+            background: linear-gradient(135deg, rgb(14, 165, 233), rgb(6, 182, 212), rgb(34, 197, 94));
+        }
+
+        .theme-preview.forest {
+            background: linear-gradient(135deg, rgb(34, 197, 94), rgb(16, 185, 129), rgb(132, 204, 22));
+        }
+
+        .theme-preview.midnight {
+            background: linear-gradient(135deg, rgb(99, 102, 241), rgb(139, 92, 246), rgb(236, 72, 153));
+        }
+
+        .theme-preview.rose {
+            background: linear-gradient(135deg, rgb(244, 63, 94), rgb(236, 72, 153), rgb(168, 85, 247));
+        }
+
+        .theme-option span {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
-                padding: 0 1rem 1rem;
+                padding: 0 1rem 2rem;
             }
+
             .content-card {
                 padding: 2rem 1.5rem;
             }
+
             .nav-links a {
                 margin: 0.25rem 0.5rem;
                 padding: 0.6rem 1rem;
                 font-size: 0.9rem;
             }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .theme-switcher {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .theme-switcher-trigger {
+                width: 50px;
+                height: 50px;
+            }
+
+            .theme-options {
+                right: -50px;
+                min-width: 250px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>❤️ DateGazer</h1>
-        <p>服务条款</p>
+    <!-- 主题切换控制器 -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <div class="theme-switcher-trigger" onclick="toggleThemeSwitcher()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
+            </svg>
+        </div>
+        <div class="theme-options">
+            <div class="theme-option" data-theme="aurora" onclick="setTheme('aurora')">
+                <div class="theme-preview aurora"></div>
+                <span>Aurora</span>
+            </div>
+            <div class="theme-option" data-theme="sunset" onclick="setTheme('sunset')">
+                <div class="theme-preview sunset"></div>
+                <span>Sunset</span>
+            </div>
+            <div class="theme-option" data-theme="ocean" onclick="setTheme('ocean')">
+                <div class="theme-preview ocean"></div>
+                <span>Ocean</span>
+            </div>
+            <div class="theme-option" data-theme="forest" onclick="setTheme('forest')">
+                <div class="theme-preview forest"></div>
+                <span>Forest</span>
+            </div>
+            <div class="theme-option" data-theme="midnight" onclick="setTheme('midnight')">
+                <div class="theme-preview midnight"></div>
+                <span>Midnight</span>
+            </div>
+            <div class="theme-option" data-theme="rose" onclick="setTheme('rose')">
+                <div class="theme-preview rose"></div>
+                <span>Rose</span>
+            </div>
+        </div>
     </div>
 
-    <div class="nav-links">
-        <a href="index.html">🏠 首页</a>
-        <a href="privacy-policy.html">🛡️ 隐私政策</a>
-        <a href="terms-of-service.html" class="active">📄 服务条款</a>
-        <a href="support.html">🛠️ 技术支持</a>
+    <div class="header">
+        <h1>DateGazer</h1>
+        <p>服务条款</p>
     </div>
 
     <div class="container">
         <div class="content-card">
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="privacy-policy.html">隐私政策</a>
+                <a href="terms-of-service.html" class="active">服务条款</a>
+                <a href="support.html">技术支持</a>
+            </div>
+
             <div class="update-date">
                 <strong>生效日期：</strong>2024年9月5日<br>
                 <strong>最后更新：</strong>2024年9月5日
             </div>
 
-        <h2>1. 接受条款</h2>
+        <h2>接受条款</h2>
         <p>欢迎使用DateGazer（"应用"、"服务"、"我们"）！本服务条款（"条款"）是您（"用户"、"您"）与DateGazer之间具有法律约束力的协议。</p>
 
         <div class="warning-box">
             <strong>重要提醒：</strong>通过下载、安装、访问或使用DateGazer应用，即表示您同意受本条款约束。如果您不同意这些条款，请勿使用我们的服务。
         </div>
 
-        <h2>2. 服务描述</h2>
+        <h2>服务描述</h2>
         
-        <h3>2.1 DateGazer是什么</h3>
+        <h3>DateGazer是什么</h3>
         <p>DateGazer是一款纪念日管理应用，帮助用户：</p>
         <ul>
             <li>记录和管理重要的纪念日和特殊日期</li>
@@ -265,12 +675,12 @@
             <li>同步数据到多个设备</li>
         </ul>
 
-        <h3>2.2 服务可用性</h3>
+        <h3>服务可用性</h3>
         <p>我们努力确保服务的持续可用性，但不保证服务永远不中断。服务可能因维护、更新或不可抗力因素而暂时不可用。</p>
 
-        <h2>3. 用户账户</h2>
+        <h2>用户账户</h2>
 
-        <h3>3.1 账户创建</h3>
+        <h3>账户创建</h3>
         <ul>
             <li>您可以通过Apple ID、微信或邮箱注册账户</li>
             <li>您必须提供准确、完整的账户信息</li>
@@ -278,16 +688,16 @@
             <li>每个人只能创建一个账户</li>
         </ul>
 
-        <h3>3.2 账户责任</h3>
+        <h3>账户责任</h3>
         <ul>
             <li>您对账户下的所有活动负责</li>
             <li>如发现账户被盗用，请立即联系我们</li>
             <li>我们有权暂停或终止违规账户</li>
         </ul>
 
-        <h2>4. 用户行为规范</h2>
+        <h2>用户行为规范</h2>
 
-        <h3>4.1 允许的使用</h3>
+        <h3>允许的使用</h3>
         <ul>
             <li>个人、非商业目的使用应用</li>
             <li>创建、管理您的纪念日内容</li>
@@ -295,7 +705,7 @@
             <li>按照应用设计的方式使用功能</li>
         </ul>
 
-        <h3>4.2 禁止的行为</h3>
+        <h3>禁止的行为</h3>
         <ul>
             <li>发布违法、有害、威胁、欺诈或侵犯他人权利的内容</li>
             <li>上传包含恶意软件或病毒的文件</li>
@@ -305,9 +715,9 @@
             <li>进行任何商业推广或广告活动</li>
         </ul>
 
-        <h2>5. 内容和知识产权</h2>
+        <h2>内容和知识产权</h2>
 
-        <h3>5.1 您的内容</h3>
+        <h3>您的内容</h3>
         <ul>
             <li>您保留对上传到应用的内容的所有权</li>
             <li>您授权我们使用、存储、传输您的内容以提供服务</li>
@@ -315,41 +725,41 @@
             <li>您可以随时删除您的内容</li>
         </ul>
 
-        <h3>5.2 我们的内容</h3>
+        <h3>我们的内容</h3>
         <ul>
             <li>应用及其功能受版权和其他知识产权法保护</li>
             <li>未经许可，您不得复制、修改或分发应用</li>
             <li>我们的商标、Logo不得未经授权使用</li>
         </ul>
 
-        <h2>6. 隐私保护</h2>
+        <h2>隐私保护</h2>
         <p>我们重视您的隐私。请查阅我们的<a href="privacy-policy.html">隐私政策</a>了解我们如何收集、使用和保护您的信息。使用我们的服务即表示您同意我们的隐私实践。</p>
 
-        <h2>7. 付费服务</h2>
+        <h2>付费服务</h2>
 
-        <h3>7.1 订阅服务</h3>
+        <h3>订阅服务</h3>
         <ul>
             <li>部分高级功能可能需要付费订阅</li>
             <li>订阅费用通过App Store或其他支付平台收取</li>
             <li>订阅将自动续费，除非您提前取消</li>
         </ul>
 
-        <h3>7.2 退款政策</h3>
+        <h3>退款政策</h3>
         <ul>
             <li>退款请求按照App Store或相关平台的政策处理</li>
             <li>我们不直接处理退款，请联系相关平台</li>
         </ul>
 
-        <h2>8. 服务变更和终止</h2>
+        <h2>服务变更和终止</h2>
 
-        <h3>8.1 服务修改</h3>
+        <h3>服务修改</h3>
         <ul>
             <li>我们可能随时修改、暂停或终止服务的任何部分</li>
             <li>重大变更将提前通知用户</li>
             <li>我们努力保持服务的向后兼容性</li>
         </ul>
 
-        <h3>8.2 账户终止</h3>
+        <h3>账户终止</h3>
         <p>在以下情况下，我们可能暂停或终止您的账户：</p>
         <ul>
             <li>违反本服务条款</li>
@@ -358,10 +768,10 @@
             <li>法律要求</li>
         </ul>
 
-        <h2>9. 免责声明</h2>
+        <h2>免责声明</h2>
 
         <div class="highlight-box">
-            <h3>⚠️ 重要声明</h3>
+            <h3>重要声明</h3>
             <p>服务按"现状"提供。我们不对以下情况承担责任：</p>
             <ul>
                 <li>服务中断或数据丢失</li>
@@ -371,21 +781,21 @@
             </ul>
         </div>
 
-        <h2>10. 责任限制</h2>
+        <h2>责任限制</h2>
         <p>在法律允许的最大范围内，我们的总责任不超过您在过去12个月内为服务支付的费用。对于免费用户，我们的责任限制为人民币100元。</p>
 
-        <h2>11. 争议解决</h2>
+        <h2>争议解决</h2>
 
-        <h3>11.1 协商解决</h3>
+        <h3>协商解决</h3>
         <p>如发生争议，双方应首先通过友好协商解决。</p>
 
-        <h3>11.2 法律途径</h3>
+        <h3>法律途径</h3>
         <p>如协商无果，争议将提交至有管辖权的人民法院解决。</p>
 
-        <h2>12. 适用法律</h2>
+        <h2>适用法律</h2>
         <p>本条款受中华人民共和国法律管辖，不考虑其冲突法原则。</p>
 
-        <h2>13. 条款变更</h2>
+        <h2>条款变更</h2>
         <p>我们可能会不时更新这些条款。重要变更将通过以下方式通知：</p>
         <ul>
             <li>应用内通知</li>
@@ -393,31 +803,31 @@
             <li>网站公告</li>
         </ul>
 
-        <h2>14. 可分割性</h2>
+        <h2>可分割性</h2>
         <p>如果本条款的任何部分被认定为无效或无法执行，其余部分仍将继续有效。</p>
 
-        <h2>15. 联系我们</h2>
+        <h2>联系我们</h2>
         <div class="contact-info">
-            <h3>📧 联系方式</h3>
+            <h3>联系方式</h3>
             <p><strong>客服邮箱：</strong>1547654938@qq.com</p>
             <p><strong>法务邮箱：</strong>1547654938@qq.com</p>
             <p><strong>地址：</strong>中国</p>
             <p><strong>客服时间：</strong>全天候支持</p>
         </div>
 
-        <h2>16. 特殊条款</h2>
+        <h2>特殊条款</h2>
 
-        <h3>16.1 iOS应用商店</h3>
+        <h3>iOS应用商店</h3>
         <p>如果您通过Apple App Store下载应用，还需遵守Apple的使用条款。发生冲突时，以更严格的条款为准。</p>
 
-        <h3>16.2 数据导出</h3>
+        <h3>数据导出</h3>
         <p>您有权随时导出您的数据。我们提供多种格式的数据导出功能。</p>
 
-        <h3>16.3 服务集成</h3>
+        <h3>服务集成</h3>
         <p>应用可能集成第三方服务（如iCloud、微信等）。使用这些功能时，您还需遵守相应的第三方条款。</p>
 
         <div class="highlight-box">
-            <h3>💡 简单理解</h3>
+            <h3>简单理解</h3>
             <p>我们希望为您提供最好的纪念日管理体验。请合理使用应用，尊重他人，我们会保护您的权益并持续改进服务。如有疑问，随时联系我们！</p>
         </div>
 
@@ -427,28 +837,64 @@
         </div>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2024 DateGazer. 保留所有权利。</p>
-        <p>用心记录每一个重要时刻 ❤️</p>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">隐私政策</a>
+                <a href="terms-of-service.html">服务条款</a>
+                <a href="support.html">技术支持</a>
+                <a href="mailto:1547654938@qq.com">联系我们</a>
+                <a href="mailto:1547654938@qq.com">用户反馈</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 DateGazer. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // 处理页面加载时的平滑滚动
-        document.addEventListener('DOMContentLoaded', function() {
-            // 添加点击锚点的平滑滚动
-            const links = document.querySelectorAll('a[href^="#"]');
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
+        // 主题切换功能
+        function toggleThemeSwitcher() {
+            const switcher = document.getElementById('themeSwitcher');
+            switcher.classList.toggle('active');
+        }
+
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            
+            // 更新激活状态
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
             });
+            document.querySelector(`[data-theme="${themeName}"]`).classList.add('active');
+            
+            // 保存到localStorage
+            localStorage.setItem('dategazer-theme', themeName);
+            
+            // 关闭主题选择器
+            document.getElementById('themeSwitcher').classList.remove('active');
+        }
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('dategazer-theme') || 'aurora';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.querySelector(`[data-theme="${savedTheme}"]`)?.classList.add('active');
+        }
+
+        // 点击外部关闭主题切换器
+        document.addEventListener('click', (e) => {
+            const switcher = document.getElementById('themeSwitcher');
+            if (!switcher.contains(e.target)) {
+                switcher.classList.remove('active');
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
         });
     </script>
 </body>

@@ -3,15 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术支持 - DateGazer 纪念日管理应用</title>
+    <title>技术支持 - DateGazer</title>
     <meta name="description" content="DateGazer应用技术支持，常见问题解答，故障排除和联系客服。">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            /* 动态配色系统 */
+            --theme-primary: 102, 126, 234;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 6, 182, 212;
+            --theme-warm: 245, 158, 11;
+            --theme-cool: 139, 92, 246;
+            
+            /* 现代化高级渐变系统 */
+            --mesh-gradient: conic-gradient(from 180deg at 50% 50%, 
+                rgba(var(--theme-primary), 0.08) 0deg,
+                rgba(var(--theme-secondary), 0.06) 72deg,
+                rgba(var(--theme-accent), 0.07) 144deg,
+                rgba(var(--theme-warm), 0.05) 216deg,
+                rgba(var(--theme-cool), 0.09) 288deg,
+                rgba(var(--theme-primary), 0.08) 360deg);
+            --crystal-gradient: linear-gradient(
+                125deg,
+                rgba(var(--theme-primary), 0.05) 0%,
+                rgba(var(--theme-secondary), 0.03) 25%,
+                rgba(var(--theme-accent), 0.06) 50%,
+                rgba(var(--theme-warm), 0.025) 75%,
+                rgba(var(--theme-cool), 0.04) 100%
+            );
+            
+            /* 玻璃拟态系统 */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-hover: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            
+            /* 阴影系统 */
+            --floating-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                              0 4px 12px rgba(0, 0, 0, 0.1), 
+                              0 0 0 1px rgba(255, 255, 255, 0.08);
+            
+            /* 增强文字阴影确保可读性 */
+            --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.5);
+            --text-shadow-strong: 0 3px 12px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.6);
+            
+            /* 动画时序 */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* 尺寸系统 */
+            --border-radius-lg: 16px;
+            --border-radius-xl: 20px;
+            --border-radius-2xl: 24px;
+        }
+
+        /* 预设主题配色 */
+        [data-theme="aurora"] {
+            --theme-primary: 102, 126, 234;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 6, 182, 212;
+            --theme-warm: 245, 158, 11;
+            --theme-cool: 139, 92, 246;
+        }
+
+        [data-theme="sunset"] {
+            --theme-primary: 251, 113, 133;
+            --theme-secondary: 249, 115, 22;
+            --theme-accent: 234, 88, 12;
+            --theme-warm: 239, 68, 68;
+            --theme-cool: 168, 85, 247;
+        }
+
+        [data-theme="ocean"] {
+            --theme-primary: 14, 165, 233;
+            --theme-secondary: 6, 182, 212;
+            --theme-accent: 34, 197, 94;
+            --theme-warm: 16, 185, 129;
+            --theme-cool: 99, 102, 241;
+        }
+
+        [data-theme="forest"] {
+            --theme-primary: 34, 197, 94;
+            --theme-secondary: 16, 185, 129;
+            --theme-accent: 132, 204, 22;
+            --theme-warm: 234, 179, 8;
+            --theme-cool: 99, 102, 241;
+        }
+
+        [data-theme="midnight"] {
+            --theme-primary: 99, 102, 241;
+            --theme-secondary: 139, 92, 246;
+            --theme-accent: 168, 85, 247;
+            --theme-warm: 217, 70, 239;
+            --theme-cool: 236, 72, 153;
+        }
+
+        [data-theme="rose"] {
+            --theme-primary: 244, 63, 94;
+            --theme-secondary: 236, 72, 153;
+            --theme-accent: 219, 39, 119;
+            --theme-warm: 251, 113, 133;
+            --theme-cool: 168, 85, 247;
         }
 
         * {
@@ -20,50 +110,93 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            background: var(--primary-gradient);
-            color: #333;
-            position: relative;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* 全新高级背景系统 - 优美深色渐变，确保文字可读性 */
+        html {
+            background: 
+                /* 主深色渐变基底 - 确保可读性 */
+                linear-gradient(135deg, 
+                    #0f0f23 0%,    /* 深紫蓝 */
+                    #1a1a2e 25%,   /* 深蓝灰 */
+                    #16213e 50%,   /* 暗蓝 */
+                    #0f3460 75%,   /* 深蓝 */
+                    #0d1b2a 100%   /* 极深蓝 */
+                ),
+                /* 动态主题色彩层 - 低透明度点缀 */
+                radial-gradient(ellipse 1200px 800px at 20% 30%, 
+                    rgba(var(--theme-primary), 0.12) 0%, 
+                    transparent 60%),
+                radial-gradient(ellipse 800px 1000px at 80% 70%, 
+                    rgba(var(--theme-secondary), 0.1) 0%, 
+                    transparent 55%),
+                radial-gradient(ellipse 600px 600px at 60% 20%, 
+                    rgba(var(--theme-accent), 0.08) 0%, 
+                    transparent 50%),
+                /* 精致的环形渐变装饰 */
+                conic-gradient(from 180deg at 40% 60%, 
+                    rgba(var(--theme-cool), 0.06) 0deg, 
+                    transparent 60deg,
+                    rgba(var(--theme-warm), 0.04) 120deg,
+                    transparent 180deg,
+                    rgba(var(--theme-primary), 0.05) 240deg,
+                    transparent 300deg,
+                    rgba(var(--theme-cool), 0.06) 360deg);
+            background-attachment: local;
+            background-repeat: no-repeat;
             min-height: 100vh;
         }
 
-        /* Animated background */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: transparent;
+            position: relative;
+            min-height: 100vh;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            font-variant-numeric: oldstyle-nums;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* 高级装饰纹理层 - 提升质感 */
         body::before {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            animation: floatBg 20s ease-in-out infinite;
+                /* 细腻的噪点纹理 */
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(var(--theme-accent), 0.015) 0%, transparent 70%),
+                /* 极细微的主题色装饰 */
+                linear-gradient(45deg, 
+                    rgba(var(--theme-primary), 0.008) 0%, 
+                    transparent 25%, 
+                    rgba(var(--theme-secondary), 0.006) 50%, 
+                    transparent 75%, 
+                    rgba(var(--theme-cool), 0.01) 100%);
             z-index: -1;
-        }
-
-        @keyframes floatBg {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
+            backface-visibility: hidden;
+            pointer-events: none;
         }
 
         .header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            color: white;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem 2rem;
             text-align: center;
             position: relative;
         }
 
         .header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            text-shadow: var(--text-shadow);
+            color: white;
+            text-shadow: var(--text-shadow-strong);
             margin-bottom: 1rem;
             background: linear-gradient(45deg, #ffffff, #f0f0f0);
             -webkit-background-clip: text;
@@ -73,56 +206,54 @@
 
         .header p {
             font-size: 1.2rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
             text-shadow: var(--text-shadow);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
             position: relative;
             z-index: 1;
         }
 
         .content-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            background: var(--crystal-gradient);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: var(--border-radius-2xl);
             padding: 3rem;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--floating-shadow);
+            margin-bottom: 2rem;
         }
 
         .nav-links {
             text-align: center;
-            padding: 1rem 0;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            margin: 0 1rem;
+            margin: 0 1.5rem;
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
             font-weight: 500;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s var(--ease-smooth);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a.active {
-            background: rgba(255, 255, 255, 0.25);
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.15);
             color: white;
-            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .contact-grid {
@@ -133,27 +264,27 @@
         }
 
         .contact-card {
-            background: var(--glass-bg);
+            background: var(--mesh-gradient);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: var(--border-radius-xl);
             color: white;
             text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: var(--card-shadow);
+            transition: all 0.4s var(--ease-smooth);
+            box-shadow: var(--floating-shadow);
         }
 
         .contact-card:hover {
             transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--crystal-gradient);
         }
 
         .contact-card h3 {
-            margin-top: 0;
             font-size: 1.5rem;
             font-weight: 600;
             text-shadow: var(--text-shadow);
+            margin-bottom: 1rem;
         }
 
         .contact-card .icon {
@@ -172,27 +303,27 @@
             text-decoration: none;
             font-weight: 600;
             padding: 0.8rem 1.5rem;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             border-radius: 25px;
             display: inline-block;
             margin-top: 1rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s var(--ease-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .contact-card a:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.25);
             transform: translateY(-2px);
         }
 
         h2 {
             color: white;
             margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             text-shadow: var(--text-shadow);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 0.8rem;
         }
 
@@ -202,18 +333,9 @@
 
         h3 {
             color: rgba(255, 255, 255, 0.95);
-            margin-top: 1.8rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-shadow: var(--text-shadow);
-        }
-
-        h4 {
-            color: rgba(255, 255, 255, 0.95);
-            margin-top: 0;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
             font-weight: 600;
             text-shadow: var(--text-shadow);
         }
@@ -227,35 +349,34 @@
 
         ol, ul {
             padding-left: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .faq-item {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
-            border-radius: 16px;
+            border-radius: var(--border-radius-lg);
             margin-bottom: 1.5rem;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--ease-smooth);
         }
 
         .faq-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
         }
 
         .faq-question {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
             padding: 1.5rem;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.3s var(--ease-smooth);
             color: white;
         }
 
@@ -266,7 +387,7 @@
         .faq-answer {
             padding: 1.5rem;
             display: none;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.9);
         }
 
@@ -275,7 +396,7 @@
         }
 
         .faq-arrow {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s var(--ease-smooth);
             color: rgba(255, 255, 255, 0.8);
         }
 
@@ -285,19 +406,19 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
 
         .feature-card {
-            background: var(--glass-bg);
+            background: var(--crystal-gradient);
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             padding: 2rem;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius-lg);
+            transition: all 0.3s var(--ease-smooth);
+            box-shadow: var(--floating-shadow);
             position: relative;
         }
 
@@ -308,14 +429,30 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background: linear-gradient(45deg, #ffffff, rgba(255, 255, 255, 0.5));
+            background: linear-gradient(45deg, 
+                rgba(var(--theme-primary), 0.8), 
+                rgba(var(--theme-secondary), 0.6));
             border-radius: 0 2px 2px 0;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--mesh-gradient);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card h4 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-shadow: var(--text-shadow);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin-bottom: 0;
         }
 
         .status-indicator {
@@ -331,53 +468,247 @@
             box-shadow: 0 0 10px #28a745;
         }
 
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem 2rem;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 3rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
         strong {
             color: white;
             font-weight: 600;
         }
 
         .highlight-box {
-            background: rgba(255, 243, 205, 0.15);
+            background: rgba(255, 243, 205, 0.1);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 234, 167, 0.3);
-            border-radius: 16px;
+            border: 1px solid rgba(255, 234, 167, 0.2);
+            border-radius: var(--border-radius-lg);
             padding: 2rem;
             margin: 2rem 0;
         }
 
+        .highlight-box h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
         .contact-info {
-            background: rgba(212, 237, 218, 0.15);
+            background: rgba(212, 237, 218, 0.1);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(195, 230, 203, 0.3);
-            border-radius: 16px;
+            border: 1px solid rgba(195, 230, 203, 0.2);
+            border-radius: var(--border-radius-lg);
             padding: 2rem;
             margin: 2rem 0;
         }
 
         .contact-info h3 {
-            color: rgba(255, 255, 255, 0.95);
+            color: white;
             margin-top: 0;
             font-weight: 700;
         }
 
-        .contact-info h4 {
-            margin-top: 0;
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Responsive Design */
+        /* Footer 统一样式 */
+        .footer {
+            padding: 4rem 2rem 3rem;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(var(--theme-primary), 0.03) 0%, 
+                    rgba(var(--theme-secondary), 0.05) 50%, 
+                    rgba(var(--theme-accent), 0.03) 100%);
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(var(--theme-primary), 0.3) 20%, 
+                rgba(var(--theme-secondary), 0.5) 50%, 
+                rgba(var(--theme-accent), 0.3) 80%, 
+                transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 0.9rem;
+            transition: all 0.4s var(--ease-smooth);
+            position: relative;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                rgba(var(--theme-primary), 0.8), 
+                rgba(var(--theme-secondary), 1));
+            transition: all 0.4s var(--ease-smooth);
+            transform: translateX(-50%);
+        }
+
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-bottom {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            font-weight: 200;
+            letter-spacing: 1px;
+        }
+
+        /* 主题切换器 */
+        .theme-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .theme-switcher-trigger {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-smooth);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--floating-shadow);
+        }
+
+        .theme-switcher-trigger:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1) rotate(45deg);
+        }
+
+        .theme-options {
+            position: absolute;
+            top: 80px;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: var(--border-radius-xl);
+            padding: 1.5rem;
+            min-width: 280px;
+            box-shadow: var(--floating-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px) scale(0.9);
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .theme-switcher.active .theme-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .theme-option.active {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-preview {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--glass-border);
+            flex-shrink: 0;
+        }
+
+        .theme-preview.aurora {
+            background: linear-gradient(135deg, rgb(102, 126, 234), rgb(236, 72, 153), rgb(6, 182, 212));
+        }
+
+        .theme-preview.sunset {
+            background: linear-gradient(135deg, rgb(251, 113, 133), rgb(249, 115, 22), rgb(239, 68, 68));
+        }
+
+        .theme-preview.ocean {
+            background: linear-gradient(135deg, rgb(14, 165, 233), rgb(6, 182, 212), rgb(34, 197, 94));
+        }
+
+        .theme-preview.forest {
+            background: linear-gradient(135deg, rgb(34, 197, 94), rgb(16, 185, 129), rgb(132, 204, 22));
+        }
+
+        .theme-preview.midnight {
+            background: linear-gradient(135deg, rgb(99, 102, 241), rgb(139, 92, 246), rgb(236, 72, 153));
+        }
+
+        .theme-preview.rose {
+            background: linear-gradient(135deg, rgb(244, 63, 94), rgb(236, 72, 153), rgb(168, 85, 247));
+        }
+
+        .theme-option span {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
-                padding: 0 1rem 1rem;
+                padding: 0 1rem 2rem;
             }
 
             .content-card {
@@ -394,40 +725,83 @@
                 font-size: 2rem;
             }
 
-            .contact-grid {
+            .contact-grid, .feature-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
 
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .faq-question {
+            .faq-question, .faq-answer {
                 padding: 1rem;
             }
 
-            .faq-answer {
-                padding: 1rem;
+            .theme-switcher {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .theme-switcher-trigger {
+                width: 50px;
+                height: 50px;
+            }
+
+            .theme-options {
+                right: -50px;
+                min-width: 250px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>❤️ DateGazer</h1>
-        <p>技术支持中心</p>
+    <!-- 主题切换控制器 -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <div class="theme-switcher-trigger" onclick="toggleThemeSwitcher()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
+            </svg>
+        </div>
+        <div class="theme-options">
+            <div class="theme-option" data-theme="aurora" onclick="setTheme('aurora')">
+                <div class="theme-preview aurora"></div>
+                <span>Aurora</span>
+            </div>
+            <div class="theme-option" data-theme="sunset" onclick="setTheme('sunset')">
+                <div class="theme-preview sunset"></div>
+                <span>Sunset</span>
+            </div>
+            <div class="theme-option" data-theme="ocean" onclick="setTheme('ocean')">
+                <div class="theme-preview ocean"></div>
+                <span>Ocean</span>
+            </div>
+            <div class="theme-option" data-theme="forest" onclick="setTheme('forest')">
+                <div class="theme-preview forest"></div>
+                <span>Forest</span>
+            </div>
+            <div class="theme-option" data-theme="midnight" onclick="setTheme('midnight')">
+                <div class="theme-preview midnight"></div>
+                <span>Midnight</span>
+            </div>
+            <div class="theme-option" data-theme="rose" onclick="setTheme('rose')">
+                <div class="theme-preview rose"></div>
+                <span>Rose</span>
+            </div>
+        </div>
     </div>
 
-    <div class="nav-links">
-        <a href="index.html">🏠 首页</a>
-        <a href="support.html" class="active">🛠️ 技术支持</a>
-        <a href="privacy-policy.html">🛡️ 隐私政策</a>
-        <a href="terms-of-service.html">📄 服务条款</a>
+    <div class="header">
+        <h1>DateGazer</h1>
+        <p>技术支持中心</p>
     </div>
 
     <div class="container">
         <div class="content-card">
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="support.html" class="active">技术支持</a>
+                <a href="privacy-policy.html">隐私政策</a>
+                <a href="terms-of-service.html">服务条款</a>
+            </div>
+
             <div class="contact-grid">
                 <div class="contact-card">
                     <div class="icon">📧</div>
@@ -445,7 +819,7 @@
                 </div>
             </div>
 
-        <h2>📋 常见问题</h2>
+        <h2>常见问题</h2>
         
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
@@ -546,41 +920,41 @@
             </div>
         </div>
 
-        <h2 id="features">🚀 主要功能支持</h2>
+        <h2 id="features">主要功能支持</h2>
         
         <div class="feature-grid">
             <div class="feature-card">
-                <h4>📅 纪念日管理</h4>
+                <h4>纪念日管理</h4>
                 <p>创建、编辑、删除纪念日，支持分类和标签管理</p>
             </div>
             
             <div class="feature-card">
-                <h4>🔔 智能提醒</h4>
+                <h4>智能提醒</h4>
                 <p>多种提醒方式：通知、日历、系统闹钟</p>
             </div>
             
             <div class="feature-card">
-                <h4>🎨 精美卡片</h4>
+                <h4>精美卡片</h4>
                 <p>自动生成纪念日卡片，支持自定义背景和样式</p>
             </div>
             
             <div class="feature-card">
-                <h4>📱 Live Photo</h4>
+                <h4>Live Photo</h4>
                 <p>创建动态纪念日Live Photo，让回忆更生动</p>
             </div>
             
             <div class="feature-card">
-                <h4>☁️ 云端同步</h4>
+                <h4>云端同步</h4>
                 <p>iCloud自动同步，多设备数据一致</p>
             </div>
             
             <div class="feature-card">
-                <h4>🔐 隐私保护</h4>
+                <h4>隐私保护</h4>
                 <p>本地存储优先，数据加密保护</p>
             </div>
         </div>
 
-        <h2 id="status">📊 系统状态</h2>
+        <h2 id="status">系统状态</h2>
         
         <div class="feature-grid">
             <div class="feature-card">
@@ -604,7 +978,7 @@
             </div>
         </div>
 
-        <h2>🔧 故障排除指南</h2>
+        <h2>故障排除指南</h2>
         
         <h3>应用崩溃或卡顿</h3>
         <ol>
@@ -629,27 +1003,27 @@
             <li>进入iOS设置 > DateGazer</li>
             <li>检查并开启所需权限：
                 <ul>
-                    <li>📷 相机（拍摄照片）</li>
-                    <li>📱 相册（保存Live Photo）</li>
-                    <li>📅 日历（添加提醒）</li>
-                    <li>🔔 通知（提醒功能）</li>
+                    <li>相机（拍摄照片）</li>
+                    <li>相册（保存Live Photo）</li>
+                    <li>日历（添加提醒）</li>
+                    <li>通知（提醒功能）</li>
                 </ul>
             </li>
             <li>重启应用使权限生效</li>
         </ol>
 
-        <h2>📞 联系我们</h2>
+        <h2>联系我们</h2>
         
         <div class="contact-info">
             <h3>技术支持团队</h3>
-            <p><strong>📧 邮箱：</strong><a href="mailto:1547654938@qq.com" style="color: rgba(255, 255, 255, 0.9);">1547654938@qq.com</a></p>
-            <p><strong>⏰ 响应时间：</strong>24小时内回复</p>
-            <p><strong>🕐 服务时间：</strong>全天候支持</p>
-            <p><strong>🌐 语言：</strong>中文、English</p>
+            <p><strong>邮箱：</strong><a href="mailto:1547654938@qq.com">1547654938@qq.com</a></p>
+            <p><strong>响应时间：</strong>24小时内回复</p>
+            <p><strong>服务时间：</strong>全天候支持</p>
+            <p><strong>语言：</strong>中文、English</p>
         </div>
 
         <div class="highlight-box">
-            <h4>💡 联系我们时请提供：</h4>
+            <h4>联系我们时请提供：</h4>
             <ul>
                 <li>设备型号和iOS版本</li>
                 <li>DateGazer应用版本</li>
@@ -661,10 +1035,22 @@
         </div>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2024 DateGazer. 保留所有权利.</p>
-        <p>用心记录每一个重要时刻 ❤️</p>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">隐私政策</a>
+                <a href="terms-of-service.html">服务条款</a>
+                <a href="support.html">技术支持</a>
+                <a href="mailto:1547654938@qq.com">联系我们</a>
+                <a href="mailto:1547654938@qq.com">用户反馈</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 DateGazer. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function toggleFaq(element) {
@@ -689,20 +1075,46 @@
             }
         }
 
-        // 页面加载时的动画效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 添加加载动画
-            const cards = document.querySelectorAll('.contact-card, .feature-card, .faq-item');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
+        // 主题切换功能
+        function toggleThemeSwitcher() {
+            const switcher = document.getElementById('themeSwitcher');
+            switcher.classList.toggle('active');
+        }
+
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            
+            // 更新激活状态
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
             });
+            document.querySelector(`[data-theme="${themeName}"]`).classList.add('active');
+            
+            // 保存到localStorage
+            localStorage.setItem('dategazer-theme', themeName);
+            
+            // 关闭主题选择器
+            document.getElementById('themeSwitcher').classList.remove('active');
+        }
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('dategazer-theme') || 'aurora';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.querySelector(`[data-theme="${savedTheme}"]`)?.classList.add('active');
+        }
+
+        // 点击外部关闭主题切换器
+        document.addEventListener('click', (e) => {
+            const switcher = document.getElementById('themeSwitcher');
+            if (!switcher.contains(e.target)) {
+                switcher.classList.remove('active');
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
         });
     </script>
 </body>
