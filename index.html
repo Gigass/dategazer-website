@@ -1289,6 +1289,22 @@
             border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
+        .preview-item video {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto 1.5rem;
+            box-shadow:
+                0 12px 24px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: #000;
+            object-fit: contain;
+            max-height: 70vh;
+        }
+
         .preview-info h4 {
             font-size: 1.2rem;
             font-weight: 700;
@@ -2407,6 +2423,56 @@
                         <div class="preview-info">
                             <h4>📝 心情日记记录</h4>
                             <p>记录每天心情瞬间，支持格式编辑和自动保存</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Videos Section -->
+    <section class="app-preview">
+        <div class="preview-container">
+            <div class="preview-header">
+                <h2>🎬 宣传视频</h2>
+                <p>直观看看 DateGazer 的功能亮点演示</p>
+            </div>
+            <div class="preview-gallery">
+                <div class="preview-row preview-row-1">
+                    <div class="preview-item">
+                        <video controls preload="metadata" playsinline webkit-playsinline>
+                            <source src="video/闹铃提醒宣传视频.mp4" type="video/mp4">
+                            <source src="video/闹铃提醒宣传视频.MOV" type="video/quicktime">
+                            您的浏览器不支持内置播放。您可以
+                            <a href="video/闹铃提醒宣传视频.mp4">下载观看</a>。
+                        </video>
+                        <div class="preview-info">
+                            <h4>⏰ 闹铃提醒宣传视频</h4>
+                            <p>系统级闹铃提醒，穿透静音与专注模式</p>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <video controls preload="metadata" playsinline webkit-playsinline>
+                            <source src="video/纪乃日和小组件宣传视频.mp4" type="video/mp4">
+                            <source src="video/纪乃日和小组件宣传视频.MOV" type="video/quicktime">
+                            您的浏览器不支持内置播放。您可以
+                            <a href="video/纪乃日和小组件宣传视频.mp4">下载观看</a>。
+                        </video>
+                        <div class="preview-info">
+                            <h4>📱 纪乃日与小组件宣传视频</h4>
+                            <p>桌面小组件DIY，实时倒计时显示</p>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <video controls preload="metadata" playsinline webkit-playsinline>
+                            <source src="video/心情日记宣传视频.mp4" type="video/mp4">
+                            <source src="video/心情日记宣传视频.MOV" type="video/quicktime">
+                            您的浏览器不支持内置播放。您可以
+                            <a href="video/心情日记宣传视频.mp4">下载观看</a>。
+                        </video>
+                        <div class="preview-info">
+                            <h4>📝 心情日记宣传视频</h4>
+                            <p>每日心情记录，时间轴回看心情变化</p>
                         </div>
                     </div>
                 </div>
