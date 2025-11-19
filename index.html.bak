@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DateGazer - 心念记纪念日管理专家</title>
     <meta name="description" content="DateGazer心念记 - 精美卡片创作，Live Photo分享美好回忆，应用图标实时倒计时，智能提醒不错过，桌面小组件DIY，心情日记记录瞬间">
-    <link rel="apple-touch-icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
     <style>
         :root {
             /* 动态配色系统 */
@@ -16,57 +14,59 @@
             --theme-accent: 6, 182, 212;
             --theme-warm: 245, 158, 11;
             --theme-cool: 139, 92, 246;
-
+            
             /* 现代化高级渐变系统 - 适合文字阅读的低亮度版本 */
-            --mesh-gradient: conic-gradient(from 180deg at 50% 50%,
-                    rgba(var(--theme-primary), 0.08) 0deg,
-                    rgba(var(--theme-secondary), 0.06) 72deg,
-                    rgba(var(--theme-accent), 0.07) 144deg,
-                    rgba(var(--theme-warm), 0.05) 216deg,
-                    rgba(var(--theme-cool), 0.09) 288deg,
-                    rgba(var(--theme-primary), 0.08) 360deg);
+            --mesh-gradient: conic-gradient(from 180deg at 50% 50%, 
+                rgba(var(--theme-primary), 0.08) 0deg,
+                rgba(var(--theme-secondary), 0.06) 72deg,
+                rgba(var(--theme-accent), 0.07) 144deg,
+                rgba(var(--theme-warm), 0.05) 216deg,
+                rgba(var(--theme-cool), 0.09) 288deg,
+                rgba(var(--theme-primary), 0.08) 360deg);
             --holographic-gradient: linear-gradient(45deg,
-                    rgba(var(--theme-primary), 0.08) 0%,
-                    rgba(var(--theme-secondary), 0.06) 20%,
-                    rgba(var(--theme-accent), 0.07) 40%,
-                    rgba(var(--theme-warm), 0.05) 60%,
-                    rgba(var(--theme-cool), 0.09) 80%,
-                    rgba(var(--theme-primary), 0.08) 100%);
+                rgba(var(--theme-primary), 0.08) 0%,
+                rgba(var(--theme-secondary), 0.06) 20%,
+                rgba(var(--theme-accent), 0.07) 40%,
+                rgba(var(--theme-warm), 0.05) 60%,
+                rgba(var(--theme-cool), 0.09) 80%,
+                rgba(var(--theme-primary), 0.08) 100%);
             --aurora-gradient: radial-gradient(ellipse 120% 80% at 50% 40%,
-                    rgba(var(--theme-primary), 0.06) 0%,
-                    rgba(var(--theme-secondary), 0.04) 30%,
-                    rgba(var(--theme-accent), 0.08) 60%,
-                    rgba(var(--theme-cool), 0.03) 80%,
-                    transparent 100%);
+                rgba(var(--theme-primary), 0.06) 0%,
+                rgba(var(--theme-secondary), 0.04) 30%,
+                rgba(var(--theme-accent), 0.08) 60%,
+                rgba(var(--theme-cool), 0.03) 80%,
+                transparent 100%);
             --prism-gradient: linear-gradient(135deg,
-                    rgba(var(--theme-primary), 0.04) 0%,
-                    rgba(var(--theme-secondary), 0.06) 12.5%,
-                    rgba(var(--theme-accent), 0.03) 25%,
-                    rgba(var(--theme-warm), 0.05) 37.5%,
-                    rgba(var(--theme-cool), 0.07) 50%,
-                    rgba(var(--theme-primary), 0.04) 62.5%,
-                    rgba(var(--theme-secondary), 0.05) 75%,
-                    rgba(var(--theme-accent), 0.04) 87.5%,
-                    rgba(var(--theme-warm), 0.06) 100%);
-            --liquid-gradient: radial-gradient(circle at 30% 30%,
-                    rgba(var(--theme-primary), 0.06) 0%,
-                    transparent 35%),
-                radial-gradient(circle at 70% 70%,
-                    rgba(var(--theme-secondary), 0.05) 0%,
-                    transparent 40%),
-                radial-gradient(circle at 20% 80%,
-                    rgba(var(--theme-accent), 0.04) 0%,
-                    transparent 45%),
-                radial-gradient(circle at 80% 20%,
-                    rgba(var(--theme-cool), 0.05) 0%,
-                    transparent 38%);
-            --crystal-gradient: linear-gradient(125deg,
-                    rgba(var(--theme-primary), 0.05) 0%,
-                    rgba(var(--theme-secondary), 0.03) 25%,
-                    rgba(var(--theme-accent), 0.06) 50%,
-                    rgba(var(--theme-warm), 0.025) 75%,
-                    rgba(var(--theme-cool), 0.04) 100%);
-
+                rgba(var(--theme-primary), 0.04) 0%,
+                rgba(var(--theme-secondary), 0.06) 12.5%,
+                rgba(var(--theme-accent), 0.03) 25%,
+                rgba(var(--theme-warm), 0.05) 37.5%,
+                rgba(var(--theme-cool), 0.07) 50%,
+                rgba(var(--theme-primary), 0.04) 62.5%,
+                rgba(var(--theme-secondary), 0.05) 75%,
+                rgba(var(--theme-accent), 0.04) 87.5%,
+                rgba(var(--theme-warm), 0.06) 100%);
+            --liquid-gradient: radial-gradient(circle at 30% 30%, 
+                rgba(var(--theme-primary), 0.06) 0%, 
+                transparent 35%),
+                radial-gradient(circle at 70% 70%, 
+                rgba(var(--theme-secondary), 0.05) 0%, 
+                transparent 40%),
+                radial-gradient(circle at 20% 80%, 
+                rgba(var(--theme-accent), 0.04) 0%, 
+                transparent 45%),
+                radial-gradient(circle at 80% 20%, 
+                rgba(var(--theme-cool), 0.05) 0%, 
+                transparent 38%);
+            --crystal-gradient: linear-gradient(
+                125deg,
+                rgba(var(--theme-primary), 0.05) 0%,
+                rgba(var(--theme-secondary), 0.03) 25%,
+                rgba(var(--theme-accent), 0.06) 50%,
+                rgba(var(--theme-warm), 0.025) 75%,
+                rgba(var(--theme-cool), 0.04) 100%
+            );
+            
             /* 玻璃拟态系统 - 进一步降低透明度提升可见性 */
             --glass-bg: rgba(255, 255, 255, 0.35);
             --glass-bg-hover: rgba(255, 255, 255, 0.45);
@@ -74,24 +74,24 @@
             --glass-border: rgba(255, 255, 255, 0.5);
             --glass-border-hover: rgba(255, 255, 255, 0.65);
             --glass-border-strong: rgba(255, 255, 255, 0.75);
-
+            
             /* 阴影系统 */
-            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                            0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                           0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
             --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.4);
             --shadow-glow-hover: 0 0 30px rgba(102, 126, 234, 0.6);
-
+            
             /* 增强文字阴影确保可读性 */
             --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.5);
             --text-shadow-strong: 0 3px 12px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.6);
             --text-shadow-glow: 0 0 20px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.3);
-
+            
             /* 色彩系统 */
             --white-pure: rgba(255, 255, 255, 1);
             --white-90: rgba(255, 255, 255, 0.9);
@@ -99,35 +99,35 @@
             --white-70: rgba(255, 255, 255, 0.7);
             --white-60: rgba(255, 255, 255, 0.6);
             --white-50: rgba(255, 255, 255, 0.5);
-
+            
             /* 动画时序 */
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --ease-dynamic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
+            
             /* 动态背景变量 */
             --bg-intensity: 1;
             --particle-density: 1;
             --animation-speed: 1;
-
+            
             /* 超现代化设计系统 */
             --card-gradient: var(--crystal-gradient);
-            --border-gradient: linear-gradient(145deg,
-                    rgba(var(--theme-primary), 0.4),
-                    rgba(var(--theme-secondary), 0.3),
-                    rgba(var(--theme-accent), 0.2));
-            --floating-shadow: 0 12px 40px rgba(0, 0, 0, 0.15),
-                0 4px 12px rgba(0, 0, 0, 0.1),
-                0 0 0 1px rgba(255, 255, 255, 0.08);
-            --neumorphism-pro: 12px 12px 24px rgba(0, 0, 0, 0.12),
-                -8px -8px 16px rgba(255, 255, 255, 0.08),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.05);
+            --border-gradient: linear-gradient(145deg, 
+                rgba(var(--theme-primary), 0.4), 
+                rgba(var(--theme-secondary), 0.3),
+                rgba(var(--theme-accent), 0.2));
+            --floating-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                              0 4px 12px rgba(0, 0, 0, 0.1), 
+                              0 0 0 1px rgba(255, 255, 255, 0.08);
+            --neumorphism-pro: 12px 12px 24px rgba(0, 0, 0, 0.12), 
+                              -8px -8px 16px rgba(255, 255, 255, 0.08),
+                              inset 2px 2px 4px rgba(255, 255, 255, 0.05);
             --holographic-shadow: 0 8px 32px rgba(var(--theme-primary), 0.15),
-                0 0 24px rgba(var(--theme-secondary), 0.1);
+                                 0 0 24px rgba(var(--theme-secondary), 0.1);
             --liquid-pattern: var(--liquid-gradient);
             --aurora-pattern: var(--aurora-gradient);
-
+            
             /* 尺寸系统 */
             --border-radius-sm: 8px;
             --border-radius-md: 12px;
@@ -135,7 +135,7 @@
             --border-radius-xl: 20px;
             --border-radius-2xl: 24px;
             --border-radius-3xl: 32px;
-
+            
             /* 动态主题切换动画 */
             transition: all 1.2s var(--ease-smooth);
         }
@@ -199,49 +199,39 @@
 
         /* 动态主题色彩背景系统 - 持续展示主题配色 */
         html {
-            background:
+            background: 
                 /* 主要主题色渐变基底 */
-                linear-gradient(135deg,
-                    rgba(var(--theme-primary), 0.15) 0%,
-                    /* 蓝紫色主调 */
-                    rgba(var(--theme-secondary), 0.12) 25%,
-                    /* 粉红色点缀 */
-                    rgba(var(--theme-accent), 0.1) 50%,
-                    /* 青色中调 */
-                    rgba(var(--theme-cool), 0.13) 75%,
-                    /* 紫色深调 */
-                    rgba(var(--theme-primary), 0.08) 100%
-                    /* 回到蓝紫色 */
+                linear-gradient(135deg, 
+                    rgba(var(--theme-primary), 0.15) 0%,     /* 蓝紫色主调 */
+                    rgba(var(--theme-secondary), 0.12) 25%,  /* 粉红色点缀 */
+                    rgba(var(--theme-accent), 0.1) 50%,      /* 青色中调 */
+                    rgba(var(--theme-cool), 0.13) 75%,       /* 紫色深调 */
+                    rgba(var(--theme-primary), 0.08) 100%    /* 回到蓝紫色 */
                 ),
                 /* 深色基底确保文字可读性 */
-                linear-gradient(135deg,
-                    rgba(15, 15, 35, 0.9) 0%,
-                    /* 深紫蓝基底 */
-                    rgba(26, 26, 46, 0.85) 25%,
-                    /* 深蓝灰基底 */
-                    rgba(22, 33, 62, 0.9) 50%,
-                    /* 暗蓝基底 */
-                    rgba(15, 52, 96, 0.85) 75%,
-                    /* 深蓝基底 */
-                    rgba(13, 27, 42, 0.9) 100%
-                    /* 极深蓝基底 */
+                linear-gradient(135deg, 
+                    rgba(15, 15, 35, 0.9) 0%,    /* 深紫蓝基底 */
+                    rgba(26, 26, 46, 0.85) 25%,  /* 深蓝灰基底 */
+                    rgba(22, 33, 62, 0.9) 50%,   /* 暗蓝基底 */
+                    rgba(15, 52, 96, 0.85) 75%,  /* 深蓝基底 */
+                    rgba(13, 27, 42, 0.9) 100%   /* 极深蓝基底 */
                 ),
                 /* 动态主题色彩光晕 */
-                radial-gradient(ellipse 1000px 600px at 25% 25%,
-                    rgba(var(--theme-primary), 0.2) 0%,
+                radial-gradient(ellipse 1000px 600px at 25% 25%, 
+                    rgba(var(--theme-primary), 0.2) 0%, 
                     transparent 60%),
-                radial-gradient(ellipse 800px 800px at 75% 75%,
-                    rgba(var(--theme-secondary), 0.15) 0%,
+                radial-gradient(ellipse 800px 800px at 75% 75%, 
+                    rgba(var(--theme-secondary), 0.15) 0%, 
                     transparent 55%),
-                radial-gradient(ellipse 600px 1000px at 50% 10%,
-                    rgba(var(--theme-accent), 0.12) 0%,
+                radial-gradient(ellipse 600px 1000px at 50% 10%, 
+                    rgba(var(--theme-accent), 0.12) 0%, 
                     transparent 50%),
-                radial-gradient(ellipse 700px 500px at 80% 30%,
-                    rgba(var(--theme-warm), 0.08) 0%,
+                radial-gradient(ellipse 700px 500px at 80% 30%, 
+                    rgba(var(--theme-warm), 0.08) 0%, 
                     transparent 45%),
                 /* 主题色环形渐变装饰 */
-                conic-gradient(from 180deg at 40% 60%,
-                    rgba(var(--theme-primary), 0.1) 0deg,
+                conic-gradient(from 180deg at 40% 60%, 
+                    rgba(var(--theme-primary), 0.1) 0deg, 
                     rgba(var(--theme-secondary), 0.08) 60deg,
                     rgba(var(--theme-accent), 0.06) 120deg,
                     rgba(var(--theme-warm), 0.09) 180deg,
@@ -260,23 +250,18 @@
             0% {
                 background-position: 0% 0%, 0% 0%, 25% 25%, 75% 75%, 50% 10%, 80% 30%, 40% 60%;
             }
-
             20% {
                 background-position: 10% 10%, 10% 10%, 30% 20%, 80% 70%, 45% 15%, 75% 35%, 35% 65%;
             }
-
             40% {
                 background-position: 20% 5%, 20% 5%, 20% 30%, 70% 80%, 55% 5%, 85% 25%, 45% 55%;
             }
-
             60% {
                 background-position: 15% 20%, 15% 20%, 35% 35%, 65% 75%, 40% 20%, 70% 40%, 55% 45%;
             }
-
             80% {
                 background-position: 25% 15%, 25% 15%, 15% 25%, 85% 65%, 60% 8%, 90% 20%, 30% 70%;
             }
-
             100% {
                 background-position: 30% 30%, 30% 30%, 40% 40%, 60% 60%, 50% 25%, 80% 50%, 50% 50%;
             }
@@ -290,7 +275,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
+            background-image: 
                 radial-gradient(circle at 25% 25%, rgba(var(--theme-primary), 0.15) 2px, transparent 2px),
                 radial-gradient(circle at 75% 75%, rgba(var(--theme-secondary), 0.12) 1px, transparent 1px),
                 radial-gradient(circle at 50% 10%, rgba(var(--theme-accent), 0.18) 1px, transparent 1px),
@@ -309,22 +294,18 @@
                 transform: translate(0, 0) rotate(0deg);
                 opacity: 0.8;
             }
-
             25% {
                 transform: translate(-15px, -15px) rotate(90deg);
                 opacity: 0.9;
             }
-
             50% {
                 transform: translate(10px, -10px) rotate(180deg);
                 opacity: 0.6;
             }
-
             75% {
                 transform: translate(20px, 15px) rotate(270deg);
                 opacity: 0.85;
             }
-
             100% {
                 transform: translate(0, 0) rotate(360deg);
                 opacity: 0.8;
@@ -392,17 +373,17 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background:
+            background: 
                 /* 动态噪点纹理 */
                 radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.015) 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.015) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(var(--theme-accent), 0.02) 0%, transparent 70%),
                 /* 动态主题色装饰 */
-                linear-gradient(45deg,
-                    rgba(var(--theme-primary), 0.012) 0%,
-                    transparent 25%,
-                    rgba(var(--theme-secondary), 0.01) 50%,
-                    transparent 75%,
+                linear-gradient(45deg, 
+                    rgba(var(--theme-primary), 0.012) 0%, 
+                    transparent 25%, 
+                    rgba(var(--theme-secondary), 0.01) 50%, 
+                    transparent 75%, 
                     rgba(var(--theme-cool), 0.015) 100%);
             z-index: -1;
             backface-visibility: hidden;
@@ -416,12 +397,10 @@
                 transform: translate(0, 0) scale(1);
                 opacity: 0.8;
             }
-
             50% {
                 transform: translate(-10px, -5px) scale(1.02);
                 opacity: 1;
             }
-
             100% {
                 transform: translate(5px, 10px) scale(0.98);
                 opacity: 0.9;
@@ -462,26 +441,21 @@
         }
 
         @keyframes enhancedSparkle {
-
-            0%,
-            100% {
+            0%, 100% { 
                 opacity: 0;
                 transform: scale(0) rotate(0deg);
                 filter: blur(1px);
             }
-
             25% {
                 opacity: 0.6;
                 transform: scale(0.5) rotate(90deg);
                 filter: blur(0.5px);
             }
-
-            50% {
+            50% { 
                 opacity: 1;
                 transform: scale(1.2) rotate(180deg);
                 filter: blur(0px);
             }
-
             75% {
                 opacity: 0.8;
                 transform: scale(0.8) rotate(270deg);
@@ -533,55 +507,38 @@
 
         .logo:hover {
             animation: logoHover 0.6s var(--ease-bounce);
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 30px rgba(102, 126, 234, 0.6));
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4)) 
+                    drop-shadow(0 0 30px rgba(102, 126, 234, 0.6));
         }
 
         @keyframes luxuryPulse {
-
-            0%,
-            100% {
+            0%, 100% { 
                 transform: scale(1) rotate(0deg);
                 filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
             }
-
-            50% {
+            50% { 
                 transform: scale(1.08) rotate(2deg);
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
             }
         }
 
         @keyframes logoGlow {
-            from {
+            from { 
                 opacity: 0.3;
                 transform: scale(0.8);
             }
-
-            to {
+            to { 
                 opacity: 0.6;
                 transform: scale(1.2);
             }
         }
 
         @keyframes logoHover {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-
-            25% {
-                transform: scale(1.15) rotate(-5deg);
-            }
-
-            50% {
-                transform: scale(1.2) rotate(0deg);
-            }
-
-            75% {
-                transform: scale(1.1) rotate(3deg);
-            }
-
-            100% {
-                transform: scale(1.12) rotate(0deg);
-            }
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.15) rotate(-5deg); }
+            50% { transform: scale(1.2) rotate(0deg); }
+            75% { transform: scale(1.1) rotate(3deg); }
+            100% { transform: scale(1.12) rotate(0deg); }
         }
 
         .hero h1 {
@@ -642,7 +599,6 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-large);
-            cursor: pointer;
         }
 
         .download-btn::before {
@@ -652,11 +608,11 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.25),
-                    rgba(255, 255, 255, 0.1),
-                    transparent);
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.25), 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
             transition: left 0.6s var(--ease-smooth);
         }
 
@@ -696,37 +652,41 @@
         }
 
         .download-btn.primary {
-            background:
-                linear-gradient(135deg,
+            background: 
+                linear-gradient(135deg, 
                     rgba(var(--theme-primary), 0.3) 0%,
                     rgba(var(--theme-secondary), 0.25) 30%,
                     rgba(var(--theme-accent), 0.3) 60%,
-                    rgba(var(--theme-warm), 0.2) 100%),
+                    rgba(var(--theme-warm), 0.2) 100%
+                ),
                 linear-gradient(45deg,
                     rgba(var(--theme-cool), 0.1) 0%,
                     transparent 50%,
-                    rgba(var(--theme-primary), 0.1) 100%);
+                    rgba(var(--theme-primary), 0.1) 100%
+                );
             border: 2px solid rgba(var(--theme-primary), 0.4);
-            box-shadow:
-                var(--shadow-xl),
+            box-shadow: 
+                var(--shadow-xl), 
                 0 0 30px rgba(var(--theme-primary), 0.3),
                 0 0 60px rgba(var(--theme-secondary), 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .download-btn.primary:hover {
-            background:
-                linear-gradient(135deg,
+            background: 
+                linear-gradient(135deg, 
                     rgba(var(--theme-primary), 0.4) 0%,
                     rgba(var(--theme-secondary), 0.35) 30%,
                     rgba(var(--theme-accent), 0.4) 60%,
-                    rgba(var(--theme-warm), 0.3) 100%),
+                    rgba(var(--theme-warm), 0.3) 100%
+                ),
                 linear-gradient(45deg,
                     rgba(var(--theme-cool), 0.15) 0%,
                     transparent 50%,
-                    rgba(var(--theme-primary), 0.15) 100%);
-            box-shadow:
-                var(--shadow-xl),
+                    rgba(var(--theme-primary), 0.15) 100%
+                );
+            box-shadow: 
+                var(--shadow-xl), 
                 0 0 40px rgba(var(--theme-primary), 0.4),
                 0 0 80px rgba(var(--theme-secondary), 0.3),
                 inset 0 2px 0 rgba(255, 255, 255, 0.3);
@@ -734,22 +694,17 @@
 
         /* 按钮微光效果 */
         @keyframes btnShimmer {
-            0% {
-                transform: translateX(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(300%) rotate(45deg);
-            }
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(300%) rotate(45deg); }
         }
 
         .download-btn.primary::before {
             background: linear-gradient(90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.4),
-                    rgba(255, 215, 0, 0.3),
-                    rgba(255, 255, 255, 0.4),
-                    transparent);
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 215, 0, 0.3),
+                rgba(255, 255, 255, 0.4),
+                transparent);
             animation: btnShimmer 3s ease-in-out infinite;
         }
 
@@ -780,13 +735,8 @@
         }
 
         @keyframes glow {
-            from {
-                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-            }
-
-            to {
-                box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
-            }
+            from { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
+            to { box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5); }
         }
 
         .beta-notice p {
@@ -806,15 +756,8 @@
         }
 
         @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translate(-50%, 0);
-            }
-
-            50% {
-                transform: translate(-50%, 10px);
-            }
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
         }
 
         /* Features Section - 统一透明背景 */
@@ -957,39 +900,42 @@
 
         /* 现代化高级卡片变体 */
         .feature-card:nth-child(3n+1) {
-            background:
+            background: 
                 var(--liquid-pattern),
                 linear-gradient(135deg,
                     rgba(var(--theme-primary), 0.15) 0%,
                     rgba(var(--theme-accent), 0.1) 50%,
-                    rgba(var(--theme-cool), 0.12) 100%);
-            box-shadow:
+                    rgba(var(--theme-cool), 0.12) 100%
+                );
+            box-shadow: 
                 var(--floating-shadow),
                 0 0 30px rgba(var(--theme-primary), 0.2);
             border: 1px solid rgba(var(--theme-primary), 0.2);
         }
 
         .feature-card:nth-child(3n+2) {
-            background:
+            background: 
                 var(--aurora-pattern),
                 linear-gradient(135deg,
                     rgba(var(--theme-secondary), 0.15) 0%,
                     rgba(var(--theme-warm), 0.1) 50%,
-                    rgba(var(--theme-primary), 0.12) 100%);
-            box-shadow:
+                    rgba(var(--theme-primary), 0.12) 100%
+                );
+            box-shadow: 
                 var(--holographic-shadow),
                 0 0 30px rgba(var(--theme-secondary), 0.2);
             border: 1px solid rgba(var(--theme-secondary), 0.2);
         }
 
         .feature-card:nth-child(3n+3) {
-            background:
+            background: 
                 var(--prism-gradient),
                 linear-gradient(135deg,
                     rgba(var(--theme-accent), 0.15) 0%,
                     rgba(var(--theme-cool), 0.1) 50%,
-                    rgba(var(--theme-secondary), 0.12) 100%);
-            box-shadow:
+                    rgba(var(--theme-secondary), 0.12) 100%
+                );
+            box-shadow: 
                 var(--neumorphism-pro),
                 0 0 30px rgba(var(--theme-accent), 0.2);
             border: 1px solid rgba(var(--theme-accent), 0.2);
@@ -1002,7 +948,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
+            background: 
                 radial-gradient(circle at 30% 30%, rgba(var(--theme-primary), 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 70% 70%, rgba(var(--theme-secondary), 0.1) 0%, transparent 50%),
                 linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
@@ -1017,10 +963,10 @@
             left: -1px;
             right: -1px;
             bottom: -1px;
-            background: linear-gradient(135deg,
-                    rgba(var(--theme-primary), 0.4),
-                    rgba(var(--theme-secondary), 0.3),
-                    rgba(var(--theme-accent), 0.4));
+            background: linear-gradient(135deg, 
+                rgba(var(--theme-primary), 0.4),
+                rgba(var(--theme-secondary), 0.3),
+                rgba(var(--theme-accent), 0.4));
             border-radius: var(--border-radius-2xl);
             opacity: 0;
             z-index: -1;
@@ -1030,10 +976,10 @@
 
         .feature-card:hover::before {
             opacity: 1;
-            background: linear-gradient(135deg,
-                    rgba(255, 255, 255, 0.18) 0%,
-                    rgba(255, 255, 255, 0.1) 50%,
-                    rgba(102, 126, 234, 0.15) 100%);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.18) 0%, 
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(102, 126, 234, 0.15) 100%);
         }
 
         .feature-card:hover::after {
@@ -1053,15 +999,15 @@
                 transition: all 0.5s var(--ease-smooth);
                 cursor: pointer;
             }
-
+            
             .feature-card:hover {
                 transform: translateY(-16px) scale(1.03);
-                box-shadow:
-                    var(--shadow-xl),
+                box-shadow: 
+                    var(--shadow-xl), 
                     var(--shadow-glow-hover),
                     0 0 60px rgba(var(--theme-primary), 0.2);
             }
-
+            
             /* 移除screenshot-card的PC端动画 */
         }
 
@@ -1135,7 +1081,8 @@
 
         .feature-card:hover .feature-icon {
             transform: scale(1.1) rotate(3deg);
-            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 25px rgba(var(--theme-primary), 0.4));
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4)) 
+                    drop-shadow(0 0 25px rgba(var(--theme-primary), 0.4));
         }
 
         .feature-card:hover .feature-icon::before {
@@ -1144,14 +1091,11 @@
 
         /* 图标呼吸效果 */
         @keyframes iconBreathe {
-
-            0%,
-            100% {
+            0%, 100% { 
                 transform: scale(1);
                 filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
             }
-
-            50% {
+            50% { 
                 transform: scale(1.05);
                 filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
             }
@@ -1261,7 +1205,7 @@
             .preview-gallery {
                 gap: 4rem;
             }
-
+            
             .preview-row {
                 gap: 2.5rem;
             }
@@ -1272,21 +1216,20 @@
                 gap: 3rem;
             }
         }
-
+        
         @media (max-width: 1200px) {
             .preview-row-2 {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
+        
         @media (max-width: 768px) {
-
             .preview-row-1,
             .preview-row-2 {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
+            
             .preview-gallery {
                 gap: 2rem;
             }
@@ -1294,16 +1237,16 @@
 
         /* 现代化卡片设计 - 进一步提升可见性 */
         .preview-item {
-            background:
-                linear-gradient(145deg,
-                    rgba(255, 255, 255, 0.4) 0%,
+            background: 
+                linear-gradient(145deg, 
+                    rgba(255, 255, 255, 0.4) 0%, 
                     rgba(255, 255, 255, 0.32) 50%,
                     rgba(255, 255, 255, 0.36) 100%);
             border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 2rem;
             text-align: center;
-            box-shadow:
+            box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.25),
                 0 4px 16px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -1319,17 +1262,17 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg,
-                    rgba(var(--theme-primary), 0.1) 0%,
-                    transparent 30%,
-                    rgba(var(--theme-secondary), 0.08) 70%,
-                    rgba(var(--theme-accent), 0.1) 100%);
+            background: linear-gradient(135deg, 
+                rgba(var(--theme-primary), 0.1) 0%,
+                transparent 30%,
+                rgba(var(--theme-secondary), 0.08) 70%,
+                rgba(var(--theme-accent), 0.1) 100%);
             border-radius: 18px;
             z-index: 1;
             pointer-events: none;
         }
 
-        .preview-item>* {
+        .preview-item > * {
             position: relative;
             z-index: 2;
         }
@@ -1340,7 +1283,7 @@
             border-radius: 16px;
             display: block;
             margin-bottom: 1.5rem;
-            box-shadow:
+            box-shadow: 
                 0 12px 24px rgba(0, 0, 0, 0.3),
                 0 4px 8px rgba(0, 0, 0, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.1);
@@ -1367,7 +1310,7 @@
             font-weight: 700;
             color: white;
             margin-bottom: 0.8rem;
-            text-shadow:
+            text-shadow: 
                 0 2px 4px rgba(0, 0, 0, 0.5),
                 0 1px 2px rgba(0, 0, 0, 0.3);
             line-height: 1.3;
@@ -1548,10 +1491,10 @@
         /* 简约现代化Footer */
         .footer {
             padding: 4rem 2rem 3rem;
-            background:
-                linear-gradient(135deg,
-                    rgba(var(--theme-primary), 0.03) 0%,
-                    rgba(var(--theme-secondary), 0.05) 50%,
+            background: 
+                linear-gradient(135deg, 
+                    rgba(var(--theme-primary), 0.03) 0%, 
+                    rgba(var(--theme-secondary), 0.05) 50%, 
                     rgba(var(--theme-accent), 0.03) 100%);
             position: relative;
         }
@@ -1563,12 +1506,12 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg,
-                    transparent,
-                    rgba(var(--theme-primary), 0.3) 20%,
-                    rgba(var(--theme-secondary), 0.5) 50%,
-                    rgba(var(--theme-accent), 0.3) 80%,
-                    transparent);
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(var(--theme-primary), 0.3) 20%, 
+                rgba(var(--theme-secondary), 0.5) 50%, 
+                rgba(var(--theme-accent), 0.3) 80%, 
+                transparent);
         }
 
         .footer-content {
@@ -1603,9 +1546,9 @@
             left: 50%;
             width: 0;
             height: 1px;
-            background: linear-gradient(90deg,
-                    rgba(var(--theme-primary), 0.8),
-                    rgba(var(--theme-secondary), 1));
+            background: linear-gradient(90deg, 
+                rgba(var(--theme-primary), 0.8), 
+                rgba(var(--theme-secondary), 1));
             transition: all 0.4s var(--ease-smooth);
             transform: translateX(-50%);
         }
@@ -1644,12 +1587,12 @@
                 max-width: 900px;
                 padding: 0 3rem;
             }
-
+            
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
-
+            
             .features-columns {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
@@ -1661,156 +1604,156 @@
             .container {
                 padding: 0 1.5rem;
             }
-
-            .features-section,
-            .app-preview,
+            
+            .features-section, 
+            .app-preview, 
             .detailed-features {
                 padding: 4rem 1.5rem;
             }
-
+            
             .section-header {
                 margin-bottom: 3rem;
             }
-
+            
             .section-header h2 {
                 font-size: clamp(1.8rem, 6vw, 2.5rem);
             }
-
+            
             .section-header p {
                 font-size: 1.1rem;
                 max-width: 100%;
             }
-
+            
             .features-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
+            
             .features-columns {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
+            
             .preview-row-1,
             .preview-row-2 {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
+            
             .preview-gallery {
                 gap: 2rem;
             }
-
+            
             .preview-item {
                 padding: 1.5rem;
             }
-
+            
             .preview-item img {
                 border-radius: 12px;
                 margin-bottom: 1rem;
             }
-
+            
             .preview-info h4 {
                 font-size: 1.1rem;
                 margin-bottom: 0.6rem;
             }
-
+            
             .preview-info p {
                 font-size: 0.95rem;
             }
-
+            
             .cta-container {
                 flex-direction: column;
                 align-items: center;
             }
-
+            
             .download-btn {
                 width: 280px;
                 justify-content: center;
             }
-
+            
             /* Footer移动端优化 */
             .footer {
                 padding: 3rem 1.5rem 2rem;
             }
-
+            
             .footer-links {
                 gap: 1.5rem;
                 margin-bottom: 2.5rem;
             }
-
+            
             .footer-links a {
                 font-size: 0.85rem;
                 letter-spacing: 0.5px;
             }
         }
-
+        
         /* 超小屏幕优化 */
         @media (max-width: 480px) {
             .container {
                 padding: 0 1rem;
             }
-
-            .features-section,
-            .app-preview,
+            
+            .features-section, 
+            .app-preview, 
             .detailed-features {
                 padding: 3rem 1rem;
             }
-
+            
             .section-header {
                 margin-bottom: 2rem;
             }
-
+            
             .section-header h2 {
                 font-size: clamp(1.5rem, 8vw, 2rem);
                 margin-bottom: 0.8rem;
             }
-
+            
             .section-header p {
                 font-size: 1rem;
                 line-height: 1.5;
             }
-
+            
             .preview-gallery {
                 gap: 1rem;
                 margin-top: 2rem;
             }
-
+            
             .preview-row {
                 gap: 1rem;
             }
-
+            
             .preview-gallery {
                 gap: 1.5rem;
             }
-
+            
             .preview-item {
                 padding: 1.2rem;
             }
-
+            
             .preview-item img {
                 border-radius: 10px;
                 margin-bottom: 0.8rem;
             }
-
+            
             .preview-info h4 {
                 font-size: 1rem;
                 margin-bottom: 0.4rem;
             }
-
+            
             .preview-info p {
                 font-size: 0.9rem;
                 line-height: 1.4;
             }
-
+            
             .feature-card {
                 padding: 2rem 1.5rem;
             }
-
+            
             .feature-column {
                 padding: 1.5rem;
             }
-
+            
             .download-btn {
                 width: 100%;
                 max-width: 300px;
@@ -1999,19 +1942,19 @@
                 padding: 2rem 1.5rem;
                 margin: 1rem;
             }
-
+            
             .modal-icon {
                 font-size: 3rem;
             }
-
+            
             .modal-title {
                 font-size: 1.5rem;
             }
-
+            
             .modal-actions {
                 flex-direction: column;
             }
-
+            
             .modal-btn {
                 width: 100%;
                 justify-content: center;
@@ -2160,9 +2103,8 @@
         }
 
         @media (min-width: 1024px) {
-
             /* 为PC端启用硬件加速 */
-            .feature-card,
+            .feature-card, 
             .feature-column {
                 will-change: transform;
                 backface-visibility: hidden;
@@ -2175,9 +2117,9 @@
             }
 
             /* 减少重绘区域 */
-            .hero,
-            .features-section,
-            .screenshots-section,
+            .hero, 
+            .features-section, 
+            .screenshots-section, 
             .detailed-features {
                 contain: layout style;
             }
@@ -2187,7 +2129,7 @@
                 scroll-behavior: smooth;
                 scroll-padding-top: 2rem;
             }
-
+            
             /* PC端专用视差滚动优化 */
             .hero {
                 transform: translateZ(0);
@@ -2207,9 +2149,7 @@
             transform: translateY(0);
         }
     </style>
-    <link rel="stylesheet" href="neo-brutalism.css">
 </head>
-
 <body>
     <!-- Hero Section -->
     <section class="hero">
@@ -2217,53 +2157,37 @@
             <div class="logo-container">
                 <div class="logo">
                     <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                        <circle cx="40" cy="40" r="35" fill="url(#heartGradient)" stroke="rgba(255,255,255,0.3)"
-                            stroke-width="2" />
-                        <path
-                            d="M40 58L32.5 50.5C25 43 25 30 32.5 30C36.25 30 40 33 40 33S43.75 30 47.5 30C55 30 55 43 47.5 50.5L40 58Z"
-                            fill="white" />
+                        <circle cx="40" cy="40" r="35" fill="url(#heartGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                        <path d="M40 58L32.5 50.5C25 43 25 30 32.5 30C36.25 30 40 33 40 33S43.75 30 47.5 30C55 30 55 43 47.5 50.5L40 58Z" fill="white"/>
                         <defs>
                             <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="rgba(var(--theme-primary), 1)" />
-                                <stop offset="50%" stop-color="rgba(var(--theme-secondary), 1)" />
-                                <stop offset="100%" stop-color="rgba(var(--theme-accent), 1)" />
+                                <stop offset="0%" stop-color="rgba(var(--theme-primary), 1)"/>
+                                <stop offset="50%" stop-color="rgba(var(--theme-secondary), 1)"/>
+                                <stop offset="100%" stop-color="rgba(var(--theme-accent), 1)"/>
                             </linearGradient>
                         </defs>
                     </svg>
                 </div>
             </div>
-            <h1 class="text-display glitch-text" data-text="DateGazer">DateGazer</h1>
+            <h1 class="text-display">DateGazer</h1>
             <div class="tagline text-subheading">心念记 - 纪念日管理专家</div>
             <p class="subtitle">精美卡片创作，Live Photo分享美好回忆<br>应用图标实时倒计时，智能提醒不错过<br>桌面小组件DIY，心情日记记录瞬间<br>让每个重要时刻都闪闪发光！</p>
-
-            <div class="cta-container fade-in">
-                <a href="https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196" class="download-btn primary"
-                    target="_blank">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.98 1.07-3.11-1.04.05-2.29.69-3.02 1.55-.65.75-1.21 1.95-1.06 3.04 1.15.09 2.33-.64 3.01-1.48" />
-                    </svg>
-                    App Store 下载
+            
+            <div class="beta-notice">
+                <div class="beta-badge">🚀 Beta测试版</div>
+                <p>通过TestFlight抢先体验DateGazer的所有功能</p>
+            </div>
+            
+            <div class="cta-container">
+                <a href="#" class="download-btn primary" onclick="handleDownload()">
+                    🚀 下载Beta测试版
                 </a>
                 <a href="#features" class="download-btn">
-                    了解更多
+                    ✨ 了解更多功能
                 </a>
             </div>
-
-            <div class="beta-notice">
-                <div class="beta-badge">🎁 最新活动 · 永久 Pro</div>
-                <p>
-                    在 App Store 兑换码中输入 <strong>DATEGAZERFREE2025</strong><br>
-                    或直接前往兑换链接：<br>
-                    <a href="https://apps.apple.com/redeem?ctx=offercodes&id=6751546196&code=DATEGAZERFREE2025"
-                        target="_blank"
-                        style="color: #2c3e50; font-weight: 600; text-decoration: underline;">
-                        点击领取 DateGazer 永久 Pro 会员
-                    </a>
-                </p>
-            </div>
         </div>
-
+        
         <div class="scroll-indicator" onclick="document.querySelector('#features').scrollIntoView()">
             <div style="font-size: 1.5rem;">⬇</div>
             <div style="font-size: 0.8rem; margin-top: 0.5rem;">滑动了解更多</div>
@@ -2274,23 +2198,21 @@
     <section id="features" class="features-section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="text-display glitch-text" data-text="核心功能">核心功能</h2>
+                <h2 class="text-display">核心功能</h2>
                 <p class="text-body">DateGazer为您提供全方位的纪念日管理体验，每个功能都经过精心设计</p>
             </div>
-
+            
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <rect x="8" y="12" width="44" height="36" rx="6" fill="url(#cardGradient)"
-                                stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2" />
-                            <path d="M16 20h28M16 26h20M16 32h24" stroke="white" stroke-width="2"
-                                stroke-linecap="round" />
-                            <circle cx="42" cy="38" r="6" fill="rgba(var(--theme-secondary), 0.8)" />
+                            <rect x="8" y="12" width="44" height="36" rx="6" fill="url(#cardGradient)" stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2"/>
+                            <path d="M16 20h28M16 26h20M16 32h24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="42" cy="38" r="6" fill="rgba(var(--theme-secondary), 0.8)"/>
                             <defs>
                                 <linearGradient id="cardGradient">
-                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(var(--theme-accent), 0.6)" />
+                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-accent), 0.6)"/>
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -2304,21 +2226,19 @@
                         <span class="feature-tag text-caption">社交分享</span>
                     </div>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="25" fill="url(#clockGradient)"
-                                stroke="rgba(var(--theme-secondary), 0.5)" stroke-width="2" />
-                            <circle cx="30" cy="30" r="3" fill="white" />
-                            <path d="M30 30L30 18" stroke="white" stroke-width="3" stroke-linecap="round" />
-                            <path d="M30 30L38 30" stroke="white" stroke-width="2" stroke-linecap="round" />
-                            <path d="M30 10v4M30 46v4M10 30h4M46 30h4" stroke="rgba(var(--theme-primary), 0.6)"
-                                stroke-width="2" />
+                            <circle cx="30" cy="30" r="25" fill="url(#clockGradient)" stroke="rgba(var(--theme-secondary), 0.5)" stroke-width="2"/>
+                            <circle cx="30" cy="30" r="3" fill="white"/>
+                            <path d="M30 30L30 18" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M30 30L38 30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M30 10v4M30 46v4M10 30h4M46 30h4" stroke="rgba(var(--theme-primary), 0.6)" stroke-width="2"/>
                             <defs>
                                 <linearGradient id="clockGradient">
-                                    <stop offset="0%" stop-color="rgba(var(--theme-secondary), 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(var(--theme-warm), 0.6)" />
+                                    <stop offset="0%" stop-color="rgba(var(--theme-secondary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-warm), 0.6)"/>
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -2332,20 +2252,18 @@
                         <span class="feature-tag text-caption">智能算法</span>
                     </div>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <rect x="10" y="8" width="40" height="44" rx="8" fill="url(#phoneGradient)"
-                                stroke="rgba(var(--theme-accent), 0.5)" stroke-width="2" />
-                            <rect x="14" y="16" width="32" height="20" rx="4" fill="rgba(var(--theme-primary), 0.3)"
-                                stroke="rgba(var(--theme-primary), 0.8)" stroke-width="1" />
-                            <rect x="16" y="18" width="12" height="8" rx="2" fill="rgba(var(--theme-secondary), 0.8)" />
-                            <circle cx="44" cy="44" r="4" fill="white" />
+                            <rect x="10" y="8" width="40" height="44" rx="8" fill="url(#phoneGradient)" stroke="rgba(var(--theme-accent), 0.5)" stroke-width="2"/>
+                            <rect x="14" y="16" width="32" height="20" rx="4" fill="rgba(var(--theme-primary), 0.3)" stroke="rgba(var(--theme-primary), 0.8)" stroke-width="1"/>
+                            <rect x="16" y="18" width="12" height="8" rx="2" fill="rgba(var(--theme-secondary), 0.8)"/>
+                            <circle cx="44" cy="44" r="4" fill="white"/>
                             <defs>
                                 <linearGradient id="phoneGradient">
-                                    <stop offset="0%" stop-color="rgba(var(--theme-accent), 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(var(--theme-cool), 0.6)" />
+                                    <stop offset="0%" stop-color="rgba(var(--theme-accent), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-cool), 0.6)"/>
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -2359,21 +2277,18 @@
                         <span class="feature-tag text-caption">实时更新</span>
                     </div>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <path d="M30 8v4M8 30h4M52 30h4M13.8 13.8l2.8 2.8M44.2 44.2l2.8 2.8"
-                                stroke="rgba(var(--theme-warm), 0.6)" stroke-width="2" stroke-linecap="round" />
-                            <circle cx="30" cy="30" r="18" fill="url(#bellGradient)"
-                                stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2" />
-                            <path d="M22 25C22 21 25.5 18 30 18s8 3 8 7v8c0 4 2 6 2 6H20s2-2 2-6v-8z" fill="white" />
-                            <path d="M26 42c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="white" stroke-width="2"
-                                stroke-linecap="round" />
+                            <path d="M30 8v4M8 30h4M52 30h4M13.8 13.8l2.8 2.8M44.2 44.2l2.8 2.8" stroke="rgba(var(--theme-warm), 0.6)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="30" cy="30" r="18" fill="url(#bellGradient)" stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2"/>
+                            <path d="M22 25C22 21 25.5 18 30 18s8 3 8 7v8c0 4 2 6 2 6H20s2-2 2-6v-8z" fill="white"/>
+                            <path d="M26 42c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             <defs>
                                 <linearGradient id="bellGradient">
-                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(var(--theme-warm), 0.6)" />
+                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-warm), 0.6)"/>
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -2387,21 +2302,18 @@
                         <span class="feature-tag text-caption">场景提醒</span>
                     </div>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <rect x="12" y="8" width="36" height="44" rx="4" fill="url(#journalGradient)"
-                                stroke="rgba(var(--theme-cool), 0.5)" stroke-width="2" />
-                            <path d="M18 18h24M18 24h20M18 30h22M18 36h16" stroke="white" stroke-width="2"
-                                stroke-linecap="round" />
-                            <circle cx="42" cy="40" r="8" fill="rgba(var(--theme-secondary), 0.9)" />
-                            <path d="M38 40a4 4 0 0 1 8 0M40 38v4M44 38v4" stroke="white" stroke-width="2"
-                                stroke-linecap="round" />
+                            <rect x="12" y="8" width="36" height="44" rx="4" fill="url(#journalGradient)" stroke="rgba(var(--theme-cool), 0.5)" stroke-width="2"/>
+                            <path d="M18 18h24M18 24h20M18 30h22M18 36h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="42" cy="40" r="8" fill="rgba(var(--theme-secondary), 0.9)"/>
+                            <path d="M38 40a4 4 0 0 1 8 0M40 38v4M44 38v4" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             <defs>
                                 <linearGradient id="journalGradient">
-                                    <stop offset="0%" stop-color="rgba(var(--theme-cool), 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(var(--theme-accent), 0.6)" />
+                                    <stop offset="0%" stop-color="rgba(var(--theme-cool), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-accent), 0.6)"/>
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -2415,20 +2327,18 @@
                         <span class="feature-tag text-caption">关联记录</span>
                     </div>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <path d="M30 8L46 18v16c0 12-16 18-16 18S14 46 14 34V18L30 8z" fill="url(#shieldGradient)"
-                                stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2" />
-                            <path d="M24 28l6 6 12-12" stroke="white" stroke-width="3" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <circle cx="44" cy="16" r="8" fill="rgba(var(--theme-accent), 0.9)" />
-                            <path d="M40 16h8M44 12v8" stroke="white" stroke-width="2" stroke-linecap="round" />
+                            <path d="M30 8L46 18v16c0 12-16 18-16 18S14 46 14 34V18L30 8z" fill="url(#shieldGradient)" stroke="rgba(var(--theme-primary), 0.5)" stroke-width="2"/>
+                            <path d="M24 28l6 6 12-12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="44" cy="16" r="8" fill="rgba(var(--theme-accent), 0.9)"/>
+                            <path d="M40 16h8M44 12v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             <defs>
                                 <linearGradient id="shieldGradient">
-                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(var(--theme-secondary), 0.6)" />
+                                    <stop offset="0%" stop-color="rgba(var(--theme-primary), 0.8)"/>
+                                    <stop offset="100%" stop-color="rgba(var(--theme-secondary), 0.6)"/>
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -2450,10 +2360,10 @@
     <section class="app-preview">
         <div class="preview-container">
             <div class="preview-header">
-                <h2 class="glitch-text" data-text="📸 应用预览">📸 应用预览</h2>
+                <h2>📸 应用预览</h2>
                 <p>直观体验DateGazer的精美界面和强大功能</p>
             </div>
-
+            
             <div class="preview-gallery">
                 <!-- 第一排：3张图片 -->
                 <div class="preview-row preview-row-1">
@@ -2464,7 +2374,7 @@
                             <p>DIY名片设计工具，打造专属纪念日卡片</p>
                         </div>
                     </div>
-
+                    
                     <div class="preview-item">
                         <img src="pic/006.jpg" alt="Live Photo分享" loading="lazy">
                         <div class="preview-info">
@@ -2472,7 +2382,7 @@
                             <p>创建动态Live Photo，让回忆更加生动</p>
                         </div>
                     </div>
-
+                    
                     <div class="preview-item">
                         <img src="pic/003.jpg" alt="系统级闹钟" loading="lazy">
                         <div class="preview-info">
@@ -2481,7 +2391,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- 第二排：4张图片 -->
                 <div class="preview-row preview-row-2">
                     <div class="preview-item">
@@ -2491,7 +2401,7 @@
                             <p>个性化桌面小组件，实时显示重要纪念日</p>
                         </div>
                     </div>
-
+                    
                     <div class="preview-item">
                         <img src="pic/002.jpg" alt="通知提醒系统" loading="lazy">
                         <div class="preview-info">
@@ -2499,7 +2409,7 @@
                             <p>多重提醒保障，日历同步多设备数据共享</p>
                         </div>
                     </div>
-
+                    
                     <div class="preview-item">
                         <img src="pic/005.jpg" alt="日历和时间线" loading="lazy">
                         <div class="preview-info">
@@ -2507,7 +2417,7 @@
                             <p>国内节假日月历，时间轴展示纪念日卡片</p>
                         </div>
                     </div>
-
+                    
                     <div class="preview-item">
                         <img src="pic/001.jpg" alt="心情日记" loading="lazy">
                         <div class="preview-info">
@@ -2524,7 +2434,7 @@
     <section class="app-preview">
         <div class="preview-container">
             <div class="preview-header">
-                <h2 class="glitch-text" data-text="🎬 宣传视频">🎬 宣传视频</h2>
+                <h2>🎬 宣传视频</h2>
                 <p>直观看看 DateGazer 的功能亮点演示</p>
             </div>
             <div class="preview-gallery">
@@ -2574,10 +2484,10 @@
     <section class="detailed-features">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="glitch-text" data-text="🚀 功能详解">🚀 功能详解</h2>
+                <h2>🚀 功能详解</h2>
                 <p>深入了解DateGazer的每一个贴心设计</p>
             </div>
-
+            
             <div class="features-columns">
                 <div class="feature-column fade-in">
                     <h3>🎯 提醒系统</h3>
@@ -2589,7 +2499,7 @@
                         <li><strong>跨设备同步</strong> - iPhone、iPad、Mac、Apple Watch全平台</li>
                     </ul>
                 </div>
-
+                
                 <div class="feature-column fade-in">
                     <h3>🎨 个性化定制</h3>
                     <ul class="feature-list">
@@ -2600,7 +2510,7 @@
                         <li><strong>标签分类系统</strong> - 自定义彩色标签管理</li>
                     </ul>
                 </div>
-
+                
                 <div class="feature-column fade-in">
                     <h3>💫 智能辅助</h3>
                     <ul class="feature-list">
@@ -2611,7 +2521,7 @@
                         <li><strong>Spotlight集成</strong> - 支持iOS系统搜索</li>
                     </ul>
                 </div>
-
+                
                 <div class="feature-column fade-in">
                     <h3>🤝 社交互动</h3>
                     <ul class="feature-list">
@@ -2630,13 +2540,12 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-card fade-in">
-                <h2 class="glitch-text" data-text="开始您的纪念日管理之旅">开始您的纪念日管理之旅</h2>
+                <h2>开始您的纪念日管理之旅</h2>
                 <p>DateGazer - 让每个重要时刻都闪闪发光！<br>现在就下载体验专业的纪念日管理服务</p>
-
+                
                 <div class="cta-container">
-                    <a href="https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196"
-                        class="download-btn primary" target="_blank">
-                        🚀 前往 App Store 下载
+                    <a href="#" class="download-btn primary" onclick="handleDownload()">
+                        🚀 加入Beta测试
                     </a>
                 </div>
             </div>
@@ -2653,7 +2562,7 @@
                 <a href="mailto:1547654938@qq.com">联系我们</a>
                 <a href="mailto:1547654938@qq.com">用户反馈</a>
             </div>
-
+            
             <div class="footer-bottom">
                 <p>&copy; 2024 DateGazer. 保留所有权利.</p>
                 <p style="margin-top: 0.5rem;">用心记录每一个重要时刻</p>
@@ -2668,9 +2577,8 @@
     <div class="theme-switcher" id="themeSwitcher">
         <div class="theme-switcher-trigger" onclick="toggleThemeSwitcher()">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="3" />
-                <path
-                    d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24" />
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
             </svg>
         </div>
         <div class="theme-options">
@@ -2707,15 +2615,15 @@
             <button class="close-btn" onclick="closeModal()">&times;</button>
             <div class="modal-header">
                 <div class="modal-icon">🚀</div>
-                <div class="modal-title">DateGazer 已上架 App Store</div>
-                <div class="modal-subtitle">在 App Store 畅享完整功能体验</div>
+                <div class="modal-title">DateGazer Beta测试版</div>
+                <div class="modal-subtitle">通过TestFlight抢先体验所有功能</div>
             </div>
             <div class="modal-body">
                 <div class="modal-text">
-                    请在 iPhone 或 iPad 上打开下方 App Store 链接，或在 App Store 搜索「心念记」下载：
+                    请在iPhone或iPad上打开TestFlight链接加入Beta测试：
                 </div>
                 <div class="beta-link">
-                    https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196
+                    https://testflight.apple.com/join/D1K1UVDu
                 </div>
                 <div class="modal-text">
                     <strong>🎯 主要功能预览：</strong>
@@ -2729,8 +2637,8 @@
                 </ul>
             </div>
             <div class="modal-actions">
-                <a href="https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196" class="modal-btn primary" target="_blank">
-                    🚀 前往 App Store 下载
+                <a href="https://testflight.apple.com/join/D1K1UVDu" class="modal-btn primary" target="_blank">
+                    🚀 立即加入测试
                 </a>
                 <button class="modal-btn secondary" onclick="closeModal()">
                     稍后再说
@@ -2750,10 +2658,10 @@
             </div>
             <div class="modal-body">
                 <div class="modal-text">
-                    请使用 iPhone 或 iPad 打开下方 App Store 链接：
+                    请使用iPhone或iPad访问TestFlight测试版：
                 </div>
                 <div class="beta-link">
-                    https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196
+                    https://testflight.apple.com/join/D1K1UVDu
                 </div>
                 <div class="modal-text">
                     <strong>Android版本敬请期待！</strong><br>
@@ -2762,7 +2670,7 @@
             </div>
             <div class="modal-actions">
                 <button class="modal-btn primary" onclick="copyLink()">
-                    📋 复制 App Store 链接
+                    📋 复制TestFlight链接
                 </button>
                 <button class="modal-btn secondary" onclick="closeModal()">
                     我知道了
@@ -2788,7 +2696,7 @@
         }
 
         function copyLink() {
-            const link = 'https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196';
+            const link = 'https://testflight.apple.com/join/D1K1UVDu';
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(link).then(() => {
                     // 临时更改按钮文本以提供反馈
@@ -2807,7 +2715,7 @@
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-
+                
                 const btn = event.target;
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '✅ 已复制';
@@ -2821,8 +2729,8 @@
         function handleDownload() {
             const userAgent = navigator.userAgent;
             if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                // iOS用户 - 直接跳转到 App Store 正式版
-                window.location.href = 'https://apps.apple.com/cn/app/%E5%BF%83%E5%BF%B5%E8%AE%B0/id6751546196';
+                // iOS用户 - 直接跳转到TestFlight beta测试版
+                window.location.href = 'https://testflight.apple.com/join/D1K1UVDu';
             } else if (/Android/i.test(userAgent)) {
                 // Android用户 - 显示Android专用弹窗
                 openModal('androidModal');
@@ -2833,14 +2741,14 @@
         }
 
         // 点击弹窗外部区域关闭弹窗
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             if (e.target.classList.contains('modal-overlay')) {
                 closeModal();
             }
         });
 
         // ESC键关闭弹窗
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
@@ -2850,22 +2758,22 @@
         function createSparkle() {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
-
+            
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight;
             const delay = Math.random() * 4;
             const duration = 3 + Math.random() * 6;
-
+            
             // 随机大小变化
             const scale = 0.5 + Math.random() * 1.5;
             const rotation = Math.random() * 360;
-
+            
             sparkle.style.left = x + 'px';
             sparkle.style.top = y + 'px';
             sparkle.style.animationDelay = delay + 's';
             sparkle.style.animationDuration = duration + 's';
             sparkle.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
-
+            
             // 随机颜色变化
             const colorVariant = Math.floor(Math.random() * 3);
             if (colorVariant === 1) {
@@ -2873,9 +2781,9 @@
             } else if (colorVariant === 2) {
                 sparkle.style.background = `radial-gradient(circle, rgba(var(--theme-cool), 0.8) 0%, rgba(var(--theme-secondary), 0.6) 50%, transparent 100%)`;
             }
-
+            
             document.getElementById('sparkleContainer').appendChild(sparkle);
-
+            
             setTimeout(() => {
                 if (sparkle.parentNode) {
                     sparkle.remove();
@@ -2889,7 +2797,7 @@
             for (let i = 0; i < 25; i++) {
                 setTimeout(createSparkle, Math.random() * 5000);
             }
-
+            
             // 持续创建粒子
             setInterval(() => {
                 if (Math.random() < 0.4) { // 40% 概率创建新粒子
@@ -2916,9 +2824,9 @@
                 pointer-events: none;
                 z-index: 1;
             `;
-
+            
             document.getElementById('sparkleContainer').appendChild(meteor);
-
+            
             setTimeout(() => {
                 if (meteor.parentNode) {
                     meteor.remove();
@@ -2945,7 +2853,7 @@
                 }
             }
         `;
-
+        
         const meteorStyleSheet = document.createElement('style');
         meteorStyleSheet.textContent = meteorKeyframes;
         document.head.appendChild(meteorStyleSheet);
@@ -2968,34 +2876,34 @@
         function setTheme(themeName) {
             // 添加切换动画类
             document.body.classList.add('theme-switching');
-
+            
             // 设置主题
             document.documentElement.setAttribute('data-theme', themeName);
-
+            
             // 更新激活状态
             document.querySelectorAll('.theme-option').forEach(option => {
                 option.classList.remove('active');
             });
             document.querySelector(`[data-theme="${themeName}"]`).classList.add('active');
-
+            
             // 保存到localStorage
             localStorage.setItem('dategazer-theme', themeName);
-
+            
             // 关闭主题选择器
             document.getElementById('themeSwitcher').classList.remove('active');
-
+            
             // 移除切换动画类
             setTimeout(() => {
                 document.body.classList.remove('theme-switching');
             }, 800);
-
+            
             // 触发主题切换动画
             createThemeTransition();
-
+            
             // 创建主题切换特效
             createThemeChangeEffect();
         }
-
+        
         // 主题切换特效
         function createThemeChangeEffect() {
             // 创建彩色爆发粒子
@@ -3017,15 +2925,15 @@
                         z-index: 1000;
                         animation: themeChangeBurst 1.5s ease-out forwards;
                     `;
-
+                    
                     const angle = (i / 15) * Math.PI * 2;
                     const distance = 200 + Math.random() * 100;
-
+                    
                     burst.style.setProperty('--angle', angle + 'rad');
                     burst.style.setProperty('--distance', distance + 'px');
-
+                    
                     document.body.appendChild(burst);
-
+                    
                     setTimeout(() => {
                         if (burst.parentNode) {
                             burst.remove();
@@ -3034,7 +2942,7 @@
                 }, i * 50);
             }
         }
-
+        
         // 主题切换爆发动画
         const themeChangeKeyframes = `
             @keyframes themeChangeBurst {
@@ -3052,7 +2960,7 @@
                 }
             }
         `;
-
+        
         const themeChangeStyleSheet = document.createElement('style');
         themeChangeStyleSheet.textContent = themeChangeKeyframes;
         document.head.appendChild(themeChangeStyleSheet);
@@ -3072,9 +2980,9 @@
                 opacity: 0;
                 transition: opacity 0.5s ease;
             `;
-
+            
             document.body.appendChild(overlay);
-
+            
             requestAnimationFrame(() => {
                 overlay.style.opacity = '1';
                 setTimeout(() => {
@@ -3112,24 +3020,24 @@
             if (Math.random() < 0.08) { // 8% 概率在鼠标位置创建粒子
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
-
+                
                 // 添加随机偏移
                 const offsetX = (Math.random() - 0.5) * 30;
                 const offsetY = (Math.random() - 0.5) * 30;
-
+                
                 sparkle.style.left = (e.clientX + offsetX) + 'px';
                 sparkle.style.top = (e.clientY + offsetY) + 'px';
                 sparkle.style.animationDuration = '1.5s';
                 sparkle.style.transform = `scale(${0.3 + Math.random() * 0.7})`;
-
+                
                 // 鼠标轨迹粒子特殊颜色
                 sparkle.style.background = `radial-gradient(circle, 
                     rgba(var(--theme-accent), 0.9) 0%, 
                     rgba(var(--theme-primary), 0.7) 50%, 
                     transparent 100%)`;
-
+                
                 document.getElementById('sparkleContainer').appendChild(sparkle);
-
+                
                 setTimeout(() => {
                     if (sparkle.parentNode) {
                         sparkle.remove();
@@ -3140,28 +3048,28 @@
 
         // 增强的动态背景滚动效果
         let ticking = false;
-
+        
         function updateParallax() {
             const scrolled = window.pageYOffset;
             const rate = scrolled * -0.3;
-
+            
             // 动态背景位置更新
             document.documentElement.style.setProperty('--scroll-y', scrolled + 'px');
-
+            
             // 更新hero区域的视差效果
             const hero = document.querySelector('.hero');
             if (hero) {
                 hero.style.transform = `translateY(${scrolled * 0.2}px)`;
                 hero.style.opacity = Math.max(0, 1 - scrolled / (window.innerHeight * 0.8));
             }
-
+            
             // 动态粒子密度调整
             const sparkleContainer = document.getElementById('sparkleContainer');
             if (sparkleContainer) {
                 const opacity = Math.max(0.3, 1 - scrolled / (window.innerHeight * 2));
                 sparkleContainer.style.opacity = opacity;
             }
-
+            
             ticking = false;
         }
 
@@ -3187,7 +3095,7 @@
                 }
             }
         `;
-
+        
         const styleSheet = document.createElement('style');
         styleSheet.textContent = cardSlideInKeyframes;
         document.head.appendChild(styleSheet);
@@ -3197,10 +3105,10 @@
             const path = window.location.pathname;
             const search = window.location.search;
             const hash = window.location.hash;
-
+            
             // 构建完整的deep link URL
             const fullPath = `${path}${search}${hash}`;
-
+            
             if (path.startsWith('/wechat/')) {
                 console.log('WeChat login callback:', fullPath);
                 const deepLink = `dategazer://wechat${path.replace('/wechat', '')}${search}${hash}`;
@@ -3237,10 +3145,10 @@
                 window.location.href = deepLink;
                 return true;
             }
-
+            
             return false;
         }
-
+        
         // 页面加载时检查Universal Links
         if (handleUniversalLinks()) {
             // 如果是deep link，显示加载提示
@@ -3306,7 +3214,7 @@
                             card.style.background = 'rgba(255, 255, 255, 0.15)';
                         }
                     });
-
+                    
                     card.addEventListener('mouseleave', () => {
                         if (!card.style.animation) {
                             card.style.background = '';
@@ -3317,5 +3225,4 @@
         });
     </script>
 </body>
-
 </html>
